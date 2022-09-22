@@ -19,8 +19,10 @@ class MyHomePage extends StatelessWidget {
     Transaction(id: '101', Title: 'food', amount: 89, date: DateTime.now()),
     Transaction(id: '102', Title: 'travel', amount: 65, date: DateTime.now()),
   ];
-  String? titleInput;
-  String? amtinput;
+  // String? titleInput;
+  // String? amtinput;
+  final titlecontroller = TextEditingController();
+  final amountcontroller = TextEditingController();
   // final MainAxisAlignment mainAxisAlignment,
   @override
   Widget build(BuildContext context) {
@@ -52,16 +54,21 @@ class MyHomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     TextField(
-                        decoration: InputDecoration(labelText: 'text'),
-                        onChanged: (value) => titleInput = value),
+                      decoration: InputDecoration(labelText: 'text'),
+                      // onChanged: (value) => titleInput = value
+                      controller: titlecontroller,
+                    ),
                     TextField(
                       decoration: InputDecoration(labelText: 'Amount'),
-                      onChanged: (value) => amtinput = value,
+                      controller: amountcontroller,
+                      // onChanged: (value) => amtinput = value,
                     ),
                     TextButton(
                       onPressed: () {
-                        print(titleInput);
-                        print(amtinput);
+                        print(titlecontroller.text);
+                        print(amountcontroller.text);
+                        // print(titleInput);
+                        // print(amtinput);
                       },
                       child: Text(
                         "Add Transaction",
