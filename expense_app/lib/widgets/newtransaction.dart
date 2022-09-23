@@ -3,11 +3,18 @@
 import 'package:flutter/material.dart';
 
 // import
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   // const newTransaction({super.key});
   final Function addTax;
   NewTransaction(this.addTax);
+
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
   final titlecontroller = TextEditingController();
+
   final amountcontroller = TextEditingController();
 
   void submitdata() {
@@ -18,7 +25,7 @@ class NewTransaction extends StatelessWidget {
     if (t_text.isEmpty || amt_text <= 0) {
       return;
     }
-    addTax(
+    widget.addTax(
       t_text,
       amt_text,
     );
