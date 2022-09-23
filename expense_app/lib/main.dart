@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter App',
       home: MyHomePage(),
     );
@@ -29,31 +30,38 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter App'),
-        ),
-        body:
+      appBar: AppBar(
+        title: const Text('Flutter App'),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+      ),
+      body:
 
-            // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
-            SingleChildScrollView(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                child: Card(
-                  elevation: 5, // width: double.infinity,
-                  color: Colors.blue,
-                  child: Text('hello chart'),
-                ),
+          // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
+          SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Card(
+                elevation: 5, // width: double.infinity,
+                color: Colors.blue,
+                child: Text('hello chart'),
               ),
-              Usertranasaction(),
-              // Card(
-              //   child: Text("body"),
-              // )
-            ],
-          ),
-        ));
+            ),
+            Usertranasaction(),
+            // Card(
+            //   child: Text("body"),
+            // )
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }
