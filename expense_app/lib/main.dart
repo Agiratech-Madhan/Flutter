@@ -33,7 +33,6 @@ class MyHomePage extends StatelessWidget {
           title: const Text('Flutter App'),
         ),
         body:
-            // Ma
 
             // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
             SingleChildScrollView(
