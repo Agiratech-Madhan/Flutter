@@ -35,6 +35,7 @@ class NewTransaction extends StatelessWidget {
                   titlecontroller.text,
                   double.parse(amountcontroller.text),
                 );
+
                 // print(titleInput);
                 // print(amtinput);
               },

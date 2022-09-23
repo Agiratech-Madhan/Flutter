@@ -1,5 +1,5 @@
-// import 'widgets/newtransaction.dart';
-// import 'widgets/transactionlist.dart';
+import 'widgets/newtransaction.dart';
+import 'widgets/transactionlist.dart';
 import 'package:expense_app/widgets/usertransaction.dart';
 import 'package:flutter/material.dart';
 import 'models/transaction.dart';
@@ -36,23 +36,25 @@ class MyHomePage extends StatelessWidget {
             // Ma
 
             // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
-            Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                elevation: 5, // width: double.infinity,
-                color: Colors.blue,
-                child: Text('hello chart'),
+            SingleChildScrollView(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: Card(
+                  elevation: 5, // width: double.infinity,
+                  color: Colors.blue,
+                  child: Text('hello chart'),
+                ),
               ),
-            ),
-            Usertranasaction(),
-            // Card(
-            //   child: Text("body"),
-            // )
-          ],
+              Usertranasaction(),
+              // Card(
+              //   child: Text("body"),
+              // )
+            ],
+          ),
         ));
   }
 }
