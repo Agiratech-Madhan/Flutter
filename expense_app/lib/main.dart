@@ -1,6 +1,6 @@
 import 'widgets/newtransaction.dart';
 import 'widgets/transactionlist.dart';
-import 'package:expense_app/widgets/usertransaction.dart';
+// import 'package:expense_app/widgets/usertransaction.dart';
 import 'package:flutter/material.dart';
 import 'models/transaction.dart';
 
@@ -17,22 +17,54 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  // List<Transaction> transaction = [
-  //   Transaction(id: '101', Title: 'food', amount: 89, date: DateTime.now()),
-  //   Transaction(id: '102', Title: 'travel', amount: 65, date: DateTime.now()),
-  // ];
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-  // String? titleInput;
-  // String? amtinput;
-  // final titlecontroller = TextEditingController(); moved into newtransaction.dart
-  // final MainAxisAlignment mainAxisAlignment,
+class _MyHomePageState extends State<MyHomePage> {
+  // List<Transaction> transaction = [
+
+  final List<Transaction> _userTransaction = [
+    Transaction(id: '101', Title: 'food', amount: 89, date: DateTime.now()),
+    Transaction(id: '102', Title: 'travel', amount: 65, date: DateTime.now()),
+  ];
+  void _addNewTransaction(String title_, double amount_) {
+    final newTran = Transaction(
+      Title: title_,
+      amount: amount_,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+    );
+    setState(() {
+      _userTransaction.add(newTran);
+    });
+  }
+
+  void _startAddNewtransaction(BuildContext ctex) {
+    showModalBottomSheet(
+      context: ctex,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addNewTransaction),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter App'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => _startAddNewtransaction(context),
+          )
+        ],
       ),
       body:
 
@@ -50,7 +82,9 @@ class MyHomePage extends StatelessWidget {
                 child: Text('hello chart'),
               ),
             ),
-            Usertranasaction(),
+            // Usertranasaction(),
+            TransactionList(_userTransaction),
+
             // Card(
             //   child: Text("body"),
             // )
@@ -59,7 +93,7 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _startAddNewtransaction(context),
         child: Icon(Icons.add),
       ),
     );
