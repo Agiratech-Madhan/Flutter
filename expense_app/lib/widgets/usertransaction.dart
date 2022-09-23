@@ -17,12 +17,22 @@ class _UsertranasactionState extends State<Usertranasaction> {
     Transaction(id: '101', Title: 'food', amount: 89, date: DateTime.now()),
     Transaction(id: '102', Title: 'travel', amount: 65, date: DateTime.now()),
   ];
+  void _addNewTransaction(String title_, double amount_) {
+    final newTran = Transaction(
+        Title: title_,
+        amount: amount_,
+        date: DateTime.now(),
+        id: DateTime.now().toString());
+    setState(() {
+      _userTransaction.add(newTran);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        newTransaction(),
+        NewTransaction(_addNewTransaction),
         TransactionList(_userTransaction),
       ],
     );

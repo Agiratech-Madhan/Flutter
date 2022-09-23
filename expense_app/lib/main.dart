@@ -1,5 +1,6 @@
-import 'package:expense_app/widgets/newtransaction.dart';
-import 'package:expense_app/widgets/transactionlist.dart';
+// import 'widgets/newtransaction.dart';
+// import 'widgets/transactionlist.dart';
+import 'package:expense_app/widgets/usertransaction.dart';
 import 'package:flutter/material.dart';
 import 'models/transaction.dart';
 
@@ -47,7 +48,7 @@ class MyHomePage extends StatelessWidget {
                 child: Text('hello chart'),
               ),
             ),
-
+            Usertranasaction(),
             // Card(
             //   child: Text("body"),
             // )
