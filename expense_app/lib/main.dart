@@ -12,6 +12,39 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter App',
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        // colorScheme: ColorScheme(Color primary: Colors.amber,),
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        // colorSchemeSeed:  Color(123),
+        // accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+        textTheme: TextTheme(
+            headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold)),
+        // appBarTheme: AppBarTheme(
+        //     toolbarTextStyle: TextStyle(
+        //         fontFamily: 'OpenSans',
+        //         fontSize: 30,
+        //         fontWeight: FontWeight.bold)),
+        appBarTheme: AppBarTheme(
+            titleTextStyle: TextStyle(
+                // color: Colors.lightBlueAccent,
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 20)),
+
+        // appBarTheme: AppBarTheme(toolbarTextStyle: ThemeData.light())
+        // appBarTheme: AppBarTheme(
+        //   too: TextTheme(
+        //     headline6: TextStyle(
+        //         fontFamily: 'OpenSans',
+        //         fontSize: 20,
+        //         fontWeight: FontWeight.bold)),
+        // ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -58,7 +91,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter App'),
+        title: const Text(
+          'Flutter App',
+          style: TextStyle(fontFamily: 'Open Sans'),
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
