@@ -29,6 +29,7 @@ class _NewTransactionState extends State<NewTransaction> {
       t_text,
       amt_text,
     );
+    Navigator.of(context).pop();
   }
 
   @override
