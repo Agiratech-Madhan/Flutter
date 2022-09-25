@@ -1,8 +1,12 @@
+import 'package:expense_app/widgets/chart.dart';
+
 import 'widgets/newtransaction.dart';
 import 'widgets/transactionlist.dart';
 // import 'package:expense_app/widgets/usertransaction.dart';
 import 'package:flutter/material.dart';
 import 'models/transaction.dart';
+
+import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme(Color primary: Colors.amber,),
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         // colorSchemeSeed:  Color(123),
-        // accentColor: Colors.amber,
+        accentColor: Colors.amber,
         fontFamily: 'Quicksand',
         textTheme: TextTheme(
             headline6: TextStyle(
@@ -59,9 +63,20 @@ class _MyHomePageState extends State<MyHomePage> {
   // List<Transaction> transaction = [
 
   final List<Transaction> _userTransaction = [
-    Transaction(id: '101', Title: 'food', amount: 89, date: DateTime.now()),
-    Transaction(id: '102', Title: 'travel', amount: 65, date: DateTime.now()),
+    // Transaction(id: '101', Title: 'food', amount: 89, date: DateTime.now()),
+    // Transaction(id: '102', Title: 'travel', amount: 65, date: DateTime.now()),
   ];
+  List<Transaction> get _recentTranasactions {
+    return _userTransaction.where((element) {
+      return element.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
+  // List<Transaction> get _rt{
+  //   return _userTransaction.where((e){
+  //     return e.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+  //   })
+  // }
   void _addNewTransaction(String title_, double amount_) {
     final newTran = Transaction(
       Title: title_,
@@ -110,14 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                elevation: 5, // width: double.infinity,
-                color: Colors.blue,
-                child: Text('hello chart'),
-              ),
-            ),
+            Chart(_recentTranasactions), // needs only recent tranasaction
             // Usertranasaction(),
             TransactionList(_userTransaction),
 
