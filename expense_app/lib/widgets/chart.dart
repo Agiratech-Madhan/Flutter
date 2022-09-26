@@ -45,13 +45,23 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupTransaction.map((e) {
-          // return Text('${e['day']}:${e['amount']}');
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children: groupTransaction.map((e) {
+            // return Text('${e['day']}:${e['amount']}');
 
-          return ChartBar(e['day'] as String, e['amount'] as double,
-              totspending == 0.0 ? 0.0 : (e['amount'] as double) / totspending);
-        }).toList(),
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                  e['day'] as String,
+                  e['amount'] as double,
+                  totspending == 0.0
+                      ? 0.0
+                      : (e['amount'] as double) / totspending),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
