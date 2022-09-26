@@ -50,7 +50,7 @@ class Chart extends StatelessWidget {
           // return Text('${e['day']}:${e['amount']}');
 
           return ChartBar(e['day'] as String, e['amount'] as double,
-              (e['amount'] as double) / totspending);
+              totspending == 0.0 ? 0.0 : (e['amount'] as double) / totspending);
         }).toList(),
       ),
     );
