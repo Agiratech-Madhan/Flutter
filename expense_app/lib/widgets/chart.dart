@@ -1,4 +1,5 @@
 import 'package:expense_app/models/transaction.dart';
+import 'package:expense_app/widgets/chart_bar.dart';
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import 'package:intl/intl.dart';
@@ -20,14 +21,20 @@ class Chart extends StatelessWidget {
           totsum += recentTransaction[i].amount;
         }
       }
-      print("weekday${weekDay}");
-      print("recent off0 ${recentTransaction[0].date.day}");
+      print("weekday${weekDay.day}");
+      // print("recent off0 ${recentTransaction[0].date.day}");
       print(DateFormat.E().format(weekDay));
       print(totsum);
       return {
-        'day': DateFormat.E().format(weekDay),
+        'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totsum,
       };
+    });
+  }
+
+  double get totspending {
+    return groupTransaction.fold(0.0, (previousValue, item) {
+      return previousValue + (item['amount'] as double);
     });
   }
 
@@ -36,9 +43,13 @@ class Chart extends StatelessWidget {
     print(groupTransaction);
     return Card(
       elevation: 6,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(20),
       child: Row(
-        children: [],
+        children: groupTransaction.map((e) {
+          // return Text('${e['day']}:${e['amount']}');
+          return ChartBar(e['day'] as String, e['amount'] as double,
+              (e['amount'] as double) / totspending);
+        }).toList(),
       ),
     );
   }
