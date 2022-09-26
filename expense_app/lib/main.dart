@@ -20,7 +20,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.pink,
         // colorScheme: ColorScheme(Color primary: Colors.amber,),
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        // colorScheme = ColorScheme.fromSeed(seedColor: colorSchemeSeed, brightness: effectiveBrightness);
+
         // colorSchemeSeed:  Color(123),
+        // colorScheme: ,
         accentColor: Colors.amber,
         fontFamily: 'Quicksand',
         textTheme: TextTheme(
