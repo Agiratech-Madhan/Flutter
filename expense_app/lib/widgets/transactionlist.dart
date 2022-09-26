@@ -4,8 +4,8 @@ import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transaction;
-
-  TransactionList(this.transaction);
+  final Function d_trans;
+  TransactionList(this.transaction, this.d_trans);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,23 +35,29 @@ class TransactionList extends StatelessWidget {
                   elevation: 5,
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                   child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 20,
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: FittedBox(
-                          child: Text('\$${transaction[index].amount}'),
+                      leading: CircleAvatar(
+                        radius: 20,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: FittedBox(
+                            child: Text('\$${transaction[index].amount}'),
+                          ),
                         ),
                       ),
-                    ),
-                    title: Text(
-                      transaction[index].Title,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    subtitle: Text(
-                      DateFormat.yMMMd().format(transaction[index].date),
-                    ),
-                  ),
+                      title: Text(
+                        transaction[index].Title,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      subtitle: Text(
+                        DateFormat.yMMMd().format(transaction[index].date),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () => d_trans(transaction[index].id),
+                        color: Color.fromARGB(255, 255, 0, 0),
+                        icon: Icon(
+                          Icons.delete,
+                        ),
+                      )),
                 );
               },
               itemCount: transaction.length,

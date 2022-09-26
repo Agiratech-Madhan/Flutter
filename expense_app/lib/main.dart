@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
                 fontSize: 20)),
-
+        errorColor: Colors.red,
         // appBarTheme: AppBarTheme(toolbarTextStyle: ThemeData.light())
         // appBarTheme: AppBarTheme(
         //   too: TextTheme(
@@ -106,6 +106,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransaction.removeWhere((element) => element.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Chart(_recentTranasactions), // needs only recent tranasaction
             // Usertranasaction(),
-            TransactionList(_userTransaction),
+            TransactionList(_userTransaction, _deleteTransaction),
 
             // Card(
             //   child: Text("body"),
