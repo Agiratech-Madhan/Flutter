@@ -41,12 +41,14 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(groupTransaction);
+    print("totspending${totspending}");
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
         children: groupTransaction.map((e) {
           // return Text('${e['day']}:${e['amount']}');
+
           return ChartBar(e['day'] as String, e['amount'] as double,
               (e['amount'] as double) / totspending);
         }).toList(),
