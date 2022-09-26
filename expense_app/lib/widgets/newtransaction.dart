@@ -21,17 +21,17 @@ class _NewTransactionState extends State<NewTransaction> {
   dynamic _selectedDate;
 
   void _submitdata() {
+    if (_amountcontroller.text.isEmpty) {
+      return;
+    }
     final t_text = _titlecontroller.text;
     final amt_text = double.parse(_amountcontroller.text);
     // print(t_text);
     // print(amt_text);
-    if (t_text.isEmpty || amt_text <= 0) {
+    if (t_text.isEmpty || amt_text <= 0 || _selectedDate == null) {
       return;
     }
-    widget.addTax(
-      t_text,
-      amt_text,
-    );
+    widget.addTax(t_text, amt_text, _selectedDate);
     Navigator.of(context).pop();
   }
 
@@ -40,7 +40,7 @@ class _NewTransactionState extends State<NewTransaction> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2019),
-      lastDate: DateTime(2070),
+      lastDate: DateTime.now(),
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
