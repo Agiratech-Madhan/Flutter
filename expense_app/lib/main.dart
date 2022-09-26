@@ -80,11 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
   //     return e.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
   //   })
   // }
-  void _addNewTransaction(String title_, double amount_) {
+  void _addNewTransaction(String title_, double amount_, dynamic selecteddate) {
     final newTran = Transaction(
       Title: title_,
       amount: amount_,
-      date: DateTime.now(),
+      date: selecteddate,
       id: DateTime.now().toString(),
     );
     setState(() {
