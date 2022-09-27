@@ -105,7 +105,7 @@ class _NewTransactionState extends State<NewTransaction> {
                             child: Text(
                               "Choose Date",
                               style: TextStyle(
-                                  // color: Theme.of(context).primaryColor,
+                                  // color: Theme.of(context).primaryColor,git
                                   fontWeight: FontWeight.bold),
                             ),
                             onPressed: _presentdatepicker)
