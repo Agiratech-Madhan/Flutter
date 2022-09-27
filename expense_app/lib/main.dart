@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:expense_app/widgets/chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'widgets/newtransaction.dart';
 import 'widgets/transactionlist.dart';
@@ -123,85 +124,104 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    ;
-    final appBar_ = AppBar(
-      title: const Text(
-        'Flutter App',
-        style: TextStyle(fontFamily: 'Open Sans'),
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () => _startAddNewtransaction(context),
-        )
-      ],
-    );
+
+    final dynamic appBar_ = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text("expense App"),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: Icon(CupertinoIcons.add),
+                  onTap: () => _startAddNewtransaction(context),
+                )
+              ],
+            ),
+          )
+        : AppBar(
+            title: const Text(
+              'Flutter App',
+              style: TextStyle(fontFamily: 'Open Sans'),
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () => _startAddNewtransaction(context),
+              )
+            ],
+          );
     final tranlistwidget = Container(
         height: (mediaQuery.size.height -
                 appBar_.preferredSize.height -
                 mediaQuery.padding.top) *
             0.7,
         child: TransactionList(_userTransaction, _deleteTransaction));
-    return Scaffold(
-      appBar: appBar_,
-      body:
-
-          // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
-          SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Enable Chart"),
-                  Switch.adaptive(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: _enableChart,
-                      onChanged: (val) {
-                        setState(() {
-                          _enableChart = val;
-                        });
-                      })
-                ],
-              ),
-
-            if (!isLandscape)
-              Container(
-                  height: (mediaQuery.size.height -
-                          appBar_.preferredSize.height -
-                          mediaQuery.padding.top) *
-                      0.3,
-                  child: Chart(
-                      _recentTranasactions)), // needs only recent tranasaction
-            if (!isLandscape) tranlistwidget,
-            if (isLandscape)
-              _enableChart
-                  ? Container(
-                      height: (mediaQuery.size.height -
-                              appBar_.preferredSize.height -
-                              mediaQuery.padding.top) *
-                          0.7,
-                      child: Chart(
-                          _recentTranasactions)) // needs only recent tranasaction
-                  // Usertranasaction(),
-                  : tranlistwidget,
-
-            // Card(
-            //   child: Text("body"),
-            // )
-          ],
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Platform.isIOS
-          ? Container()
-          : FloatingActionButton(
-              onPressed: () => _startAddNewtransaction(context),
-              child: Icon(Icons.add),
+    final pageBody =
+        // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
+        SingleChildScrollView(
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          if (isLandscape)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Enable Chart"),
+                Switch.adaptive(
+                    activeColor: Theme.of(context).primaryColor,
+                    value: _enableChart,
+                    onChanged: (val) {
+                      setState(() {
+                        _enableChart = val;
+                      });
+                    })
+              ],
             ),
+
+          if (!isLandscape)
+            Container(
+                height: (mediaQuery.size.height -
+                        appBar_.preferredSize.height -
+                        mediaQuery.padding.top) *
+                    0.3,
+                child: Chart(
+                    _recentTranasactions)), // needs only recent tranasaction
+          if (!isLandscape) tranlistwidget,
+          if (isLandscape)
+            _enableChart
+                ? Container(
+                    height: (mediaQuery.size.height -
+                            appBar_.preferredSize.height -
+                            mediaQuery.padding.top) *
+                        0.7,
+                    child: Chart(
+                        _recentTranasactions)) // needs only recent tranasaction
+                // Usertranasaction(),
+                : tranlistwidget,
+
+          // Card(
+          //   child: Text("body"),
+          // )
+        ],
+      ),
     );
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            child: pageBody,
+            navigationBar: appBar_,
+          )
+        : Scaffold(
+            appBar: appBar_,
+            body: pageBody,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    onPressed: () => _startAddNewtransaction(context),
+                    child: Icon(Icons.add),
+                  ),
+          );
   }
 }
