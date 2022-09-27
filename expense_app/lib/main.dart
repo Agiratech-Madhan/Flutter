@@ -114,19 +114,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Flutter App',
-          style: TextStyle(fontFamily: 'Open Sans'),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewtransaction(context),
-          )
-        ],
+    final appBar_ = AppBar(
+      title: const Text(
+        'Flutter App',
+        style: TextStyle(fontFamily: 'Open Sans'),
       ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _startAddNewtransaction(context),
+        )
+      ],
+    );
+    return Scaffold(
+      appBar: appBar_,
       body:
 
           // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
@@ -135,9 +136,20 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTranasactions), // needs only recent tranasaction
+            Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar_.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.35,
+                child: Chart(
+                    _recentTranasactions)), // needs only recent tranasaction
             // Usertranasaction(),
-            TransactionList(_userTransaction, _deleteTransaction),
+            Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar_.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.65,
+                child: TransactionList(_userTransaction, _deleteTransaction)),
 
             // Card(
             //   child: Text("body"),
