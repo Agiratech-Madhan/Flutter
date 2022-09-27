@@ -158,52 +158,57 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TransactionList(_userTransaction, _deleteTransaction));
     final pageBody =
         // MainAxisAlignment _mainAxisAlignment=MainAxisAlignment.spaceAround,
-        SingleChildScrollView(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          if (isLandscape)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Enable Chart"),
-                Switch.adaptive(
-                    activeColor: Theme.of(context).primaryColor,
-                    value: _enableChart,
-                    onChanged: (val) {
-                      setState(() {
-                        _enableChart = val;
-                      });
-                    })
-              ],
-            ),
+        SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Enable Chart",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Switch.adaptive(
+                      activeColor: Theme.of(context).primaryColor,
+                      value: _enableChart,
+                      onChanged: (val) {
+                        setState(() {
+                          _enableChart = val;
+                        });
+                      })
+                ],
+              ),
 
-          if (!isLandscape)
-            Container(
-                height: (mediaQuery.size.height -
-                        appBar_.preferredSize.height -
-                        mediaQuery.padding.top) *
-                    0.3,
-                child: Chart(
-                    _recentTranasactions)), // needs only recent tranasaction
-          if (!isLandscape) tranlistwidget,
-          if (isLandscape)
-            _enableChart
-                ? Container(
-                    height: (mediaQuery.size.height -
-                            appBar_.preferredSize.height -
-                            mediaQuery.padding.top) *
-                        0.7,
-                    child: Chart(
-                        _recentTranasactions)) // needs only recent tranasaction
-                // Usertranasaction(),
-                : tranlistwidget,
+            if (!isLandscape)
+              Container(
+                  height: (mediaQuery.size.height -
+                          appBar_.preferredSize.height -
+                          mediaQuery.padding.top) *
+                      0.3,
+                  child: Chart(
+                      _recentTranasactions)), // needs only recent tranasaction
+            if (!isLandscape) tranlistwidget,
+            if (isLandscape)
+              _enableChart
+                  ? Container(
+                      height: (mediaQuery.size.height -
+                              appBar_.preferredSize.height -
+                              mediaQuery.padding.top) *
+                          0.7,
+                      child: Chart(
+                          _recentTranasactions)) // needs only recent tranasaction
+                  // Usertranasaction(),
+                  : tranlistwidget,
 
-          // Card(
-          //   child: Text("body"),
-          // )
-        ],
+            // Card(
+            //   child: Text("body"),
+            // )
+          ],
+        ),
       ),
     );
     return Platform.isIOS
