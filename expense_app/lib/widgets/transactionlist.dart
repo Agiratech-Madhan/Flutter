@@ -53,13 +53,24 @@ class TransactionList extends StatelessWidget {
                       subtitle: Text(
                         DateFormat.yMMMd().format(transaction[index].date),
                       ),
-                      trailing: IconButton(
-                        onPressed: () => d_trans(transaction[index].id),
-                        color: Color.fromARGB(255, 255, 0, 0),
-                        icon: Icon(
-                          Icons.delete,
-                        ),
-                      )),
+                      trailing: MediaQuery.of(context).size.width > 420
+                          ? TextButton.icon(
+                              onPressed: () => d_trans(transaction[index].id),
+                              icon: Icon(
+                                Icons.delete,
+                              ),
+                              label: Text("Delete"),
+                              style: TextButton.styleFrom(
+                                  foregroundColor:
+                                      Color.fromARGB(255, 255, 0, 0)),
+                            )
+                          : IconButton(
+                              onPressed: () => d_trans(transaction[index].id),
+                              color: Color.fromARGB(255, 255, 0, 0),
+                              icon: Icon(
+                                Icons.delete,
+                              ),
+                            )),
                 );
               },
               itemCount: transaction.length,
@@ -106,3 +117,16 @@ class TransactionList extends StatelessWidget {
                     ],
                   ),
                 );*/
+
+                // ///ElevatedButton.icon(
+                //               onPressed: () => d_trans(transaction[index].id),
+                //               icon: Icon(
+                //                 Icons.delete,
+                //               ),
+                //               style: ElevatedButton.styleFrom(
+                //                   foregroundColor:
+                //                       Color.fromARGB(255, 255, 0, 0)
+                //                   // Theme.of(context).primaryColor
+                //                   ,
+                //                   backgroundColor: Colors.white),
+                //               label: Text("Delete")),
