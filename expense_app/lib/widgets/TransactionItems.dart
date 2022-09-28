@@ -28,7 +28,6 @@ class _TranasactionItemsState extends State<TranasactionItems> {
       Colors.orange
     ];
     bgColor = availablecolor[Random().nextInt(4)];
-    // TODO: implement initState
     super.initState();
   }
 
@@ -36,7 +35,7 @@ class _TranasactionItemsState extends State<TranasactionItems> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
       child: ListTile(
           leading: CircleAvatar(
             backgroundColor: bgColor,

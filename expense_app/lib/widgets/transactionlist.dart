@@ -32,13 +32,27 @@ class TransactionList extends StatelessWidget {
                 ],
               );
             })
-          : ListView.builder(
-              itemBuilder: (contxt, index) {
-                return TranasactionItems(
-                    transaction_: transaction[index], d_trans: d_trans);
-              },
-              itemCount: transaction.length,
+          // : ListView.builder(
+          //     itemBuilder: (contxt, index) {
+          //       return TranasactionItems(
+          //           transaction_: transaction[index], d_trans: d_trans);
+          //     },
+          //     itemCount: transaction.length,
+          //   ),
+          : ListView(
+              children: transaction
+                  .map((e) => TranasactionItems(
+                      key: ValueKey(e.id), transaction_: e, d_trans: d_trans))
+                  .toList(),
             ),
+      // or
+
+      //  :ListView(
+      //       children:...[ transaction
+      //           .map((e) =>
+      //               TranasactionItems(transaction_: e, d_trans: d_trans]))
+      //           .toList(),
+      //     ),
     );
   }
 }
@@ -83,15 +97,15 @@ class TransactionList extends StatelessWidget {
                   ),
                 );*/
 
-                // ///ElevatedButton.icon(
-                //               onPressed: () => d_trans(transaction[index].id),
-                //               icon: Icon(
-                //                 Icons.delete,
-                //               ),
-                //               style: ElevatedButton.styleFrom(
-                //                   foregroundColor:
-                //                       Color.fromARGB(255, 255, 0, 0)
-                //                   // Theme.of(context).primaryColor
-                //                   ,
-                //                   backgroundColor: Colors.white),
-                //               label: Text("Delete")),
+// ///ElevatedButton.icon(
+//               onPressed: () => d_trans(transaction[index].id),
+//               icon: Icon(
+//                 Icons.delete,
+//               ),
+//               style: ElevatedButton.styleFrom(
+//                   foregroundColor:
+//                       Color.fromARGB(255, 255, 0, 0)
+//                   // Theme.of(context).primaryColor
+//                   ,
+//                   backgroundColor: Colors.white),
+//               label: Text("Delete")),
