@@ -127,12 +127,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final dynamic appBar_ = Platform.isIOS
         ? CupertinoNavigationBar(
-            middle: Text("expense App"),
+            middle: const Text("expense App"),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  child: Icon(CupertinoIcons.add),
+                  child: const Icon(CupertinoIcons.add),
                   onTap: () => _startAddNewtransaction(context),
                 )
               ],
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             actions: [
               IconButton(
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.add),
                 onPressed: () => _startAddNewtransaction(context),
               )
             ],

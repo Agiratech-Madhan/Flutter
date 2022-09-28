@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/transaction.dart';
+import '../widgets/TransactionItems.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transaction;
@@ -18,7 +19,7 @@ class TransactionList extends StatelessWidget {
                     "No Transaction added yet",
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -33,51 +34,15 @@ class TransactionList extends StatelessWidget {
             })
           : ListView.builder(
               itemBuilder: (contxt, index) {
-                return Card(
-                  elevation: 5,
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 20,
-                        child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: FittedBox(
-                            child: Text('\$${transaction[index].amount}'),
-                          ),
-                        ),
-                      ),
-                      title: Text(
-                        transaction[index].Title,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      subtitle: Text(
-                        DateFormat.yMMMd().format(transaction[index].date),
-                      ),
-                      trailing: MediaQuery.of(context).size.width > 420
-                          ? TextButton.icon(
-                              onPressed: () => d_trans(transaction[index].id),
-                              icon: Icon(
-                                Icons.delete,
-                              ),
-                              label: Text("Delete"),
-                              style: TextButton.styleFrom(
-                                  foregroundColor:
-                                      Color.fromARGB(255, 255, 0, 0)),
-                            )
-                          : IconButton(
-                              onPressed: () => d_trans(transaction[index].id),
-                              color: Color.fromARGB(255, 255, 0, 0),
-                              icon: Icon(
-                                Icons.delete,
-                              ),
-                            )),
-                );
+                return TranasactionItems(
+                    transaction_: transaction[index], d_trans: d_trans);
               },
               itemCount: transaction.length,
             ),
     );
   }
 }
+
 /** Card(
                   child: Row(
                     children: [

@@ -1,5 +1,6 @@
 // import 'dart:html';
 import 'dart:io';
+import '../widgets/adaptivebutton.dart';
 import 'package:flutter/cupertino.dart';
 // import 'package:flutter/src/widgets/container.dart';
 // import 'package:flutter/src/widgets/framework.dart';
@@ -93,6 +94,7 @@ class _NewTransactionState extends State<NewTransaction> {
                             : 'Picked Date ${DateFormat.yMd().format(_selectedDate)}',
                       ),
                     ),
+                    Adaptivebutton("Choose Date", _presentdatepicker),
                     // TextButton(
                     //   onPressed: null,
                     //   child: Text(
@@ -100,26 +102,6 @@ class _NewTransactionState extends State<NewTransaction> {
                     //   ),
                     //   style: TextButton.styleFrom(foregroundColor: Colors.purple),
                     // )
-                    Platform.isIOS
-                        ? CupertinoButton(
-                            child: Text(
-                              "Choose Date",
-                              style: TextStyle(
-                                  // color: Theme.of(context).primaryColor,git
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onPressed: _presentdatepicker)
-                        : TextButton(
-                            onPressed: _presentdatepicker,
-                            child: Text(
-                              "Choose Date",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            // style: TextButton.styleFrom(
-                            //     foregroundColor: Color.fromARGB(255, 76, 89, 175)),
-                          ),
                   ],
                 ),
               ),
