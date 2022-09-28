@@ -120,6 +120,52 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<Widget> _BuildisLandascapecontent(
+      MediaQueryData mediaQuery, AppBar appBar_, tranlistwidget) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Enable Chart",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Switch.adaptive(
+              activeColor: Theme.of(context).primaryColor,
+              value: _enableChart,
+              onChanged: (val) {
+                setState(() {
+                  _enableChart = val;
+                });
+              })
+        ],
+      ),
+      _enableChart
+          ? Container(
+              height: (mediaQuery.size.height -
+                      appBar_.preferredSize.height -
+                      mediaQuery.padding.top) *
+                  0.7,
+              child:
+                  Chart(_recentTranasactions)) // needs only recent tranasaction
+          // Usertranasaction(),
+          : tranlistwidget
+    ];
+  }
+
+  List<Widget> _buildPortraitcontent(
+      MediaQueryData mediaQuery, AppBar appBar_, tranlistwidget) {
+    return [
+      Container(
+          height: (mediaQuery.size.height -
+                  appBar_.preferredSize.height -
+                  mediaQuery.padding.top) *
+              0.3,
+          child: Chart(_recentTranasactions)),
+      tranlistwidget
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -165,44 +211,14 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Enable Chart",
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  Switch.adaptive(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: _enableChart,
-                      onChanged: (val) {
-                        setState(() {
-                          _enableChart = val;
-                        });
-                      })
-                ],
-              ),
+              ..._BuildisLandascapecontent(mediaQuery, appBar_, tranlistwidget),
 
             if (!isLandscape)
-              Container(
-                  height: (mediaQuery.size.height -
-                          appBar_.preferredSize.height -
-                          mediaQuery.padding.top) *
-                      0.3,
-                  child: Chart(
-                      _recentTranasactions)), // needs only recent tranasaction
-            if (!isLandscape) tranlistwidget,
-            if (isLandscape)
-              _enableChart
-                  ? Container(
-                      height: (mediaQuery.size.height -
-                              appBar_.preferredSize.height -
-                              mediaQuery.padding.top) *
-                          0.7,
-                      child: Chart(
-                          _recentTranasactions)) // needs only recent tranasaction
-                  // Usertranasaction(),
-                  : tranlistwidget,
+              ..._buildPortraitcontent(mediaQuery, appBar_,
+                  tranlistwidget), // needs only recent tranasaction
+            // if (!isLandscape)tranlistwidget ,
+            // if (isLandscape)
+            //   ,
 
             // Card(
             //   child: Text("body"),
