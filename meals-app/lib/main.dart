@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
+import 'categories_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("MEals app"),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Meals',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: Center(
-        child: Text("NavigationTime"),
-      ),
+      home: CategoryScreen(),
     );
   }
 }
