@@ -8,57 +8,68 @@ class MyApp extends StatelessWidget {
   // const MyApp({super.key});
 
   // This widget is the root of your application.
-  List images_ = ["assets/images/sam.jpg", "assets/images/sam.jpg"];
+  List images_ = [
+    "assets/images/sam.jpg",
+    "assets/images/sam.jpg",
+    "assets/images/sam.jpg",
+    "assets/images/sam.jpg",
+    "assets/images/sam.jpg",
+  ];
+  List text = [
+    "Shop menwear",
+    "ShopWomenswear",
+    "ShopEverything",
+    "shop Kidswear",
+    "shop accessories"
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: ListView.builder(
-          itemBuilder: (BuildContext ctx, index) {
-            return Column(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      child: Image.asset(images_[index]),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20, left: 20),
-                      // alignment: Alignment.center,
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text("hello"),
-                        ],
+      home: SafeArea(
+        child: Scaffold(
+          body: ListView.builder(
+            itemBuilder: (BuildContext ctx, index) {
+              return Column(
+                children: [
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: ClipRRect(
+                          // padding: EdgeInsets.all(20),
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(images_[index]),
+                        ),
                       ),
-                    )
-                  ],
-                ),
-              ],
-            );
-          },
-          itemCount: images_.length,
+                      Positioned.fill(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            text[index],
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+            itemCount: images_.length,
+          ),
         ),
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***import 'package:flutter/material.dart';
 
