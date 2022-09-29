@@ -1,0 +1,17 @@
+// import 'dart:html';
+
+import 'package:flutter/material.dart';
+
+class CategoryMealsScreen extends StatelessWidget {
+  const CategoryMealsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("receipies page"),
+      ),
+      body: Text("main recepies content"),
+    );
+  }
+}
