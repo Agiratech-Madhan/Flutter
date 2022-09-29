@@ -75,12 +75,32 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.tff
+        - asset: assets/fonts/Raleway-Bold.tff
+
+
+        # - asset: fonts/Schyler-Italic.ttf
+        #   style: italic
+          weight: 700
+        - asset: assets/fonts/Raleway-Black.tff
+          weight: 900
+
+    - family: RobotCondensed
+      fonts:
+        - asset: assets/fonts/RobotCondensed-Regular.tff
+        - asset: assets/fonts/RobotCondensed-Bold.tff
+
+
+        # - asset: fonts/Schyler-Italic.ttf
+        #   style: italic
+          weight: 700
+        - asset: assets/fonts/RobotCondensed-Light.tff
+          weight: 300 
+        - asset: assets/fonts/RobotCondensed-Italic.tff
+          style: italic    
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

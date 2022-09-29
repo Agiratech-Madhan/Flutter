@@ -12,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
         title: const Text("Mealshop"),
       ),
       body: GridView(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           children: DUMMY_CATEGORIES
               .map((catedata) => Category_Item(catedata.title, catedata.color))
               .toList(),
