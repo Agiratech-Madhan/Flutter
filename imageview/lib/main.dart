@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Text(
                             text[index],
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold),
@@ -64,6 +64,17 @@ class MyApp extends StatelessWidget {
               );
             },
             itemCount: images_.length,
+          ),
+          // bottomNavigationBar: BottomNavigationBar(items:BottomNavigationBarItem(icon:Icon(Icons.add),label:  ), ),
+          bottomNavigationBar: TextButton(
+            child: Text(
+              "May be Later",
+              style: TextStyle(
+                color: Colors.grey,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            onPressed: () {},
           ),
         ),
       ),

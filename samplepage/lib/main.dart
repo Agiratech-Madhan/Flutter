@@ -75,9 +75,9 @@ class _MainPagState extends State<MainPag> {
                       padding: EdgeInsets.only(left: 20),
                       text: 'Continue with Facebook',
 
-                      // icon: Icons.email,
+                      // icon: Icons.email,rgb(66,89,147)
                       onPressed: () {},
-                      backgroundColor: Color.fromARGB(255, 52, 52, 143)!,
+                      backgroundColor: Color.fromRGBO(66, 89, 147, 1)!,
                     ),
                   ],
                 )),
@@ -95,6 +95,19 @@ class _MainPagState extends State<MainPag> {
                 SizedBox(
                   height: 20,
                 ),
+                // ElevatedButton(
+                //   child: Row(
+                //     children: [
+                //       Container(
+                //           width: 30,
+                //           height: 30,
+                //           child: Image.asset("assets/images/search.png")),
+                //       Text("Google")
+                //     ],
+                //   ),
+                //   onPressed: () {},
+                // ),
+                // ElevatedButton.icon(onPressed: (){}, icon: icon.Assert( "assets/Google.png"), label:Text( "eff"))
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
