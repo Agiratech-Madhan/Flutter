@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'secondscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -49,9 +51,9 @@ class _MainPagState extends State<MainPag> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: const EdgeInsets.only(bottom: 270),
+                  padding: const EdgeInsets.only(bottom: 315),
                   child: const Text(
-                    "Depop",
+                    "depop",
                     style: TextStyle(
                         fontSize: 34,
                         color: Colors.red,
@@ -59,7 +61,7 @@ class _MainPagState extends State<MainPag> {
                   ),
                 ),
                 SizedBox(
-                  width: 290,
+                  width: 330,
                   child: SignInButton(
                     Buttons.Google,
                     text: "Sign up with Google",
@@ -71,8 +73,9 @@ class _MainPagState extends State<MainPag> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SignInButtonBuilder(
-                      width: 270,
-                      padding: EdgeInsets.only(left: 20),
+                      width: 290,
+                      padding: EdgeInsets.only(left: 40),
+                      // margin
                       text: 'Continue with Facebook',
 
                       // icon: Icons.email,rgb(66,89,147)
@@ -82,7 +85,7 @@ class _MainPagState extends State<MainPag> {
                   ],
                 )),
                 SizedBox(
-                    width: 290,
+                    width: 330,
                     child: SignInButtonBuilder(
                       padding: EdgeInsets.only(left: 60),
                       width: 210,
@@ -114,14 +117,26 @@ class _MainPagState extends State<MainPag> {
                     const Text(
                       "Already have an Account?",
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'RobotCondensed'),
+                      // style: GoogleFonts.poppins(
+                      //     textStyle: TextStyle(color: Colors.white),
+                      //     fontStyle: FontStyle.italic),
+
+                      // GoogleFonts.lato(fontStyle: FontStyle.italic)
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SecondScreen()));
+                      },
                       child: Text("Login",
                           style: TextStyle(
-                              color: Colors.white,
-                              decoration: TextDecoration.underline)),
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                          )),
                     ),
                   ],
                 ),
@@ -136,6 +151,7 @@ class _MainPagState extends State<MainPag> {
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white,
+                      fontFamily: 'Raleway',
                     ),
                   ),
                 )

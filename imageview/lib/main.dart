@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                   Stack(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(0.8),
                         child: ClipRRect(
                           // padding: EdgeInsets.all(20),
                           borderRadius: BorderRadius.circular(10),

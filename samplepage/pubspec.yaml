@@ -49,6 +49,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.9.2
   flutter_signin_button: ^2.0.0
+  google_fonts: ^3.0.1
 flutter_icons:
   android: "launcher_icon"
   ios: true
@@ -80,7 +81,38 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  # uses-material-design: true
+  fonts:
+     - family: Raleway
+       fonts:
+         - asset: fonts/Raleway-Regular.ttf
+        #  - asset: samplepage/fonts/Raleway-Bold.ttf
+
+
+        # - asset: fonts/Schyler-Italic.ttf
+        #   style: italic
+          #  weight: 700
+        #  - asset: fonts/Raleway-Black.tff
+        #    weight: 900
+
+    #  - family: RobotCondensed
+    #    fonts:
+    #      - asset: fonts/RobotCondensed-Regular.tff
+
+
+    #     # - asset: fonts/Schyler-Italic.ttf
+    #     #   style: italic
+    #        weight: 700
+    #      - asset: assets/fonts/RobotCondensed-Light.tff
+    #        weight: 300 
+    #      - asset: assets/fonts/RobotCondensed-Italic.tff
+    #        style: italic
+        # - asset: samplepage/assets/fonts/Raleway-Bold.ttf
+        
+  #   - family: RobotCondensed
+  #     fonts:
+  #       - asset: assets/fonts/          
+  # # fonts:
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
