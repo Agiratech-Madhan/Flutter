@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
                 BottomNavigationBarItem(
                     icon: Icon(Icons.message_outlined), label: 'DMs'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.handshake), label: 'Mentions'),
+                    icon: Icon(Icons.alternate_email), label: 'Mentions'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.search), label: 'Search'),
                 BottomNavigationBarItem(icon: Icon(Icons.face), label: 'You'),
