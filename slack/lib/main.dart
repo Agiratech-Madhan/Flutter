@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './MyAccount.dart';
 import './DirectMessages.dart';
 import './Mentions.dart';
@@ -34,32 +35,37 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.pink),
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        dividerColor: Colors.transparent,
+        // systemOverlayStyle: SystemUiOverlayStyle.light,
+        // appBarTheme: systemOverlayStyle:,
+      ),
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          // appBar: AppBar(),
-          body: _Pages[_selectedindex],
-          bottomNavigationBar: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: Colors.pink,
-              currentIndex: _selectedindex,
-              selectedFontSize: 12,
-              unselectedFontSize: 12,
-              onTap: Navigationbartap,
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.message_outlined), label: 'DMs'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.alternate_email), label: 'Mentions'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.search), label: 'Search'),
-                BottomNavigationBarItem(icon: Icon(Icons.face), label: 'You'),
-              ]),
-        ),
+      home: Scaffold(
+        // appBar: AppBar(),
+        body: _Pages[_selectedindex],
+
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            unselectedItemColor: Colors.grey,
+            selectedItemColor: Colors.pink,
+            currentIndex: _selectedindex,
+            selectedFontSize: 12,
+            unselectedFontSize: 12,
+            onTap: Navigationbartap,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.message_outlined), label: 'DMs'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.alternate_email), label: 'Mentions'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.search), label: 'Search'),
+              BottomNavigationBarItem(icon: Icon(Icons.face), label: 'You'),
+            ]),
       ),
     );
   }
