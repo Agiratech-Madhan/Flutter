@@ -18,9 +18,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Services? _services;
+  var result;
+  void check(value) {
+    setState(() {
+      result = value;
+    });
+  }
 
   void Bottomsheet(BuildContext ctex) {
-    var result;
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -49,28 +54,16 @@ class _HomeState extends State<Home> {
                 leading: const Icon(Icons.list_alt_rounded),
                 title: const Text("Sections"),
                 trailing: Radio<dynamic>(
-                  activeColor: result == 1 ? Colors.blue : Colors.grey,
                   value: 1,
                   groupValue: result,
-                  onChanged: (value) {
-                    setState(() {
-                      result = value;
-                    });
-                  },
+                  onChanged: (x) => check(x),
                 ),
               ),
               ListTile(
                 leading: const Icon(Icons.access_time_rounded),
                 title: const Text("Recent activity"),
                 trailing: Radio<dynamic>(
-                    activeColor: result == 2 ? Colors.blue : Colors.grey,
-                    value: 2,
-                    groupValue: result,
-                    onChanged: (value) {
-                      setState(() {
-                        result = value;
-                      });
-                    }),
+                    value: 2, groupValue: result, onChanged: (x) => check(x)),
               )
             ],
           ),
@@ -85,56 +78,83 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
-              child: DrawerHeader(
-                  // margin: EdgeInsets.all(0.0),
-                  child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Workspaces",
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
-                      ))),
-            ),
-            ListTile(
-              leading: Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.topRight,
-                children: [
-                  Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 3),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Image.asset("assets/images/agira.png")),
-                  Positioned(
-                    top: -5,
-                    right: -5,
-                    child: Stack(alignment: Alignment.center, children: [
+            Column(
+              children: [
+                const SizedBox(
+                  height: 100,
+                  child: DrawerHeader(
+                      // margin: EdgeInsets.all(0.0),
+                      child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Workspaces",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ))),
+                ),
+                ListTile(
+                  leading: Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.topRight,
+                    children: [
                       Container(
-                          width: 25,
-                          height: 20,
-                          // color: Colors.pink,
+                          padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              color: Colors.pink,
-                              borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(10),
-                                  right: Radius.circular(10)))),
-                      Row(
-                        children: [
-                          Text(
-                            "4",
-                            style: TextStyle(color: Colors.white),
+                            border: Border.all(color: Colors.black, width: 3),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          Text("+", style: TextStyle(color: Colors.white))
-                        ],
+                          child: Image.asset("assets/images/agira.png")),
+                      Positioned(
+                        top: -5,
+                        right: -5,
+                        child: Stack(alignment: Alignment.center, children: [
+                          Container(
+                              width: 25,
+                              height: 20,
+                              // color: Colors.pink,
+                              decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(10),
+                                      right: Radius.circular(10)))),
+                          Row(
+                            children: [
+                              Text(
+                                "4",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              Text("+", style: TextStyle(color: Colors.white))
+                            ],
+                          )
+                        ]),
                       )
-                    ]),
-                  )
-                ],
-              ),
+                    ],
+                  ),
+                  title: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "AgiraTech",
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "agiratech.slack.com",
+                        style: TextStyle(color: Colors.grey, fontSize: 10),
+                      )
+                    ],
+                  ),
+                  trailing: Icon(Icons.more_vert),
+                )
+              ],
+            ),
+            Column(
+              children: [
+                Divider(
+                  color: Colors.blue,
+                )
+              ],
             )
           ],
         ),
