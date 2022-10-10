@@ -77,6 +77,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       drawer: Drawer(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               children: [
@@ -152,8 +153,85 @@ class _HomeState extends State<Home> {
             Column(
               children: [
                 Divider(
-                  color: Colors.blue,
-                )
+                  color: Colors.grey,
+                ),
+                SizedBox(
+                  height: 150,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          leading: SizedBox(
+                            // width: MediaQuery.of(context).size.width * 0.9,
+                            child: TextButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(Icons.add_circle_outline),
+                              label: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: const Text(
+                                  "Add a workspace",
+                                ),
+                              ),
+                              style: TextButton.styleFrom(
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
+                                  foregroundColor: Colors.black,
+                                  alignment: Alignment.centerLeft,
+                                  padding: const EdgeInsets.all(10)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          leading: SizedBox(
+                            // width: MediaQuery.of(context).size.width * 0.9,
+                            child: TextButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(Icons.settings),
+                              label: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: const Text(
+                                  "Preferences",
+                                ),
+                              ),
+                              style: TextButton.styleFrom(
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
+                                  foregroundColor: Colors.black,
+                                  alignment: Alignment.centerLeft,
+                                  padding: const EdgeInsets.all(10)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          leading: SizedBox(
+                            // width: MediaQuery.of(context).size.width * 0.9,
+                            child: TextButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(Icons.help_outline_outlined),
+                              label: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: const Text(
+                                  "Help",
+                                ),
+                              ),
+                              style: TextButton.styleFrom(
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
+                                  foregroundColor: Colors.black,
+                                  alignment: Alignment.centerLeft,
+                                  padding: const EdgeInsets.all(10)),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             )
           ],
@@ -278,40 +356,6 @@ class _HomeState extends State<Home> {
                               // alignment: Alignment.centerLeft,
                               padding: EdgeInsets.all(10)),
                         )))
-
-                // ,
-                // TextButton.icon(
-                //   onPressed: () {},
-                //   icon: Icon(Icons.monetization_on),
-                //   label: Align(
-                //     alignment: Alignment.centerLeft,
-                //     child: Text(
-                //       "Drafts & Sent",
-                //     ),
-                //   ),
-                //   style: TextButton.styleFrom(
-                //       elevation: 0,
-                //       backgroundColor: Colors.transparent,
-                //       foregroundColor: Colors.grey,
-                //       // alignment: Alignment.centerLeft,
-                //       padding: EdgeInsets.all(10)),
-                // ),
-                // TextButton.icon(
-                //   onPressed: () {},
-                //   icon: Icon(Icons.send_rounded),
-                //   label: Align(
-                //     alignment: Alignment.centerLeft,
-                //     child: Text(
-                //       "Drafts & Sent",
-                //     ),
-                //   ),
-                //   style: TextButton.styleFrom(
-                //       elevation: 0,
-                //       backgroundColor: Colors.transparent,
-                //       foregroundColor: Colors.grey,
-                //       // alignment: Alignment.centerLeft,
-                //       padding: EdgeInsets.all(10)),
-                // ),
               ],
             ),
             Divider(
@@ -351,12 +395,6 @@ class _HomeState extends State<Home> {
                                       ]),
                                 ),
                                 title: Text(chatdata[i].name),
-
-                                // leading: CircleAvatar(
-                                //   backgroundColor: Colors.grey,
-                                //   backgroundImage:
-                                //       AssetImage(chatdata[i].pic),
-                                // ),
                               )
                             ],
                           )),
@@ -369,93 +407,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-/**
- * import 'package:flutter/material.dart';
-
-void main() {
-  runApp(Radiosam());
-}
-
-class Radiosam extends StatelessWidget {
-  // const Radiosam({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      // Hide the debug banner
-      debugShowCheckedModeBanner: false,
-      title: 'Kindacode.com',
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  // The group value
-  var result;
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Kindacode.com',
-        ),
-      ),
-      body: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('1 + 2 + 4 = ?'),
-              RadioListTile(
-                  title: const Text('4'),
-                  value: 4,
-                  groupValue: result,
-                  onChanged: (value) {
-                    setState(() {
-                      result = value;
-                    });
-                  }),
-              RadioListTile(
-                  title: const Text('5.4'),
-                  value: 5.4,
-                  groupValue: result,
-                  onChanged: (value) {
-                    setState(() {
-                      result = value;
-                    });
-                  }),
-              RadioListTile(
-                  title: const Text('6'),
-                  value: 6,
-                  groupValue: result,
-                  onChanged: (value) {
-                    setState(() {
-                      result = value;
-                    });
-                  }),
-              RadioListTile(
-                  title: const Text('7'),
-                  value: 7,
-                  groupValue: result,
-                  onChanged: (value) {
-                    setState(() {
-                      result = value;
-                    });
-                  }),
-              const SizedBox(height: 25),
-              Text(result == 7 ? 'Correct!' : 'Please chose the right answer!')
-            ],
-          )),
-    );
-  }
-}
-
- */
