@@ -18,7 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Services? _services;
-  var result;
+  var result = 1;
   void check(value) {
     setState(() {
       result = value;
@@ -99,6 +99,7 @@ class _HomeState extends State<Home> {
                     alignment: Alignment.topRight,
                     children: [
                       Container(
+                          // color: Colors.transparent,
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black, width: 3),
@@ -138,11 +139,11 @@ class _HomeState extends State<Home> {
                       Text(
                         "AgiraTech",
                         style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "agiratech.slack.com",
-                        style: TextStyle(color: Colors.grey, fontSize: 10),
+                        style: TextStyle(color: Colors.grey, fontSize: 13),
                       )
                     ],
                   ),
@@ -373,7 +374,7 @@ class _HomeState extends State<Home> {
                       itemBuilder: (context, i) => Column(
                             children: [
                               ListTile(
-                                leading: Container(
+                                leading: SizedBox(
                                   width: 50,
                                   height: 50,
                                   child: Stack(
