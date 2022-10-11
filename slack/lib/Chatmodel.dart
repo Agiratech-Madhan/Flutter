@@ -16,35 +16,35 @@ List<Chat> chatdata = [
       name: "Madhan",
       msg: 'hello madhan',
       time: '10/1/22',
-      pic: 'assets/images/person.png'),
+      pic: 'assets/images/person1.jpeg'),
   Chat(
       name: "Madhan",
       msg: 'hello madhan',
       time: '10/1/22',
-      pic: 'assets/images/person.png'),
+      pic: 'assets/images/person1.jpeg'),
   Chat(
       name: "Madhan",
       msg: 'hello madhan',
       time: '10/1/22',
-      pic: 'assets/images/person.png'),
+      pic: 'assets/images/person1.jpeg'),
   Chat(
       name: "Madhan",
       msg: 'hello madhan',
       time: '10/1/22',
-      pic: 'assets/images/person.png'),
+      pic: 'assets/images/person1.jpeg'),
   Chat(
       name: "Madhan",
       msg: 'hello madhan',
       time: '10/1/22',
-      pic: 'assets/images/person.png'),
+      pic: 'assets/images/person1.jpeg'),
   Chat(
       name: "Madhan",
       msg: 'hello madhan',
       time: '10/1/22',
-      pic: 'assets/images/person.png'),
+      pic: 'assets/images/person1.jpeg'),
   Chat(
       name: "Madhan",
       msg: 'hello madhan',
       time: '10/1/22',
-      pic: 'assets/images/person.png'),
+      pic: 'assets/images/person1.jpeg'),
 ];

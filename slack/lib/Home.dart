@@ -386,12 +386,15 @@ class _HomeState extends State<Home> {
                                           child: Image.asset(chatdata[i].pic),
                                         ),
                                         Container(
-                                          width: 10,
-                                          height: 10,
+                                          width: 13,
+                                          height: 13,
                                           decoration: BoxDecoration(
-                                              color: Colors.pink,
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
+                                            color: Colors.pink,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            border: Border.all(
+                                                width: 2, color: Colors.white),
+                                          ),
                                         )
                                       ]),
                                 ),

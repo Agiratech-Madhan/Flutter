@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:slack/widgets/setstatus.dart';
 import './Chatmodel.dart';
+import './widgets/pause.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -50,7 +52,10 @@ class _MyAccountState extends State<MyAccount> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                         side: const BorderSide(color: Colors.grey))),
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SetStatus()),
+                    ),
                 icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
                 label: const Padding(
                   padding: EdgeInsets.only(right: 130, top: 15, bottom: 15),
@@ -64,11 +69,12 @@ class _MyAccountState extends State<MyAccount> {
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(
-                top: 20,
+                top: 10,
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Pause())),
                 icon: const Icon(Icons.notifications_off_sharp),
                 label: const Text(
                   "Pause notifications",
@@ -86,7 +92,7 @@ class _MyAccountState extends State<MyAccount> {
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(
-                top: 20,
+                top: 10,
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
@@ -111,14 +117,14 @@ class _MyAccountState extends State<MyAccount> {
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(
-                top: 20,
+                top: 10,
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.bookmark_border),
                 label: const Text(
-                  "saved Items",
+                  "Saved Items",
                 ),
                 style: TextButton.styleFrom(
                     elevation: 0,
@@ -133,7 +139,7 @@ class _MyAccountState extends State<MyAccount> {
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(
-                top: 20,
+                top: 10,
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
@@ -155,7 +161,7 @@ class _MyAccountState extends State<MyAccount> {
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(
-                top: 20,
+                top: 10,
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
@@ -177,7 +183,7 @@ class _MyAccountState extends State<MyAccount> {
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(
-                top: 20,
+                top: 10,
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
