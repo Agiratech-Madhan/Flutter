@@ -58,13 +58,15 @@ class _HomeState extends State<Home> {
                   groupValue: result,
                   onChanged: (x) => check(x),
                 ),
+                onTap: () => Navigator.of(context).pop(),
               ),
               ListTile(
                 leading: const Icon(Icons.access_time_rounded),
                 title: const Text("Recent activity"),
                 trailing: Radio<dynamic>(
                     value: 2, groupValue: result, onChanged: (x) => check(x)),
-              )
+                onTap: () => Navigator.of(context).pop(),
+              ),
             ],
           ),
         );
@@ -267,7 +269,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Bottomsheet(context);
               },
-              icon: const Icon(Icons.menu_rounded))
+              icon: const Icon(Icons.filter_list))
         ],
       ),
       body: SingleChildScrollView(
@@ -385,15 +387,20 @@ class _HomeState extends State<Home> {
                                               BorderRadius.circular(5),
                                           child: Image.asset(chatdata[i].pic),
                                         ),
-                                        Container(
-                                          width: 13,
-                                          height: 13,
-                                          decoration: BoxDecoration(
-                                            color: Colors.pink,
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            border: Border.all(
-                                                width: 2, color: Colors.white),
+                                        Positioned(
+                                          bottom: -2,
+                                          right: -2,
+                                          child: Container(
+                                            width: 15,
+                                            height: 15,
+                                            decoration: BoxDecoration(
+                                              color: Colors.pink,
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                              border: Border.all(
+                                                  width: 3,
+                                                  color: Colors.white),
+                                            ),
                                           ),
                                         )
                                       ]),

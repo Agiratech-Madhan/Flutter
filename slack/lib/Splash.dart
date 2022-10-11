@@ -26,11 +26,10 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          child: Text(
-            "Slack",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-          ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: MediaQuery.of(context).size.height * 0.4,
+          child: Image.asset('assets/images/slack.png'),
         ),
       ),
     );

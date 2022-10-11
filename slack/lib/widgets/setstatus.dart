@@ -16,6 +16,7 @@ class _SetStatusState extends State<SetStatus> {
   bool isEnable = false;
   bool isselected = false;
   bool typed = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,6 +189,7 @@ class _SetStatusState extends State<SetStatus> {
           Divider(
             color: Colors.grey,
           ),
+
           Expanded(
             child: ListView.builder(
                 itemCount: setstatus.length,

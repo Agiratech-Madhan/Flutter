@@ -98,8 +98,13 @@ class _MyAccountState extends State<MyAccount> {
               child: TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.person_search_sharp),
-                label: const Text(
-                  "Pause notifications",
+                label: Row(
+                  children: [
+                    const Text(
+                      "Set yourself as",
+                    ),
+                    Text("active")
+                  ],
                 ),
                 style: TextButton.styleFrom(
                     elevation: 0,
