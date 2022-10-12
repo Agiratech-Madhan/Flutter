@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:slack/Splash.dart';
+import 'package:slack/Splash/Splash.dart';
 
 void main() {
   return runApp(MyApp());

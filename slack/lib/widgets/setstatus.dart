@@ -23,36 +23,6 @@ class _SetStatusState extends State<SetStatus> {
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Container(
-          //   margin: EdgeInsets.only(top: 30),
-          //   // padding: EdgeInsets.all(10),
-          //   child: ListTile(
-          //     dense: true,
-          //     // visualDensity: VisualDensity(horizontal: -, vertical: 0),
-          //     leading: IconButton(
-          //       icon: Icon(Icons.cancel_outlined),
-          //       iconSize: 30,
-          //       onPressed: null,
-          //     ),
-          //     title: Padding(
-          //       padding: const EdgeInsets.only(left: 0),
-          //       child: Text("Set a status",
-          //           style:
-          //               TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-          //     ),
-          //     trailing: TextButton(
-          //       child: Text("Save",
-          //           style: TextStyle(
-          //               fontSize: 16,
-          //               color: isEnable ? Colors.black : Colors.grey)),
-          //       onPressed: () {},
-          //     ),
-          //   ),
-          // ),
-          // Divider(
-          //   color: Colors.grey,
-          // ),
-          // Spacer(),
           SizedBox(
             height: 25,
           ),
@@ -109,20 +79,6 @@ class _SetStatusState extends State<SetStatus> {
                   icon: typed ? Icon(Icons.cancel) : Icon(null))
             ],
           ),
-
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: ElevatedButton(
-          //           onPressed: () {},
-          //           child: Column(
-          //             mainAxisAlignment: MainAxisAlignment.start,
-          //             children: [Text("Madhan"), Text("Dont clear")],
-          //           )),
-          //     ),
-          //   ],
-          // )
-
           Column(
             children: [
               false
@@ -136,7 +92,6 @@ class _SetStatusState extends State<SetStatus> {
                   Container(
                     height: 70,
                     child: ListTile(
-                      // minLeadingWidth: 49,
                       leading: Padding(
                         padding: const EdgeInsets.only(left: 10, top: 15),
                         child: Column(
@@ -189,7 +144,6 @@ class _SetStatusState extends State<SetStatus> {
           Divider(
             color: Colors.grey,
           ),
-
           Expanded(
             child: ListView.builder(
                 itemCount: setstatus.length,

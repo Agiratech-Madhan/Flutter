@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 // import 'package:decorated_dropdownbutton/decorated_dropdownbutton.dart';
-import './Chatmodel.dart';
-import './Channelmodel.dart';
+import '../models/Chatmodel.dart';
+import '../models/Channelmodel.dart';
+// import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 
 enum Services {
   sections,
@@ -240,7 +241,9 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+      //#013A20 013A20
       appBar: AppBar(
+        backgroundColor: Color(0xff002A36),
         leading: Builder(builder: (context) {
           return IconButton(
             icon: Container(
@@ -414,6 +417,12 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        elevation: 10,
+        child: Icon(Icons.edit),
+        backgroundColor: Color(0xff002A36),
       ),
     );
   }

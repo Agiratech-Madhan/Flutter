@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
-import 'dart:io';
+// import 'dart:io';
 
 class StatusModel {
   final String icon;

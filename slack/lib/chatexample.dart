@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './Chatmodel.dart';
+import 'models/Chatmodel.dart';
 
 class Chat2 extends StatefulWidget {
   const Chat2({super.key});

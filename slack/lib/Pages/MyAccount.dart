@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slack/widgets/setstatus.dart';
-import './Chatmodel.dart';
-import './widgets/pause.dart';
+import '../models/Chatmodel.dart';
+import '../widgets/pause.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -15,6 +15,7 @@ class _MyAccountState extends State<MyAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xff002A36),
         title: const Text("You"),
       ),
       body: Column(

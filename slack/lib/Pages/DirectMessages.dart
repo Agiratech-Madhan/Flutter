@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './Chatmodel.dart';
+import '../models/Chatmodel.dart';
+// import '../models/Chatmodel.dart';
 
 class DirectMessages extends StatefulWidget {
   const DirectMessages({super.key});
@@ -16,23 +17,22 @@ class _DirectMessagesState extends State<DirectMessages> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Direct messages'),
-          backgroundColor: Colors.pink,
+          // backgroundColor: Colors.pink,
+          backgroundColor: const Color(0xff002A36),
         ),
         body: Column(
           children: [
-            SingleChildScrollView(
-              child: Container(
-                margin: const EdgeInsets.all(15),
-                height: 40,
-                child: TextField(
-                  onTap: null,
-                  decoration: InputDecoration(
-                    hintText: 'Jump to...',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromARGB(255, 204, 200, 200)),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
+            Container(
+              margin: const EdgeInsets.all(15),
+              height: 40,
+              child: TextField(
+                onTap: null,
+                decoration: InputDecoration(
+                  hintText: 'Jump to...',
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        width: 1, color: Color.fromARGB(255, 204, 200, 200)),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
               ),
@@ -63,7 +63,7 @@ class _DirectMessagesState extends State<DirectMessages> {
                                 width: 15,
                                 height: 15,
                                 decoration: BoxDecoration(
-                                  color: Colors.pink,
+                                  color: Colors.green,
                                   borderRadius: BorderRadius.circular(25),
                                   border:
                                       Border.all(width: 3, color: Colors.white),
@@ -81,6 +81,12 @@ class _DirectMessagesState extends State<DirectMessages> {
               ),
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          elevation: 10,
+          child: Icon(Icons.edit),
+          backgroundColor: Color(0xff002A36),
         ),
       ),
     );

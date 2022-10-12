@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './MyAccount.dart';
-import './DirectMessages.dart';
-import './Mentions.dart';
-import './Searchpage.dart';
+import 'MyAccount.dart';
+import 'DirectMessages.dart';
+import 'Mentions.dart';
+import '../subpages/MyAccount/Searchpage.dart';
 import 'Home.dart';
 
 void main() {
@@ -32,17 +32,20 @@ class _MyAppState extends State<MyApp> {
     SearchPage(),
     MyAccount(),
   ];
+  // primaryColor: const Color(0xff002A36),
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        dividerColor: Colors.transparent,
-        // systemOverlayStyle: SystemUiOverlayStyle.light,
-        // appBarTheme: systemOverlayStyle:,
-      ),
+          primaryColor: const Color(0xff002A36),
+          dividerColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          hoverColor: Colors.transparent
+          // systemOverlayStyle: SystemUiOverlayStyle.light,
+          // appBarTheme: systemOverlayStyle:,
+          ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         // appBar: AppBar(),
@@ -51,7 +54,8 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             unselectedItemColor: Colors.grey,
-            selectedItemColor: Colors.pink,
+            selectedItemColor: Color(0xff002A36),
+            // backgroundColor: const Color(0xff002A36),
             currentIndex: _selectedindex,
             selectedFontSize: 12,
             unselectedFontSize: 12,
