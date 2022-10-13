@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:slack/widgets/setstatus.dart';
+import 'package:slack/subpages/MyAccount/setstatus.dart';
 import '../models/Chatmodel.dart';
-import '../widgets/pause.dart';
+import '../subpages/MyAccount/pause.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});

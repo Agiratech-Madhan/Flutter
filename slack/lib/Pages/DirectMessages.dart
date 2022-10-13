@@ -112,7 +112,10 @@ class _DirectMessagesState extends State<DirectMessages> {
                               ]),
                         ),
                         title: Text(chatdata[i].name),
-                        subtitle: Text(chatdata[i].msg),
+                        subtitle: Text(
+                          chatdata[i].msg,
+                          style: const TextStyle(fontSize: 15),
+                        ),
                         trailing: Text(chatdata[i].time),
                       )
                     ],

@@ -26,7 +26,8 @@ List<Chat> chatdata = [
       reactions: 'hello'),
   Chat(
       name: "Madhan",
-      msg: 'Some changes are not ready to dev',
+      msg:
+          'Some changes are not ready to dev please change as much as possible ',
       time: '1hr',
       pic: 'assets/images/person1.jpeg',
       mentioned: 'sample mentions',

@@ -37,9 +37,19 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    // Color primaryAccentColor = const Color(0xff002A36);
+    Color primaryAccentColor = Colors.white30;
+
     return MaterialApp(
       theme: ThemeData(
           primaryColor: const Color(0xff002A36),
+          colorScheme: ColorScheme.fromSeed(seedColor: primaryAccentColor),
+          // primaryColor: const Color(0xff002A36),
+          // colorScheme: ThemeData().colorScheme.copyWith(
+          //       secondary: Colors.pink,
+          //     ),
+          // accentColor: Colors.white,
+          // colorScheme: ColorScheme.dark(secondary: Colors.white),
           dividerColor: Colors.transparent,
           splashColor: Colors.transparent,
           hoverColor: Colors.transparent

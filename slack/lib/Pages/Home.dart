@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slack/subpages/DMs/Jumpto.dart';
 // import 'package:flutter/services.dart';
 // import 'package:decorated_dropdownbutton/decorated_dropdownbutton.dart';
 import '../models/Chatmodel.dart';
@@ -284,19 +285,44 @@ class _HomeState extends State<Home> {
         // physics: NeverScrollableScrollPhysics(),
         child: Column(
           children: [
+            // Container(
+            //   margin: const EdgeInsets.all(15),
+            //   height: 40,
+            //   child: TextField(
+            //     decoration: InputDecoration(
+            //       labelText: 'Jump to...',
+            //       enabledBorder: OutlineInputBorder(
+            //         borderSide: const BorderSide(
+            //             width: 1, color: Color.fromARGB(255, 204, 200, 200)),
+            //         borderRadius: BorderRadius.circular(5),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
-              margin: const EdgeInsets.all(15),
-              height: 40,
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Jump to...',
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        width: 1, color: Color.fromARGB(255, 204, 200, 200)),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-              ),
+              margin: EdgeInsets.all(12),
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.grey,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          side: const BorderSide(color: Colors.grey))),
+                  onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Jumpto()),
+                      ),
+                  // icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 220, top: 12, bottom: 12),
+                    child: Text(
+                      "Jump to....",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  )),
             ),
             ListTile(
               leading: SizedBox(

@@ -151,9 +151,11 @@ class _MentionsState extends State<Mentions> {
                       ],
                     ),
                   ),
-                  Divider(
-                    color: Colors.grey,
-                  ),
+                  !(index == Mentions_list.length - 1)
+                      ? Divider(
+                          color: Colors.grey,
+                        )
+                      : Container(),
                 ],
               )),
         ),
