@@ -77,7 +77,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    bool FAB = MediaQuery.of(context).viewInsets.bottom != 0.0;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+
       drawer: Drawer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

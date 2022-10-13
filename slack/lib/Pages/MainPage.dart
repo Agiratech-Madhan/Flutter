@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'MyAccount.dart';
 import 'DirectMessages.dart';
 import 'Mentions.dart';
-import '../subpages/MyAccount/Searchpage.dart';
+import 'Searchpage.dart';
 import 'Home.dart';
 
 void main() {
