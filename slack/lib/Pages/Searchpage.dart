@@ -192,6 +192,14 @@ class _SearchPageState extends State<SearchPage> {
                         )))
               ],
             ),
+            // ListView.builder(
+            //     // scrollDirection: Axis.horizontal,
+            //     itemCount: displayList.length,
+            //     itemBuilder: ((context, i) => Row(children: [
+            //           const Padding(
+            //               padding: EdgeInsets.all(10), child: Icon(Icons.lock)),
+            //           Text(displayList[i].m_group),
+            //         ]))),
           ],
         ),
       ),
