@@ -69,11 +69,13 @@ class _JumptoState extends State<Jumpto> {
     setState(() {
       // changed = value;
       // print(changed);
+      // Text_controller.text =value==isEmpty;
       displayList = Mentions_list.where((element) =>
           element.m_group.toLowerCase().contains(value.toLowerCase())).toList();
     });
   }
 
+  TextEditingController Text_controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     print("changed$changed");
@@ -103,6 +105,7 @@ class _JumptoState extends State<Jumpto> {
             margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
             height: 40,
             child: TextField(
+              controller: Text_controller,
               onChanged: (value) {
                 // setState(() {
                 // changed = value ;
@@ -132,10 +135,10 @@ class _JumptoState extends State<Jumpto> {
               ),
             ),
           ),
-
+// || Text_controller.text.isNotEmpty
           changed
               ? accountlist(context)
-              : displayList.isNotEmpty
+              : (displayList.isNotEmpty || Text_controller.text.isEmpty)
                   ? accountlist(context)
                   : Container(),
           changed ? groups : Container(),

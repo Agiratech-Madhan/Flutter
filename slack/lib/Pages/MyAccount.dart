@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slack/subpages/MyAccount/setstatus.dart';
+import 'package:slack/subpages/MyAccount/viewprofile.dart';
 import '../models/Chatmodel.dart';
 import '../subpages/MyAccount/pause.dart';
 
@@ -21,6 +22,8 @@ class _MyAccountState extends State<MyAccount> {
       body: Column(
         children: [
           ListTile(
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ViewProfile())),
             leading: SizedBox(
               width: 50,
               height: 50,
