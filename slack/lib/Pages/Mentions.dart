@@ -31,7 +31,7 @@ class _MentionsState extends State<Mentions> {
                   Padding(
                     padding: EdgeInsets.only(
                         top: 15,
-                        left: MediaQuery.of(context).size.width * 0.227,
+                        left: MediaQuery.of(context).size.width * 0.22,
                         right: MediaQuery.of(context).size.width * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,7 +55,7 @@ class _MentionsState extends State<Mentions> {
                           ),
                         ),
                         Text(
-                          Mentions_list[index].m_name,
+                          '1hr',
                           style: TextStyle(color: Colors.grey),
                         )
                       ],
@@ -67,7 +67,7 @@ class _MentionsState extends State<Mentions> {
                       child: SizedBox(
                           width: 50,
                           height: 50,
-                          child: Image.asset(Mentions_list[index].m_group)),
+                          child: Image.asset(Mentions_list[index].m_image)),
                     ),
                     title: Text(
                       Mentions_list[index].m_name,
@@ -111,7 +111,7 @@ class _MentionsState extends State<Mentions> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(Mentions_list[index].m_name),
+                                  Text(Mentions_list[index].m_reactions),
                                   Text('1')
                                 ],
                               ),

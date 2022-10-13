@@ -23,30 +23,6 @@ List<MentionsModel> Mentions_list = [
           'A belated birthday wishes that your life may be filled with joy, peace and the love that you dese ',
       m_image: 'assets/images/person1.jpeg',
       m_reactions: '\u{1f912}'),
-  MentionsModel(
-      m_Header: 'Vignesh mentioned everyone in',
-      m_group: '#agira',
-      m_name: 'm_message',
-      m_message:
-          'A belated birthday wishes that your life may be filled with joy, peace and the love that you dese ',
-      m_image: 'assets/images/person1.jpeg',
-      m_reactions: '\u{1f912}'),
-  MentionsModel(
-      m_Header: 'Vignesh mentioned everyone in',
-      m_group: '#agira',
-      m_name: 'm_message',
-      m_message:
-          'A belated birthday wishes that your life may be filled with joy, peace and the love that you dese ',
-      m_image: 'assets/images/person1.jpeg',
-      m_reactions: '\u{1f912}'),
-  MentionsModel(
-      m_Header: 'Vignesh mentioned everyone in',
-      m_group: '#agira',
-      m_name: 'm_message',
-      m_message:
-          'A belated birthday wishes that your life may be filled with joy, peace and the love that you dese ',
-      m_image: 'assets/images/person1.jpeg',
-      m_reactions: '\u{1f912}'),
 ];
 
 
