@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:slack/subpages/MyAccount/Notifications.dart';
+import 'package:slack/subpages/MyAccount/saved_items.dart';
 import 'package:slack/subpages/MyAccount/setstatus.dart';
+import 'package:slack/subpages/MyAccount/editprofile.dart';
 import 'package:slack/subpages/MyAccount/viewprofile.dart';
 import '../models/Chatmodel.dart';
 import '../subpages/MyAccount/pause.dart';
+import 'package:intl/intl.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -12,6 +16,31 @@ class MyAccount extends StatefulWidget {
 }
 
 class _MyAccountState extends State<MyAccount> {
+  bool issetted = true;
+  void checkstatus(bool tapped) {
+    setState(() {
+      issetted != tapped;
+    });
+    print(issetted);
+  }
+
+  void view_profile(BuildContext ctex) {
+    showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        isScrollControlled: true,
+        isDismissible: true,
+
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.vertical(
+        //     top: Radius.circular(20),
+        //   ),
+        // ),
+        context: ctex,
+        builder: (context) {
+          return View_profile_page();
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +52,7 @@ class _MyAccountState extends State<MyAccount> {
         children: [
           ListTile(
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ViewProfile())),
+                MaterialPageRoute(builder: (context) => EditProfile())),
             leading: SizedBox(
               width: 50,
               height: 50,
@@ -33,6 +62,7 @@ class _MyAccountState extends State<MyAccount> {
                   child: Image.asset("assets/images/person.png"),
                 ),
                 Container(
+                    child: Container(
                   width: 15,
                   height: 15,
                   decoration: BoxDecoration(
@@ -40,11 +70,11 @@ class _MyAccountState extends State<MyAccount> {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(width: 3, color: Colors.white),
                   ),
-                )
+                ))
               ]),
             ),
             title: Text("Madhan"),
-            subtitle: Text("Active"),
+            subtitle: Text(issetted ? 'Active' : 'away'),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
@@ -99,24 +129,31 @@ class _MyAccountState extends State<MyAccount> {
                 top: 10,
               ),
               width: MediaQuery.of(context).size.width * 0.9,
-              child: TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.person_search_sharp),
-                label: Row(
-                  children: [
-                    const Text(
-                      "Set yourself as",
-                    ),
-                    Text("active")
-                  ],
+              child: GestureDetector(
+                // onTap: () => checkstatus(issetted)
+                // setState(() {
+                //   isset();
+                // })
+                // ,
+                child: TextButton.icon(
+                  onPressed: () => {checkstatus(issetted)},
+                  icon: const Icon(Icons.person_search_sharp),
+                  label: Row(
+                    children: [
+                      const Text(
+                        "Set yourself as",
+                      ),
+                      Text(issetted ? 'active' : 'away')
+                    ],
+                  ),
+                  style: TextButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.black,
+                      alignment: Alignment.centerLeft,
+                      padding:
+                          const EdgeInsets.only(left: 1, top: 10, bottom: 10)),
                 ),
-                style: TextButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    alignment: Alignment.centerLeft,
-                    padding:
-                        const EdgeInsets.only(left: 1, top: 10, bottom: 10)),
               ),
             ),
           ),
@@ -130,7 +167,8 @@ class _MyAccountState extends State<MyAccount> {
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SavedItems())),
                 icon: const Icon(Icons.bookmark_border),
                 label: const Text(
                   "Saved Items",
@@ -152,7 +190,7 @@ class _MyAccountState extends State<MyAccount> {
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => view_profile(context),
                 icon: const Icon(Icons.person_search_sharp),
                 label: const Text(
                   "View profile",
@@ -174,7 +212,8 @@ class _MyAccountState extends State<MyAccount> {
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Notifications())),
                 icon: const Icon(Icons.mobile_screen_share_sharp),
                 label: const Text(
                   "Notifications",
@@ -216,6 +255,12 @@ class _MyAccountState extends State<MyAccount> {
     );
   }
 }
+
+// Widget makeDismissible({required Widget child}) => GestureDetector(
+//       behavior: HitTestBehavior.opaque,
+//       // onTap: ()=>Navigator.pop(ctx),
+//     );
+
 /**
  * 
  * 

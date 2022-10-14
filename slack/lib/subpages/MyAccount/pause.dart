@@ -95,7 +95,7 @@ class _PauseState extends State<Pause> {
                     groupValue: _options,
                     onChanged: (value) {
                       setState(() {
-                        isselected = true;
+                        // isselected = true;
                         _homeFieldVisible = false;
                         _options = value as dynamic;
                       });
@@ -106,7 +106,7 @@ class _PauseState extends State<Pause> {
                     groupValue: _options,
                     onChanged: (value) {
                       setState(() {
-                        isselected = true;
+                        // isselected = true;
 
                         _homeFieldVisible = false;
                         _options = value as dynamic;
@@ -118,7 +118,7 @@ class _PauseState extends State<Pause> {
                     groupValue: _options,
                     onChanged: (value) {
                       setState(() {
-                        isselected = true;
+                        // isselected = true;
 
                         _homeFieldVisible = false;
                         _options = value as dynamic;
@@ -130,7 +130,7 @@ class _PauseState extends State<Pause> {
                     groupValue: _options,
                     onChanged: (value) {
                       setState(() {
-                        isselected = true;
+                        // isselected = true;
 
                         _homeFieldVisible = false;
                         _options = value as dynamic;

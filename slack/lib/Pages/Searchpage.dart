@@ -14,8 +14,10 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   bool onfocus = false;
   TextEditingController textFieldController = TextEditingController();
-  void _getvalue(String value) {
-    textFieldController.text = '$value#';
+  void _getvalue(String value, int index) {
+    index == 0
+        ? textFieldController.text = '$value#'
+        : textFieldController.text = '$value';
     // textFieldController
     textFieldController.selection = TextSelection.fromPosition(
         TextPosition(offset: textFieldController.text.length));
@@ -188,7 +190,8 @@ class _SearchPageState extends State<SearchPage> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5),
                                   )),
-                              onPressed: () => _getvalue(Searchlist[i].value)),
+                              onPressed: () =>
+                                  _getvalue(Searchlist[i].value, i)),
                         )))
               ],
             ),

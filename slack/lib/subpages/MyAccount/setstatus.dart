@@ -69,6 +69,9 @@ class _SetStatusState extends State<SetStatus> {
               ),
               Flexible(
                 child: TextField(
+                  onChanged: (value) {
+                    isEnable = true;
+                  },
                   decoration: InputDecoration.collapsed(
                     hintText: "What's your status?",
                   ),
