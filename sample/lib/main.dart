@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sample/alertdialogue.dart';
 import 'package:sample/dates.dart';
 import 'package:sample/dropdown.dart';
+import 'package:sample/pageview.dart';
+import 'package:sample/popupmenu.dart';
 import 'package:sample/searchbar.dart';
 import 'package:sample/sliverappbar.dart';
 import 'package:sample/stack.dart';
@@ -136,6 +139,28 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (context) => SearchList()));
                     },
                     child: Text("Searclist")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PageViewController()));
+                    },
+                    child: Text("Pageview")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Popupmenu()));
+                    },
+                    child: Text("popup")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AlertDialogue()));
+                    },
+                    child: Text("AlertDialogue"))
               ],
             ),
           ),
