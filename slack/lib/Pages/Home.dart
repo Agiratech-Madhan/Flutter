@@ -36,43 +36,87 @@ class _HomeState extends State<Home> {
       ),
       context: ctex,
       builder: (_) {
-        return Container(
-          height: 180,
+        return bottomsheetpage();
+      },
+    );
+  }
+
+  void Bottomsheet1(BuildContext ctex) {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+      context: ctex,
+      builder: (_) {
+        return SizedBox(
+          height: 200,
           child: Column(
             children: [
-              Container(
-                  margin: EdgeInsets.only(top: 5),
-                  width: 60,
-                  height: 3,
-                  decoration: const BoxDecoration(
-                    border: BorderDirectional(
-                        top: BorderSide(width: 5, color: Colors.grey)),
-                  )),
-              Container(
-                  margin: const EdgeInsets.only(top: 25, left: 15),
-                  alignment: Alignment.centerLeft,
-                  child: const Text('Sort by')),
-              ListTile(
-                leading: const Icon(Icons.list_alt_rounded),
-                title: const Text("Sections"),
-                trailing: Radio<dynamic>(
-                  value: 1,
-                  groupValue: result,
-                  onChanged: (x) => check(x),
-                ),
-                onTap: () => Navigator.of(context).pop(),
-              ),
-              ListTile(
-                leading: const Icon(Icons.access_time_rounded),
-                title: const Text("Recent activity"),
-                trailing: Radio<dynamic>(
-                    value: 2, groupValue: result, onChanged: (x) => check(x)),
-                onTap: () => Navigator.of(context).pop(),
-              ),
+              Row(
+                children: [
+                  ClipRRect(
+                    // borderRadius: BorderRadius.circular(5),
+                    child: Container(
+                      padding: EdgeInsets.all(2),
+                      margin: EdgeInsets.only(left: 10, top: 10),
+                      decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.circular(5),
+                          border: Border.all(width: 1, color: Colors.grey)),
+                      width: 50,
+                      height: 50,
+
+                      // margin: EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 10),
+
+                      child: Image.asset("assets/images/agira.png"),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         );
       },
+    );
+  }
+
+  Container bottomsheetpage() {
+    return Container(
+      height: 180,
+      child: Column(
+        children: [
+          Container(
+              margin: EdgeInsets.only(top: 5),
+              width: 60,
+              height: 3,
+              decoration: const BoxDecoration(
+                border: BorderDirectional(
+                    top: BorderSide(width: 5, color: Colors.grey)),
+              )),
+          Container(
+              margin: const EdgeInsets.only(top: 25, left: 15),
+              alignment: Alignment.centerLeft,
+              child: const Text('Sort by')),
+          ListTile(
+            leading: const Icon(Icons.list_alt_rounded),
+            title: const Text("Sections"),
+            trailing: Radio<dynamic>(
+              value: 1,
+              groupValue: result,
+              onChanged: (x) => check(x),
+            ),
+            onTap: () => Navigator.of(context).pop(),
+          ),
+          ListTile(
+            leading: const Icon(Icons.access_time_rounded),
+            title: const Text("Recent activity"),
+            trailing: Radio<dynamic>(
+                value: 2, groupValue: result, onChanged: (x) => check(x)),
+            onTap: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -154,7 +198,9 @@ class _HomeState extends State<Home> {
                       )
                     ],
                   ),
-                  trailing: Icon(Icons.more_vert),
+                  trailing: IconButton(
+                      onPressed: (() => Bottomsheet1(context)),
+                      icon: Icon(Icons.more_vert)),
                 )
               ],
             ),
