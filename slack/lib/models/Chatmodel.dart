@@ -19,7 +19,7 @@ class Chat {
 List<Chat> chatdata = [
   Chat(
       name: "Madhan",
-      msg: 'hello madhan',
+      msg: 'Please update your profile as soon as possible',
       time: '11m',
       pic: 'assets/images/person1.jpeg',
       mentioned: 'sample mentions',
@@ -28,7 +28,7 @@ List<Chat> chatdata = [
       name: "Madhan",
       msg:
           'Some changes are not ready to dev please change as much as possible ',
-      time: '1hr',
+      time: '30M',
       pic: 'assets/images/person1.jpeg',
       mentioned: 'sample mentions',
       reactions: 'hello'),
@@ -42,14 +42,14 @@ List<Chat> chatdata = [
   Chat(
       name: "Madhan",
       msg: 'Some changes are not ready to dev',
-      time: '1hr',
+      time: '5hr',
       pic: 'assets/images/person1.jpeg',
       mentioned: 'sample mentions',
       reactions: 'hello'),
   Chat(
       name: "Madhan",
       msg: 'Some changes are not ready to dev',
-      time: '1hr',
+      time: '8hr',
       pic: 'assets/images/person1.jpeg',
       mentioned: 'sample mentions',
       reactions: 'hello'),

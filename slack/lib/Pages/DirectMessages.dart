@@ -111,7 +111,10 @@ class _DirectMessagesState extends State<DirectMessages> {
                                   )
                               ]),
                         ),
-                        title: Text(chatdata[i].name),
+                        title: Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Text(chatdata[i].name),
+                        ),
                         subtitle: Text(
                           chatdata[i].msg,
                           style: const TextStyle(fontSize: 15),
