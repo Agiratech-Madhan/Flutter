@@ -85,31 +85,6 @@ class _MainDrawerState extends State<MainDrawer> {
               )
             ],
           ),
-
-          // child: Column(
-          //   children: [
-          //     Row(
-          //       children: [
-          //         ClipRRect(
-          //           // borderRadius: BorderRadius.circular(5),
-          //           child: Container(
-          //             padding: EdgeInsets.all(2),
-          //             margin: EdgeInsets.only(left: 10, top: 10),
-          //             decoration: BoxDecoration(
-          //                 // borderRadius: BorderRadius.circular(5),
-          //                 border: Border.all(width: 1, color: Colors.grey)),
-          //             width: 50,
-          //             height: 50,
-
-          //             // margin: EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 10),
-
-          //             child: Image.asset("assets/images/agira.png"),
-          //           ),
-          //         ),
-          //       ],
-          //     )
-          //   ],
-          // ),
         );
       },
     );

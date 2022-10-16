@@ -159,46 +159,6 @@ class _MentionsState extends State<Mentions> {
                 ],
               )),
         ),
-        // body: Container(
-        //   child: ListView.builder(
-        //     //  item
-        //     shrinkWrap: true,
-        //     itemCount: chatdata.length,
-        //     // physics: BouncingScrollPhysics(),
-        //     itemBuilder: (context, i) => Column(
-        //       children: [
-        //         ListTile(
-        //           leading: SizedBox(
-        //             width: 50,
-        //             height: 50,
-        //             child: ClipRRect(
-        //               borderRadius: BorderRadius.circular(5),
-        //               child: Image.asset(chatdata[i].pic),
-        //             ),
-        //           ),
-        //           title: Column(
-        //             children: [
-        //               Row(
-        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                 children: [
-        //                   Text(chatdata[i].mentioned),
-        //                   Text(chatdata[i].time)
-        //                 ],
-        //               ),
-        //               Text(chatdata[i].name),
-        //               Text(chatdata[i].msg),
-        //               Text(chatdata[i].reactions)
-        //             ],
-        //           ),
-        //           // title: Text(chatdata[i].name),
-        //           // subtitle: Text(chatdata[i].msg),
-
-        //           // trailing: Text(chatdata[i].time),
-        //         )
-        //       ],
-        //     ),
-        //   ),
-        // ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           elevation: 10,

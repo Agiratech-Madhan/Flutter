@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slack/subpages/DMs/Jumpto.dart';
+import 'package:slack/subpages/Home/BottomSheet.dart';
 import 'package:slack/subpages/Home/Chatscreen.dart';
 import 'package:slack/subpages/Home/Drafts.dart';
 import 'package:slack/subpages/Home/Invite.dart';
@@ -26,167 +27,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Services? _services;
-  var result = 1;
-  void check(value) {
-    setState(() {
-      result = value;
-    });
-  }
-
-  void Bottomsheet(BuildContext ctex) {
-    showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20),
-        ),
-      ),
-      context: ctex,
-      builder: (_) {
-        return bottomsheetpage();
-      },
-    );
-  }
-
-  void Bottomsheet1(BuildContext ctex1) {
-    showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20),
-        ),
-      ),
-      context: ctex1,
-      builder: (_) {
-        return SizedBox(
-          height: 170,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ListTile(
-                dense: true,
-                // contentPadding: EdgeInsets.only(left: 5),
-                visualDensity: VisualDensity(horizontal: -2.0),
-                leading: Container(
-                  width: 30,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 1, color: Colors.grey)),
-                  height: 30,
-                  // color: Colors.blue,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 3.0, right: 3, bottom: 3),
-                    child: Image.asset('assets/images/agira.png'),
-                  ),
-                ),
-                title: Text(
-                  '  AgiraTech',
-                  style: GoogleFonts.notoSans(
-                      fontWeight: FontWeight.bold, fontSize: 17),
-                ),
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.only(left: 19),
-                onTap: () => Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Invite())),
-                dense: true,
-                // visualDensity: VisualDensity(horizontal: -2.0),
-                leading: Icon(Icons.person_add_alt),
-                title: Text(
-                  'Invite memebers',
-                  style: GoogleFonts.notoSans(fontSize: 15),
-                ),
-              ),
-              ListTile(
-                dense: true,
-                visualDensity: VisualDensity(horizontal: -3.0),
-                leading: Icon(
-                  Icons.output_rounded,
-                  color: Colors.red[600],
-                ),
-                title: TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Sign out',
-                        style: GoogleFonts.notoSans(
-                            fontSize: 15, color: Colors.red[600]),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-
-          // child: Column(
-          //   children: [
-          //     Row(
-          //       children: [
-          //         ClipRRect(
-          //           // borderRadius: BorderRadius.circular(5),
-          //           child: Container(
-          //             padding: EdgeInsets.all(2),
-          //             margin: EdgeInsets.only(left: 10, top: 10),
-          //             decoration: BoxDecoration(
-          //                 // borderRadius: BorderRadius.circular(5),
-          //                 border: Border.all(width: 1, color: Colors.grey)),
-          //             width: 50,
-          //             height: 50,
-
-          //             // margin: EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 10),
-
-          //             child: Image.asset("assets/images/agira.png"),
-          //           ),
-          //         ),
-          //       ],
-          //     )
-          //   ],
-          // ),
-        );
-      },
-    );
-  }
-
-  Container bottomsheetpage() {
-    return Container(
-      height: 180,
-      child: Column(
-        children: [
-          Container(
-              margin: EdgeInsets.only(top: 5),
-              width: 60,
-              height: 3,
-              decoration: const BoxDecoration(
-                border: BorderDirectional(
-                    top: BorderSide(width: 5, color: Colors.grey)),
-              )),
-          Container(
-              margin: const EdgeInsets.only(top: 25, left: 15),
-              alignment: Alignment.centerLeft,
-              child: const Text('Sort by')),
-          ListTile(
-            leading: const Icon(Icons.list_alt_rounded),
-            title: const Text("Sections"),
-            trailing: Radio<dynamic>(
-              value: 1,
-              groupValue: result,
-              onChanged: (x) => check(x),
-            ),
-            onTap: () => Navigator.of(context).pop(),
-          ),
-          ListTile(
-            leading: const Icon(Icons.access_time_rounded),
-            title: const Text("Recent activity"),
-            trailing: Radio<dynamic>(
-                value: 2, groupValue: result, onChanged: (x) => check(x)),
-            onTap: () => Navigator.of(context).pop(),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -213,29 +53,13 @@ class _HomeState extends State<Home> {
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
         }),
-        //  Container(
-        //   margin: EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 10),
-        //   child: ClipRRect(
-        //     borderRadius: BorderRadius.circular(5),
-        //     child: Image.asset("assets/images/agira.png"),
-        //   ),
-        // ),
         title: Text(
           "AgiraTech",
           style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Bottomsheet(context);
-              },
-              icon: const Icon(Icons.filter_list))
-        ],
+        actions: [SubBottomSheet()],
       ),
       body: SingleChildScrollView(
-        // reverse: false,
-
-        // physics: NeverScrollableScrollPhysics(),
         child: Column(
           children: [
             Container(

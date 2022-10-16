@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slack/subpages/Home/Preferences.dart';
 import 'package:slack/subpages/MyAccount/Notifications.dart';
 import 'package:slack/subpages/MyAccount/saved_items.dart';
 import 'package:slack/subpages/MyAccount/setstatus.dart';
@@ -17,12 +18,12 @@ class MyAccount extends StatefulWidget {
 
 class _MyAccountState extends State<MyAccount> {
   bool issetted = true;
-  void checkstatus(bool tapped) {
-    setState(() {
-      issetted != tapped;
-    });
-    print(issetted);
-  }
+  // void checkstatus(bool tapped) {
+  //   setState(() {
+  //     issetted != tapped;
+  //   });
+  //   print(issetted);
+  // }
 
   void view_profile(BuildContext ctex) {
     showModalBottomSheet(
@@ -66,7 +67,7 @@ class _MyAccountState extends State<MyAccount> {
                   width: 15,
                   height: 15,
                   decoration: BoxDecoration(
-                    color: Colors.pink,
+                    color: issetted ? Colors.pink : Colors.grey,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(width: 3, color: Colors.white),
                   ),
@@ -136,14 +137,18 @@ class _MyAccountState extends State<MyAccount> {
                 // })
                 // ,
                 child: TextButton.icon(
-                  onPressed: () => {checkstatus(issetted)},
+                  onPressed: () => setState(() {
+                    issetted = !issetted;
+                    print('setstate called');
+                    print(issetted);
+                  }),
                   icon: const Icon(Icons.person_search_sharp),
                   label: Row(
                     children: [
                       const Text(
                         "Set yourself as",
                       ),
-                      Text(issetted ? 'active' : 'away')
+                      Text(issetted ? 'active' : ' away')
                     ],
                   ),
                   style: TextButton.styleFrom(
@@ -235,7 +240,8 @@ class _MyAccountState extends State<MyAccount> {
               ),
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Preferences())),
                 icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
                 label: const Text(
                   "Preferences",
@@ -255,134 +261,3 @@ class _MyAccountState extends State<MyAccount> {
     );
   }
 }
-
-// Widget makeDismissible({required Widget child}) => GestureDetector(
-//       behavior: HitTestBehavior.opaque,
-//       // onTap: ()=>Navigator.pop(ctx),
-//     );
-
-/**
- * 
- * 
- * 
- * 
- ListTile(
-            leading: Container(
-              margin: EdgeInsets.only(
-                top: 20,
-              ),
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.notifications_off_sharp),
-                label: const Text(
-                  "Pause notifications",
-                ),
-                style: TextButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    alignment: Alignment.centerLeft,
-                    padding:
-                        const EdgeInsets.only(left: 1, top: 10, bottom: 10)),
-              ),
-            ),
-          ),
-          ListTile(
-            leading: Container(
-              margin: EdgeInsets.only(
-                top: 20,
-              ),
-              width: double.infinity,
-              child: TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.person_search_sharp),
-                label: Row(
-                  children: [
-                    const Text(
-                      "Set yourself as ",
-                    ),
-                    Text(
-                      "away",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                style: TextButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    alignment: Alignment.centerLeft,
-                    padding:
-                        const EdgeInsets.only(left: 1, top: 10, bottom: 10)),
-              ),
-            ),
-          ),
-          
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-  ListTile(
-            leading: Container(
-              margin: EdgeInsets.only(
-                top: 20,
-              ),
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.notifications_off_sharp),
-                label: const Text(
-                  "Pause notifications",
-                ),
-                style: TextButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    alignment: Alignment.centerLeft,
-                    padding:
-                        const EdgeInsets.only(left: 1, top: 10, bottom: 10)),
-              ),
-            ),
-          ), */

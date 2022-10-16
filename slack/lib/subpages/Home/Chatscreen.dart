@@ -14,11 +14,14 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   TextEditingController text_controller = TextEditingController();
   bool isEnable = false;
+
   @override
   Widget build(BuildContext context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
     bool focused = currentFocus.isFirstFocus;
-    bool isactive = currentFocus.hasFocus;
+    // bool primaryfocus = currentFocus.hasPrimaryFocus;
+    // bool haslisteners = currentFocus.hasListeners;
+    // bool isactive = currentFocus.hasFocus;
     var top_border = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -60,10 +63,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ],
               ),
-              // Text(
-              //   "24 members >",
-              //   style: GoogleFonts.notoSans(fontSize: 12),
-              // )
             ],
           ),
         ),
@@ -99,8 +98,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                     child: IconButton(
                                       onPressed: () {},
                                       icon: Icon(!focused ? Icons.add : null),
-
-                                      // size: 27,
                                       color: Colors.black.withOpacity(0.6),
                                     ),
                                   )
@@ -112,7 +109,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           hintText: 'Message #task-review'),
                     ),
                   ),
-                  isactive
+                  focused
                       ? Container(
                           padding: EdgeInsets.only(left: 3),
                           child: Row(
@@ -193,4 +190,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-//🔒alternate_email     text_fields
