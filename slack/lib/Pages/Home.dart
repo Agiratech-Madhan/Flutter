@@ -10,6 +10,7 @@ import 'package:slack/subpages/Home/drawer.dart';
 import '../models/Chatmodel.dart';
 import '../models/Channelmodel.dart';
 // import 'package:flat_icons_flutter/flat_icons_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 enum Services {
   sections,
@@ -79,7 +80,8 @@ class _HomeState extends State<Home> {
                 ),
                 title: Text(
                   '  AgiraTech',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                  style: GoogleFonts.notoSans(
+                      fontWeight: FontWeight.bold, fontSize: 17),
                 ),
               ),
               ListTile(
@@ -91,7 +93,7 @@ class _HomeState extends State<Home> {
                 leading: Icon(Icons.person_add_alt),
                 title: Text(
                   'Invite memebers',
-                  style: TextStyle(fontSize: 15),
+                  style: GoogleFonts.notoSans(fontSize: 15),
                 ),
               ),
               ListTile(
@@ -108,7 +110,8 @@ class _HomeState extends State<Home> {
                     children: [
                       Text(
                         'Sign out',
-                        style: TextStyle(fontSize: 15, color: Colors.red[600]),
+                        style: GoogleFonts.notoSans(
+                            fontSize: 15, color: Colors.red[600]),
                       ),
                     ],
                   ),
@@ -217,9 +220,9 @@ class _HomeState extends State<Home> {
         //     child: Image.asset("assets/images/agira.png"),
         //   ),
         // ),
-        title: const Text(
+        title: Text(
           "AgiraTech",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
@@ -251,12 +254,12 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(builder: (context) => Jumpto()),
                       ),
                   // icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.only(right: 220, top: 12, bottom: 12),
                     child: Text(
                       "Jump to....",
                       textAlign: TextAlign.start,
-                      style: TextStyle(fontSize: 15),
+                      style: GoogleFonts.notoSans(fontSize: 15),
                     ),
                   )),
             ),

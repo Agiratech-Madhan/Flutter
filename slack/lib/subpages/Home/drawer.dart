@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slack/subpages/Home/Preferences.dart';
 import 'package:slack/subpages/Home/Workspaces.dart';
 import './Invite.dart';
 
@@ -235,7 +236,12 @@ class _MainDrawerState extends State<MainDrawer> {
                       leading: SizedBox(
                         width: 270,
                         child: TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => Preferences())));
+                          },
                           icon: const Icon(Icons.settings),
                           label: Padding(
                             padding: const EdgeInsets.only(left: 10),

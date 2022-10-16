@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slack/models/Chatmodel.dart';
 
-void main() {
-  runApp(Draft());
-}
-
 class Draft extends StatefulWidget {
   const Draft({super.key});
 
@@ -21,8 +17,8 @@ class _DraftState extends State<Draft> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            elevation: 0,
-            shape: Border(bottom: BorderSide(color: Colors.grey, width: 1)),
+            elevation: 1,
+            // shape: Border(bottom: BorderSide(color: Colors.grey, width: 1)),
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             leading: IconButton(

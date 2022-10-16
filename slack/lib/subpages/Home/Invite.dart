@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 // import 'package:slack/pages/Home.dart';
 
 class Invite extends StatefulWidget {
-  const Invite({super.key});
+  // final BuildContext contex;
+
+  // Invite({required this.contex});
 
   @override
   State<Invite> createState() => _InviteState();
 }
 
 class _InviteState extends State<Invite> {
+  // BuildContext? ctx1=contex;
+
   bool isEnable = false;
   TextEditingController p_mail_controller = TextEditingController();
   TextEditingController a_mail_controller = TextEditingController();
@@ -22,9 +26,8 @@ class _InviteState extends State<Invite> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.cancel),
-          onPressed: () => Navigator.pop(context),
-        ),
+            icon: Icon(Icons.cancel),
+            onPressed: () => {Navigator.pop(context)}),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -94,12 +97,13 @@ class _InviteState extends State<Invite> {
                         ),
                       )),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 16),
-                  child: Divider(
-                    color: Colors.grey,
+                if (isEnable)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50, right: 16),
+                    child: Divider(
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
                 if (isEnable)
                   TextField(
                     controller: a_mail_controller,
