@@ -44,6 +44,8 @@ dev_dependencies:
     sdk: flutter
   google_fonts: ^3.0.1  
   language_picker: ^0.4.1
+  microphone: ^0.1.0
+  just_audio: ^0.9.29
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

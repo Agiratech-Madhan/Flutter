@@ -8,6 +8,7 @@ import 'package:slack/subpages/MyAccount/viewprofile.dart';
 import '../models/Chatmodel.dart';
 import '../subpages/MyAccount/pause.dart';
 import 'package:intl/intl.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -78,29 +79,46 @@ class _MyAccountState extends State<MyAccount> {
             subtitle: Text(issetted ? 'Active' : 'away'),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Colors.grey,
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: const BorderSide(color: Colors.grey))),
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.centerLeft,
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.grey),
                 onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SetStatus()),
-                    ),
-                icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
-                label: const Padding(
-                  padding: EdgeInsets.only(right: 130, top: 15, bottom: 15),
-                  child: Text(
-                    "Update your status",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                )),
-          ),
+                  context,
+                  MaterialPageRoute(builder: (context) => SetStatus()),
+                ),
+                icon: Icon(Icons.sentiment_satisfied_alt_outlined),
+                label: Text(
+                  "Update your status",
+                  textAlign: TextAlign.start,
+                  style: GoogleFonts.notoSans(fontSize: 15),
+                ),
+              )
+              // ElevatedButton.icon(
+              //     style: ElevatedButton.styleFrom(
+              //         backgroundColor: Colors.transparent,
+              //         foregroundColor: Colors.grey,
+              //         shadowColor: Colors.transparent,
+              //         shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(10),
+              //             side: const BorderSide(color: Colors.grey))),
+              //     onPressed: () => Navigator.push(
+              //           context,
+              //           MaterialPageRoute(builder: (context) => SetStatus()),
+              //         ),
+              //     icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
+              //     label: Padding(
+              //       padding: EdgeInsets.only(right: 130, top: 15, bottom: 15),
+              //       child: Text(
+              //         "Update your status",
+              //         textAlign: TextAlign.start,
+              //         style: GoogleFonts.notoSans(fontSize: 15),
+              //       ),
+              //     )),
+              ),
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(
@@ -111,9 +129,8 @@ class _MyAccountState extends State<MyAccount> {
                 onPressed: () => Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Pause())),
                 icon: const Icon(Icons.notifications_off_sharp),
-                label: const Text(
-                  "Pause notifications",
-                ),
+                label:
+                    Text("Pause notifications", style: GoogleFonts.notoSans()),
                 style: TextButton.styleFrom(
                     elevation: 0,
                     backgroundColor: Colors.transparent,
@@ -145,10 +162,8 @@ class _MyAccountState extends State<MyAccount> {
                   icon: const Icon(Icons.person_search_sharp),
                   label: Row(
                     children: [
-                      const Text(
-                        "Set yourself as",
-                      ),
-                      Text(issetted ? 'active' : ' away')
+                      Text("Set yourself as", style: GoogleFonts.notoSans()),
+                      Text(issetted ? ' active' : ' away')
                     ],
                   ),
                   style: TextButton.styleFrom(
@@ -175,8 +190,9 @@ class _MyAccountState extends State<MyAccount> {
                 onPressed: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SavedItems())),
                 icon: const Icon(Icons.bookmark_border),
-                label: const Text(
+                label: Text(
                   "Saved Items",
+                  style: GoogleFonts.notoSans(),
                 ),
                 style: TextButton.styleFrom(
                     elevation: 0,
@@ -197,9 +213,7 @@ class _MyAccountState extends State<MyAccount> {
               child: TextButton.icon(
                 onPressed: () => view_profile(context),
                 icon: const Icon(Icons.person_search_sharp),
-                label: const Text(
-                  "View profile",
-                ),
+                label: Text("View profile", style: GoogleFonts.notoSans()),
                 style: TextButton.styleFrom(
                     elevation: 0,
                     backgroundColor: Colors.transparent,
@@ -220,9 +234,7 @@ class _MyAccountState extends State<MyAccount> {
                 onPressed: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Notifications())),
                 icon: const Icon(Icons.mobile_screen_share_sharp),
-                label: const Text(
-                  "Notifications",
-                ),
+                label: Text("Notifications", style: GoogleFonts.notoSans()),
                 style: TextButton.styleFrom(
                     elevation: 0,
                     backgroundColor: Colors.transparent,
@@ -243,9 +255,7 @@ class _MyAccountState extends State<MyAccount> {
                 onPressed: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Preferences())),
                 icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
-                label: const Text(
-                  "Preferences",
-                ),
+                label: Text("Preferences", style: GoogleFonts.notoSans()),
                 style: TextButton.styleFrom(
                     elevation: 0,
                     backgroundColor: Colors.transparent,

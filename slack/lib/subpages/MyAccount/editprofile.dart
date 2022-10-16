@@ -1,4 +1,5 @@
-import 'dart:ui';
+// import 'dart:ui';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,8 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   title: Text(
                     "EditProfile",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: GoogleFonts.notoSans(
+                        fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   trailing: TextButton(
                       style: TextButton.styleFrom(
@@ -61,7 +63,8 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       onPressed: () => Navigator.pop(context),
-                      child: Text('Save', style: TextStyle(fontSize: 15)))),
+                      child: Text('Save',
+                          style: GoogleFonts.notoSans(fontSize: 15)))),
             ),
           ),
           Divider(
@@ -108,7 +111,7 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 Text(
                   'Display Name',
-                  style: TextStyle(color: Colors.grey),
+                  style: GoogleFonts.notoSans(color: Colors.grey),
                 ),
                 TextField(
                   controller: text_display_controller,
@@ -121,7 +124,7 @@ class _EditProfileState extends State<EditProfile> {
                       const EdgeInsets.only(top: 10, right: 20, bottom: 15),
                   child: Text(
                       'This is the name that shows when someone uses  @to mentione you',
-                      style: TextStyle(color: Colors.grey)),
+                      style: GoogleFonts.notoSans(color: Colors.grey)),
                 ),
                 Text('Contact'),
                 TextField(

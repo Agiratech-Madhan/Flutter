@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slack/models/Notify.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -182,13 +183,13 @@ class _NotificationsState extends State<Notifications> {
               children: [
                 Text(
                   'Notifications',
-                  style: TextStyle(
+                  style: GoogleFonts.notoSans(
                     fontSize: 18,
                   ),
                 ),
                 Text(
                   'AgiraTech',
-                  style: TextStyle(
+                  style: GoogleFonts.notoSans(
                       fontSize: 14,
                       color: Colors.grey,
                       fontWeight: FontWeight.normal),
@@ -224,7 +225,8 @@ class _NotificationsState extends State<Notifications> {
                       children: [
                         Text(
                           'On mobile ,notify me about...',
-                          style: TextStyle(fontSize: 17, color: Colors.black),
+                          style: GoogleFonts.notoSans(
+                              fontSize: 17, color: Colors.black),
                         ),
                         Text(_selection == null
                             ? 'All new messags'
@@ -254,16 +256,18 @@ class _NotificationsState extends State<Notifications> {
                 height: 60,
                 child: ListTile(
                   onTap: () => _dialogBuilder(context),
-                  title: Text('Notify me on mobile'),
-                  subtitle: Text('$mainresult'),
+                  title: Text('Notify me on mobile',
+                      style: GoogleFonts.notoSans()),
+                  subtitle: Text('$mainresult', style: GoogleFonts.notoSans()),
                 ),
               ),
               paddingdivider(),
               SizedBox(
                 height: 70,
                 child: ListTile(
-                  title: Text('System options'),
-                  subtitle: Text('Choose sounds,vibration and importance'),
+                  title: Text('System options', style: GoogleFonts.notoSans()),
+                  subtitle: Text('Choose sounds,vibration and importance',
+                      style: GoogleFonts.notoSans()),
                 ),
               ),
               paddingdivider(),
@@ -271,24 +275,29 @@ class _NotificationsState extends State<Notifications> {
                 padding: const EdgeInsets.only(left: 8, top: 10),
                 child: TextButton(
                     onPressed: () {},
-                    child: Text('Troubleshoot notifications')),
+                    child: Text('Troubleshoot notifications',
+                        style: GoogleFonts.notoSans())),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child: Text('General settings',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style: GoogleFonts.notoSans(fontWeight: FontWeight.bold)),
               ),
               SizedBox(
                 height: 70,
                 child: ListTile(
-                  title: Text('Notification schedule'),
-                  subtitle: Text('Everyday'),
+                  title: Text('Notification schedule',
+                      style: GoogleFonts.notoSans()),
+                  subtitle: Text('Everyday', style: GoogleFonts.notoSans()),
                 ),
               ),
               paddingdivider(),
               ListTile(
-                title: Text('Default reminder time'),
-                subtitle: Text('9.00 AM'),
+                title: Text(
+                  'Default reminder time',
+                  style: GoogleFonts.notoSans(),
+                ),
+                subtitle: Text('9.00 AM', style: GoogleFonts.notoSans()),
               ),
               paddingdivider(),
               SwitchListTile(
@@ -299,12 +308,15 @@ class _NotificationsState extends State<Notifications> {
                     switchnotify = value;
                   });
                 },
-                title: Text('Notify me about replies to threads'),
+                title: Text('Notify me about replies to threads',
+                    style: GoogleFonts.notoSans()),
               ),
               paddingdivider(),
               ListTile(
-                title: Text('In-app notifications'),
-                subtitle: Text('In-app notifications appear while app is open'),
+                title:
+                    Text('In-app notifications', style: GoogleFonts.notoSans()),
+                subtitle: Text('In-app notifications appear while app is open',
+                    style: GoogleFonts.notoSans()),
               ),
               paddingdivider(),
               ListTile(

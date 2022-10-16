@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slack/subpages/Home/Preferences.dart';
 import 'package:slack/subpages/Home/Workspaces.dart';
 import './Invite.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainDrawer extends StatefulWidget {
   // const MainDrawer({super.key});
@@ -48,7 +49,8 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
                 title: Text(
                   '  AgiraTech',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                  style: GoogleFonts.notoSans(
+                      fontWeight: FontWeight.bold, fontSize: 17),
                 ),
               ),
               ListTile(
@@ -60,7 +62,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 leading: Icon(Icons.person_add_alt),
                 title: Text(
                   'Invite memebers',
-                  style: TextStyle(fontSize: 15),
+                  style: GoogleFonts.notoSans(fontSize: 15),
                 ),
               ),
               ListTile(
@@ -77,7 +79,8 @@ class _MainDrawerState extends State<MainDrawer> {
                     children: [
                       Text(
                         'Sign out',
-                        style: TextStyle(fontSize: 15, color: Colors.red[600]),
+                        style: GoogleFonts.notoSans(
+                            fontSize: 15, color: Colors.red[600]),
                       ),
                     ],
                   ),
@@ -105,7 +108,7 @@ class _MainDrawerState extends State<MainDrawer> {
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Workspaces",
-                        style: TextStyle(
+                        style: GoogleFonts.notoSans(
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ))),
             ),
@@ -139,9 +142,10 @@ class _MainDrawerState extends State<MainDrawer> {
                         children: [
                           Text(
                             "4",
-                            style: TextStyle(color: Colors.white),
+                            style: GoogleFonts.notoSans(color: Colors.white),
                           ),
-                          Text("+", style: TextStyle(color: Colors.white))
+                          Text("+",
+                              style: GoogleFonts.notoSans(color: Colors.white))
                         ],
                       )
                     ]),
@@ -151,14 +155,16 @@ class _MainDrawerState extends State<MainDrawer> {
               title: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "AgiraTech",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.notoSans(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "agiratech.slack.com",
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                    style:
+                        GoogleFonts.notoSans(color: Colors.grey, fontSize: 13),
                   )
                 ],
               ),

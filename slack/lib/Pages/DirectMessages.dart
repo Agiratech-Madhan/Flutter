@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/Chatmodel.dart';
 // import '../models/Chatmodel.dart';
 import '../subpages/DMs/Jumpto.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DirectMessages extends StatefulWidget {
   const DirectMessages({super.key});
@@ -66,12 +67,12 @@ class _DirectMessagesState extends State<DirectMessages> {
                           MaterialPageRoute(builder: (context) => Jumpto()),
                         ),
                     // icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.only(right: 220, top: 12, bottom: 12),
                       child: Text(
                         "Jump to....",
                         textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 15),
+                        style: GoogleFonts.notoSans(fontSize: 15),
                       ),
                     )),
               ),
@@ -117,7 +118,7 @@ class _DirectMessagesState extends State<DirectMessages> {
                         ),
                         subtitle: Text(
                           chatdata[i].msg,
-                          style: const TextStyle(fontSize: 15),
+                          style: GoogleFonts.notoSans(fontSize: 15),
                         ),
                         trailing: Text(chatdata[i].time),
                       )

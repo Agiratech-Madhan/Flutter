@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../models/Searchmodel.dart';
 import '../models/mentionsmodel.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -26,8 +27,7 @@ class _SearchPageState extends State<SearchPage> {
   List<MentionsModel> displayList = List.from(Mentions_list);
   void searchfilter(String value) {
     setState(() {
-      // changed = value;
-      // print(changed);
+      // if (textFieldController.text.startsWith('in:'))
       displayList = Mentions_list.where((element) {
         // (element.m_group).toLowerCase().contains(value.toLowerCase()) ||
         //     (element.m_message).toLowerCase().contains(value.toLowerCase()) ||
@@ -41,12 +41,14 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xff002A36).withOpacity(0.6),
+        backgroundColor: Color(0xff002A36),
         title: ClipRRect(
           borderRadius: BorderRadius.circular(5),
           child: Container(
             width: double.infinity,
             height: 40,
-            color: Color(0xff002A36).withOpacity(0.5),
+            // color: Color(white).withOpacity(0.5),
+            color: Colors.white,
             child: Center(
               child: TextField(
                 controller: textFieldController,
@@ -63,8 +65,13 @@ class _SearchPageState extends State<SearchPage> {
                     hintText: 'Search for something',
                     prefixIcon: GestureDetector(
                         onTap: () => Navigator.pop(context),
-                        child: Icon(Icons.search)),
-                    suffixIcon: Icon(Icons.mic)),
+                        child: Icon(textFieldController.text.isEmpty
+                            ? Icons.search
+                            : Icons.arrow_back_ios)),
+                    suffixIcon: Icon(
+                      Icons.mic,
+                      color: Colors.black,
+                    )),
               ),
             ),
           ),
@@ -83,7 +90,7 @@ class _SearchPageState extends State<SearchPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              style: TextStyle(color: Colors.black),
+                              style: GoogleFonts.notoSans(color: Colors.black),
                               'Browse People',
                               textAlign: TextAlign.left,
                             ),
@@ -113,7 +120,7 @@ class _SearchPageState extends State<SearchPage> {
                         children: [
                           Text(
                             'Browse Channels',
-                            style: TextStyle(color: Colors.black),
+                            style: GoogleFonts.notoSans(color: Colors.black),
                             textAlign: TextAlign.left,
                           ),
                         ],
@@ -139,7 +146,7 @@ class _SearchPageState extends State<SearchPage> {
                       //   child: Text(
                       //     "Jump to....",
                       //     textAlign: TextAlign.start,
-                      //     style: TextStyle(fontSize: 15),
+                      //     style: GoogleFonts.notoSans(fontSize: 15),
                       //   ),
                       // )
                     ),
@@ -172,7 +179,7 @@ class _SearchPageState extends State<SearchPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    style: TextStyle(
+                                    style: GoogleFonts.notoSans(
                                         color: Colors.black, fontSize: 15),
                                     Searchlist[i].value,
                                     textAlign: TextAlign.left,
@@ -190,8 +197,9 @@ class _SearchPageState extends State<SearchPage> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5),
                                   )),
-                              onPressed: () =>
-                                  _getvalue(Searchlist[i].value, i)),
+                              onPressed: () {
+                                _getvalue(Searchlist[i].value, i);
+                              }),
                         )))
               ],
             ),

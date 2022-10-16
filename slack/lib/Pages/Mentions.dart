@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import '../models/Chatmodel.dart';
 import '../models/mentionsmodel.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Mentions extends StatefulWidget {
   const Mentions({super.key});
@@ -21,7 +22,7 @@ class _MentionsState extends State<Mentions> {
           // backgroundColor: Colors.pink,
           title: Text(
             "Mentions & reactions",
-            style: TextStyle(fontSize: 24),
+            style: GoogleFonts.notoSans(fontSize: 24),
           ),
         ),
         body: ListView.builder(
@@ -56,7 +57,7 @@ class _MentionsState extends State<Mentions> {
                         ),
                         Text(
                           '1hr',
-                          style: TextStyle(color: Colors.grey),
+                          style: GoogleFonts.notoSans(color: Colors.grey),
                         )
                       ],
                     ),
@@ -71,11 +72,12 @@ class _MentionsState extends State<Mentions> {
                     ),
                     title: Text(
                       Mentions_list[index].m_name,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
                       Mentions_list[index].m_message,
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: GoogleFonts.notoSans(
+                          fontSize: 14, color: Colors.black),
                       maxLines: 4,
                     ),
                   ),

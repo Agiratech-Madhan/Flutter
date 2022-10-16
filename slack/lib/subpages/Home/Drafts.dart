@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slack/models/Chatmodel.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Draft extends StatefulWidget {
   const Draft({super.key});
@@ -35,28 +36,28 @@ class _DraftState extends State<Draft> {
                 Tab(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'Draft ',
-                        style: TextStyle(fontSize: 17),
+                        style: GoogleFonts.notoSans(fontSize: 17),
                       ),
                       Text(
                         '2',
-                        style: TextStyle(fontSize: 17),
+                        style: GoogleFonts.notoSans(fontSize: 17),
                       )
                     ],
                   ),
                 ),
-                const Tab(
+                Tab(
                   child: Text(
                     'Sheduled',
-                    style: TextStyle(fontSize: 17),
+                    style: GoogleFonts.notoSans(fontSize: 17),
                   ),
                 ),
-                const Tab(
+                Tab(
                   child: Text(
                     'Sent',
-                    style: TextStyle(fontSize: 17),
+                    style: GoogleFonts.notoSans(fontSize: 17),
                   ),
                 )
 
@@ -78,11 +79,11 @@ class _DraftState extends State<Draft> {
                     color: Colors.grey,
                     size: 50,
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 5),
                     child: Text(
                       'Write now,send later',
-                      style: TextStyle(
+                      style: GoogleFonts.notoSans(
                           fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                   ),
@@ -91,9 +92,9 @@ class _DraftState extends State<Draft> {
                         top: 10,
                         left: MediaQuery.of(context).size.width * 0.05,
                         right: MediaQuery.of(context).size.width * 0.05),
-                    child: const Text(
+                    child: Text(
                       "Scheduled message to be sent at a later time, or another day together,They'll wait here untill they're delevered",
-                      style: TextStyle(fontSize: 14),
+                      style: GoogleFonts.notoSans(fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -102,9 +103,10 @@ class _DraftState extends State<Draft> {
                           // textStyle: FontWeight.bold,
                           foregroundColor: Colors.black),
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         'New Message',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style:
+                            GoogleFonts.notoSans(fontWeight: FontWeight.bold),
                       ))
                 ],
               ),
@@ -152,7 +154,7 @@ class _DraftState extends State<Draft> {
             title: Text(chatdata[i].name),
             subtitle: Text(
               chatdata[i].msg,
-              style: const TextStyle(fontSize: 15),
+              style: GoogleFonts.notoSans(fontSize: 15),
             ),
             trailing: Text(chatdata[i].time),
           )

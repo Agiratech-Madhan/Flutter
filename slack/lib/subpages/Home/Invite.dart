@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:slack/pages/Home.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Invite extends StatefulWidget {
   // final BuildContext contex;
@@ -14,8 +15,8 @@ class _InviteState extends State<Invite> {
   // BuildContext? ctx1=contex;
 
   bool isEnable = false;
-  TextEditingController p_mail_controller = TextEditingController();
-  TextEditingController a_mail_controller = TextEditingController();
+  TextEditingController pmailController = TextEditingController();
+  TextEditingController amailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,11 @@ class _InviteState extends State<Invite> {
           children: [
             Text(
               'Invite',
-              style: TextStyle(fontWeight: FontWeight.normal),
+              style: GoogleFonts.notoSans(fontWeight: FontWeight.normal),
             ),
             Text(
               'Agiratech',
-              style: TextStyle(
+              style: GoogleFonts.notoSans(
                   color: Colors.grey,
                   fontWeight: FontWeight.normal,
                   fontSize: 16),
@@ -47,14 +48,14 @@ class _InviteState extends State<Invite> {
         actions: [
           TextButton(
               style: TextButton.styleFrom(
-                  foregroundColor: (p_mail_controller.text.isEmpty &&
-                          a_mail_controller.text.isEmpty)
+                  foregroundColor: (pmailController.text.isEmpty &&
+                          amailController.text.isEmpty)
                       ? Colors.grey
                       : Colors.black),
               onPressed: () => Navigator.of(context).pop(),
               child: Text(
                 'Save Request',
-                style: TextStyle(fontWeight: FontWeight.normal),
+                style: GoogleFonts.notoSans(fontWeight: FontWeight.normal),
               ))
         ],
       ),
@@ -64,7 +65,7 @@ class _InviteState extends State<Invite> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Fill in Who you'd like to invite.Your request will be sent to your admin for approval",
-              style: TextStyle(fontSize: 16),
+              style: GoogleFonts.notoSans(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ),
@@ -72,7 +73,7 @@ class _InviteState extends State<Invite> {
             child: Column(
               children: [
                 TextField(
-                  controller: p_mail_controller,
+                  controller: pmailController,
                   onChanged: (value) {
                     setState(() {
                       isEnable = true;
@@ -84,10 +85,10 @@ class _InviteState extends State<Invite> {
                       border: InputBorder.none,
                       hintText: 'Add  an email address',
                       prefixIconColor: Colors.transparent,
-                      suffixIcon: p_mail_controller.text.isNotEmpty
+                      suffixIcon: pmailController.text.isNotEmpty
                           ? IconButton(
                               icon: Icon(Icons.cancel_outlined),
-                              onPressed: (() => p_mail_controller.text = ''))
+                              onPressed: (() => pmailController.text = ''))
                           : Icon(null),
                       prefixIcon: Padding(
                         padding: const EdgeInsets.only(bottom: 3.0),
@@ -106,7 +107,7 @@ class _InviteState extends State<Invite> {
                   ),
                 if (isEnable)
                   TextField(
-                    controller: a_mail_controller,
+                    controller: amailController,
                     decoration: InputDecoration(
                         // contentPadding: EdgeInsets.only(),
 
@@ -120,14 +121,14 @@ class _InviteState extends State<Invite> {
                           ),
                         )),
                   ),
-                if (p_mail_controller.text.isNotEmpty)
+                if (pmailController.text.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(left: 50, right: 16),
                     child: Divider(
                       color: Colors.grey,
                     ),
                   ),
-                if (p_mail_controller.text.isNotEmpty)
+                if (pmailController.text.isNotEmpty)
                   TextButton(onPressed: () {}, child: Text('Allow suggestions'))
               ],
             ),
@@ -149,34 +150,20 @@ class _InviteState extends State<Invite> {
                       Text(
                         'Contacts',
                         textAlign: TextAlign.left,
-                        style: TextStyle(fontWeight: FontWeight.normal),
+                        style:
+                            GoogleFonts.notoSans(fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
                 )),
-          )
-
-              //  ListTile(
-              //   contentPadding: EdgeInsets.only(left: 11),
-              //   // dense: true,
-              //   // visualDensity: VisualDensity(horizontal: -1),
-              //   leading: Icon(
-              //     Icons.person,
-              //     color: Colors.red,
-              //   ),
-              //   title: Text(
-              //     textAlign: TextAlign.left,
-              //     'Contacts',
-              //     style: TextStyle(fontWeight: FontWeight.normal),
-              //   ),
-              // ),
-              ),
+          )),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Slack is better with others.  ',
-                style: TextStyle(color: Colors.black.withOpacity(0.7)),
+                style:
+                    GoogleFonts.notoSans(color: Colors.black.withOpacity(0.7)),
               ),
               Transform.rotate(
                   angle: -5.5,

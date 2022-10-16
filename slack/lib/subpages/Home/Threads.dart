@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:slack/models/mentionsmodel.dart';
 // import 'package:slack/models/Chatmodel.dart';
@@ -37,7 +38,7 @@ class _ThreadsState extends State<Threads> {
             color: Colors.grey.withOpacity(0.5),
             child: Text(
               ' No new replies',
-              style: TextStyle(color: Colors.grey.shade700),
+              style: GoogleFonts.notoSans(color: Colors.grey.shade700),
             ),
           ),
           Expanded(
@@ -55,16 +56,17 @@ class _ThreadsState extends State<Threads> {
                       children: [
                         Text(
                           Mentions_list[i].m_group,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style:
+                              GoogleFonts.notoSans(fontWeight: FontWeight.bold),
                         ),
                         Row(
                           children: [
                             Text(
                               Mentions_list[i].m_name,
-                              style: TextStyle(color: Colors.grey),
+                              style: GoogleFonts.notoSans(color: Colors.grey),
                             ),
                             Text(',${Mentions_list[3].m_name}',
-                                style: TextStyle(color: Colors.grey))
+                                style: GoogleFonts.notoSans(color: Colors.grey))
                           ],
                         )
                       ],
@@ -100,19 +102,21 @@ class _ThreadsState extends State<Threads> {
                       children: [
                         Text(
                           Mentions_list[i].m_name,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style:
+                              GoogleFonts.notoSans(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           // "{Mentions_list[i].m_time}",
                           // Mentions_list[i].m_time,
                           ' Oct 15 3:17 PM',
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                          style: GoogleFonts.notoSans(
+                              fontSize: 14, color: Colors.grey),
                         )
                       ],
                     ),
                     subtitle: Text(
                       Mentions_list[i].m_message,
-                      style: const TextStyle(fontSize: 15),
+                      style: GoogleFonts.notoSans(fontSize: 15),
                     ),
                     // trailing: Text(Mentions_list[i].m),
                   ),

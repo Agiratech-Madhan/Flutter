@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Pause extends StatefulWidget {
   const Pause({super.key});
@@ -18,46 +19,26 @@ class _PauseState extends State<Pause> {
   TextEditingController dateInput = TextEditingController();
   TextEditingController timeinput = TextEditingController();
 
-  dynamic _selectedDate;
-  void _presentdatepicker() async {
-    // showDatePicker(
-    //   context: context,
-    //   initialDate: DateTime.now(),
-    //   firstDate: DateTime(2019),
-    //   lastDate: DateTime.now(),
-    // ).then((pickedDate) {
-    //   if (pickedDate == null) {
-    //     return;
-    //   }
-    //   setState(() {
-    //     _selectedDate = pickedDate;
-    //   });
-    // });
-  }
-
-  // TextEditingController dateInput = TextEditingController();
   bool isselected = false;
   bool isCustom = false;
   bool _homeFieldVisible = false;
-  // void handleSelection(Place? value) {
-  //   setState(() {
-  //     _options = value;
-  // _homeFieldVisible = value == Place.five;
-  //   });
-  // }
+  void update(value) {
+    setState(() {
+      isselected = value == Place.five;
+      _options = value as dynamic;
+      _homeFieldVisible = value == Place.five;
+    });
+  }
+
   @override
   void initState() {
     dateInput.text = "";
     timeinput.text = "";
-    //set the initial value of text field
     super.initState();
   }
 
   Widget build(BuildContext context) {
-    // final hours = time.hour.toString().padLeft(2, '0');
-    // final minutes = time.minute.toString().padLeft(2, '0');
     return MaterialApp(
-      // theme: ThemeData(primarySwatch: null),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           body: Padding(
@@ -73,17 +54,18 @@ class _PauseState extends State<Pause> {
                 Flexible(
                     child: Text(
                   "Pause  Notifications",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style: GoogleFonts.notoSans(
+                      fontWeight: FontWeight.bold, fontSize: 18),
                 )),
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text("Save",
-                      style: TextStyle(
+                      style: GoogleFonts.notoSans(
                           color: isselected ? Colors.black : Colors.grey)),
                 )
               ],
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
             ),
             Column(
@@ -91,69 +73,29 @@ class _PauseState extends State<Pause> {
               children: [
                 RadioListTile(
                     title: const Text('30  minutes'),
-                    value: 1,
+                    value: Place.one,
                     groupValue: _options,
-                    onChanged: (value) {
-                      setState(() {
-                        // isselected = true;
-                        _homeFieldVisible = false;
-                        _options = value as dynamic;
-                      });
-                    }),
+                    onChanged: ((value) => update(value))),
                 RadioListTile(
                     title: const Text('1 hour'),
-                    value: 2,
+                    value: Place.two,
                     groupValue: _options,
-                    onChanged: (value) {
-                      setState(() {
-                        // isselected = true;
-
-                        _homeFieldVisible = false;
-                        _options = value as dynamic;
-                      });
-                    }),
+                    onChanged: ((value) => update(value))),
                 RadioListTile(
                     title: const Text('2 hour'),
-                    value: 3,
+                    value: Place.three,
                     groupValue: _options,
-                    onChanged: (value) {
-                      setState(() {
-                        // isselected = true;
-
-                        _homeFieldVisible = false;
-                        _options = value as dynamic;
-                      });
-                    }),
+                    onChanged: ((value) => update(value))),
                 RadioListTile(
                     title: const Text('Until tomorrow'),
-                    value: 4,
+                    value: Place.four,
                     groupValue: _options,
-                    onChanged: (value) {
-                      setState(() {
-                        // isselected = true;
-
-                        _homeFieldVisible = false;
-                        _options = value as dynamic;
-                      });
-                    }),
+                    onChanged: ((value) => update(value))),
                 RadioListTile(
                     title: const Text('Custom'),
                     value: Place.five,
-                    // selected: isCustom,
                     groupValue: _options,
-                    onChanged: (value) {
-                      setState(() {
-                        isselected = true;
-
-                        _options = value as dynamic;
-                        _homeFieldVisible = value == Place.five;
-
-                        // isCustom = value=_result.'Custom';
-                      });
-                    }),
-
-                // const SizedBox(height: 25),
-                // Text(_result == 7 ? 'Correct!' : 'Please chose the right answer!')
+                    onChanged: ((value) => update(value))),
               ],
             ),
             if (_homeFieldVisible)
@@ -173,29 +115,20 @@ class _PauseState extends State<Pause> {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
-                            firstDate: DateTime(1950),
-                            //DateTime.now() - not to allow to choose before today.
+                            firstDate: DateTime(2000),
                             lastDate: DateTime(2100));
 
                         if (pickedDate != null) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                          print(pickedDate);
                           String formattedDate =
                               DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2021-03-16
+                          print(formattedDate);
                           setState(() {
-                            dateInput.text =
-                                formattedDate; //set output date to TextField value.
+                            dateInput.text = formattedDate;
                           });
                         } else {}
                       },
                     ),
-                    // TextField(
-                    //   decoration: InputDecoration(
-                    //       labelText: "Time",
-                    //       suffixIcon: Icon(Icons.arrow_drop_down)),
-                    // )
                     TextField(
                       controller: timeinput,
                       decoration: InputDecoration(

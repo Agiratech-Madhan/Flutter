@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:slack/subpages/MyAccount/editprofile.dart';
 import 'package:slack/subpages/MyAccount/setstatus.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class View_profile_page extends StatelessWidget {
   final String today_date = DateFormat("hh:mm a").format(DateTime.now());

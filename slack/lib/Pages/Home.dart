@@ -94,13 +94,11 @@ class _HomeState extends State<Home> {
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Threads())),
                   icon: const Icon(Icons.message_rounded),
-                  label: const Text(
-                    "Threads",
-                  ),
+                  label: Text("Threads", style: GoogleFonts.notoSans()),
                   style: TextButton.styleFrom(
                       elevation: 0,
                       backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.grey,
+                      foregroundColor: Colors.black,
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.all(10)),
                 ),
@@ -113,13 +111,11 @@ class _HomeState extends State<Home> {
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Draft())),
                   icon: const Icon(Icons.send_rounded),
-                  label: const Text(
-                    "Drafts & Sent",
-                  ),
+                  label: Text("Drafts & Sent", style: GoogleFonts.notoSans()),
                   style: TextButton.styleFrom(
                       elevation: 0,
                       backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.grey,
+                      foregroundColor: Colors.black,
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.all(10)),
                 ),
@@ -134,7 +130,7 @@ class _HomeState extends State<Home> {
               },
               childrenPadding: EdgeInsets.all(13.5),
               // children
-              title: Text('Channels'),
+              title: Text('Channels', style: GoogleFonts.notoSans()),
               children: [
                 ListView.builder(
                     physics: BouncingScrollPhysics(),
@@ -154,14 +150,13 @@ class _HomeState extends State<Home> {
                           icon: channeldata[i].icon,
                           label: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text(
-                              channeldata[i].name,
-                            ),
+                            child: Text(channeldata[i].name,
+                                style: GoogleFonts.notoSans()),
                           ),
                           style: TextButton.styleFrom(
                               elevation: 0,
                               backgroundColor: Colors.transparent,
-                              foregroundColor: Colors.grey,
+                              foregroundColor: Colors.black,
                               // alignment: Alignment.centerLeft,
                               padding: EdgeInsets.all(10)),
                         )))
@@ -171,7 +166,7 @@ class _HomeState extends State<Home> {
               color: Colors.grey,
             ),
             ExpansionTile(
-              title: Text('Direct Messages'),
+              title: Text('Direct Messages', style: GoogleFonts.notoSans()),
               children: [
                 Container(
                   // height: 100,

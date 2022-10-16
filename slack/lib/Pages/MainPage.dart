@@ -5,6 +5,7 @@ import 'DirectMessages.dart';
 import 'Mentions.dart';
 import 'Searchpage.dart';
 import 'Home.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   return runApp(MyApp());
