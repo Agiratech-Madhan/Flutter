@@ -18,6 +18,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
     bool focused = currentFocus.isFirstFocus;
+    bool isactive = currentFocus.hasFocus;
     var top_border = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -111,7 +112,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           hintText: 'Message #task-review'),
                     ),
                   ),
-                  focused
+                  isactive
                       ? Container(
                           padding: EdgeInsets.only(left: 3),
                           child: Row(

@@ -73,7 +73,7 @@ class _ChatKeyBoardState extends State<ChatKeyBoard> {
                   hintText: 'Message #task-review'),
             ),
           ),
-          focusnode.hasFocus
+          isEnable
               ? Container(
                   padding: EdgeInsets.only(left: 3),
                   child: Row(
