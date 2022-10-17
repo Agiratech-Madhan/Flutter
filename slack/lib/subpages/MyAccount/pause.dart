@@ -12,10 +12,8 @@ class Pause extends StatefulWidget {
 enum Place { one, two, three, four, five }
 
 class _PauseState extends State<Pause> {
-  // int? _result;
   dynamic _options;
-  // TimeOfDay time = TimeOfDay(hour: 10, minute: 30);
-  // final _titlecontroller = TextEditingController();
+
   TextEditingController dateInput = TextEditingController();
   TextEditingController timeinput = TextEditingController();
 

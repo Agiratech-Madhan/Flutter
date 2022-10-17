@@ -33,7 +33,7 @@ class _ChatScreenState extends State<ChatScreen> {
     bool fab = MediaQuery.of(context).viewInsets.bottom != 0.0;
     FocusScopeNode currentFocus = FocusScope.of(context);
 
-    var top_border = Row(
+    var topborder = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
@@ -111,7 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
             elevation: 6,
             child: Column(
               children: [
-                if (fab) top_border,
+                if (fab) topborder,
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 1,
                   height: 60,

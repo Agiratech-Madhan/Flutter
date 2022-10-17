@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slack/subpages/Home/Chatscreen.dart';
 import '../models/Chatmodel.dart';
 // import '../models/Chatmodel.dart';
 import '../subpages/DMs/Jumpto.dart';
@@ -82,48 +83,59 @@ class _DirectMessagesState extends State<DirectMessages> {
                   shrinkWrap: true,
                   itemCount: chatdata.length,
                   // physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, i) => Column(
-                    children: [
-                      ListTile(
-                        leading: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Stack(
-                              alignment: Alignment.bottomRight,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.asset(chatdata[i].pic),
-                                ),
-                                if (true)
-                                  Positioned(
-                                    bottom: -2,
-                                    right: -2,
-                                    child: Container(
-                                      width: 15,
-                                      height: 15,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(25),
-                                        border: Border.all(
-                                            width: 3, color: Colors.white),
-                                      ),
-                                    ),
-                                  )
-                              ]),
+                  itemBuilder: (context, i) {
+                    var sizedBox = SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Stack(alignment: Alignment.bottomRight, children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.asset(chatdata[i].pic),
                         ),
-                        title: Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Text(chatdata[i].name),
-                        ),
-                        subtitle: Text(
-                          chatdata[i].msg,
-                          style: GoogleFonts.notoSans(fontSize: 15),
-                        ),
-                        trailing: Text(chatdata[i].time),
-                      )
-                    ],
-                  ),
+                        if (true)
+                          Positioned(
+                            bottom: -2,
+                            right: -2,
+                            child: Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(25),
+                                border:
+                                    Border.all(width: 3, color: Colors.white),
+                              ),
+                            ),
+                          )
+                      ]),
+                    );
+                    return Column(
+                      children: [
+                        ListTile(
+                          // onTap: () {
+                          //   print('object');
+                          //   Navigator.pushReplacement(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) => ChatScreen(
+                          //               c_icon: sizedBox,
+                          //               c_name: chatdata[i].name,
+                          //               DM: true)));
+                          // },
+                          leading: sizedBox,
+                          title: Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Text(chatdata[i].name),
+                          ),
+                          subtitle: Text(
+                            chatdata[i].msg,
+                            style: GoogleFonts.notoSans(fontSize: 15),
+                          ),
+                          trailing: Text(chatdata[i].time),
+                        )
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
