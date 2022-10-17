@@ -21,48 +21,31 @@ class _SearchListState extends State<SearchList> {
           child: ListView.builder(
               itemCount: 50,
               itemBuilder: ((context, index) => Container(
-                    // height: 68,
-                    // color: Colors.red,
-                    child: Container(
-                        // height: 60,
-                        margin: EdgeInsets.only(left: 12, right: 12),
-                        // padding: EdgeInsets.all(3),
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(10),
-                        // color: Colors.pink,
-                        // ),
-                        padding: EdgeInsets.all(2),
-                        child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                                shadowColor: Colors.transparent,
-                                foregroundColor: Colors.black,
-                                backgroundColor: Colors.white),
-                            onPressed: () {},
-                            icon: Icon(Icons.lock),
-                            label: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    // top: 7,
-                                    // bottom: 7,
-                                    left: MediaQuery.of(context).size.width *
-                                        0.10,
-                                  ),
-                                  child: Text(
-                                    'label',
-                                    style: const TextStyle(fontSize: 19),
-                                  ),
-                                ),
-                              ],
-                            ))
-                        // ListTile(
-                        //   onTap: () {},
-                        //   leading: Icon(Icons.lock),
-                        //   title: Text('Ak Vignesh'),
-                        // ),
-                        ),
-                  ))),
+                  margin: EdgeInsets.only(left: 12, right: 12),
+                  padding: EdgeInsets.all(2),
+                  child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                          shadowColor: Colors.transparent,
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white),
+                      onPressed: () {},
+                      icon: Icon(Icons.lock),
+                      label: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              // top: 7,
+                              // bottom: 7,
+                              left: MediaQuery.of(context).size.width * 0.10,
+                            ),
+                            child: Text(
+                              'label',
+                              style: const TextStyle(fontSize: 19),
+                            ),
+                          ),
+                        ],
+                      ))))),
         ),
       )),
     );

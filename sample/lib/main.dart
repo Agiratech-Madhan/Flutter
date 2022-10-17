@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:language_picker/languages.dart';
+import 'package:language_picker/languages.g.dart';
+import 'package:sample/Message.dart';
 import 'package:sample/alertdialogue.dart';
+import 'package:sample/camera.dart';
 import 'package:sample/dates.dart';
 import 'package:sample/dropdown.dart';
+import 'package:sample/groupedlist.dart';
+import 'package:sample/language.dart';
+import 'package:sample/mic.dart';
 import 'package:sample/pageview.dart';
 import 'package:sample/popupmenu.dart';
 import 'package:sample/searchbar.dart';
@@ -160,7 +167,41 @@ class _MyHomePageState extends State<MyHomePage> {
                           MaterialPageRoute(
                               builder: (context) => AlertDialogue()));
                     },
-                    child: Text("AlertDialogue"))
+                    child: Text("AlertDialogue")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CameraExample()));
+                    },
+                    child: Text("CameraExample")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Langauges()));
+                    },
+                    child: Text("Languages")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MicExample()));
+                    },
+                    child: Text("Mic")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Messages()));
+                    },
+                    child: Text("Messages")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Group1()));
+                    },
+                    child: Text("Groupedlistview")),
               ],
             ),
           ),
