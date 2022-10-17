@@ -56,7 +56,7 @@ class _MentionsState extends State<Mentions> {
                           ),
                         ),
                         Text(
-                          '1hr',
+                          Mentions_list[index].m_time,
                           style: GoogleFonts.notoSans(color: Colors.grey),
                         )
                       ],

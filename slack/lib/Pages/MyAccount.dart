@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:slack/subpages/Home/Preferences.dart';
 import 'package:slack/subpages/MyAccount/Notifications.dart';
 import 'package:slack/subpages/MyAccount/saved_items.dart';
@@ -254,7 +255,7 @@ class _MyAccountState extends State<MyAccount> {
               child: TextButton.icon(
                 onPressed: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Preferences())),
-                icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
+                icon: Icon(FontAwesomeIcons.facebookMessenger),
                 label: Text("Preferences", style: GoogleFonts.notoSans()),
                 style: TextButton.styleFrom(
                     elevation: 0,

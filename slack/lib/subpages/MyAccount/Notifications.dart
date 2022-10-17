@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slack/models/Notify.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -35,18 +36,8 @@ class _NotificationsState extends State<Notifications> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // ListTile(
-                //     // onTap: () => Navigator.pop(context),
-                //     title: Text("small"),
-                //     leading: Radio(
-                //         value: "Small",
-                //         groupValue: result,
-                //         onChanged: (value) => Changes(value.toString()))),
-                // SizedBox(
-                //   width: 10.0,
-                // ),
                 RadioListTile(
-                    selected: _selected,
+                    // selected: _selected,
                     title: Text('${notifyme[0].notify}'),
                     value: '${notifyme[0].notify}',
                     groupValue: 1,
@@ -88,7 +79,6 @@ class _NotificationsState extends State<Notifications> {
                     onChanged: (value) {
                       return Changes(value.toString());
                     }),
-
                 RadioListTile(
                     title: Text('${notifyme[6].notify}'),
                     value: '${notifyme[6].notify}',
@@ -96,7 +86,6 @@ class _NotificationsState extends State<Notifications> {
                     onChanged: (value) {
                       return Changes(value.toString());
                     }),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

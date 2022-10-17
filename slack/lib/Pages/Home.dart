@@ -145,6 +145,7 @@ class _HomeState extends State<Home> {
                                     builder: (context) => ChatScreen(
                                           c_icon: channeldata[i].icon,
                                           c_name: channeldata[i].name,
+                                          DM: false,
                                         )));
                           },
                           icon: channeldata[i].icon,
@@ -174,49 +175,52 @@ class _HomeState extends State<Home> {
                       shrinkWrap: true,
                       itemCount: chatdata.length,
                       physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, i) => Column(
-                            children: [
-                              ListTile(
-                                // onTap: () {
-                                //   print('object');
-                                //   Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //           builder: (context) => ChatScreen()));
-                                // },
-                                leading: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: Stack(
-                                      alignment: Alignment.bottomRight,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Image.asset(chatdata[i].pic),
-                                        ),
-                                        Positioned(
-                                          bottom: -2,
-                                          right: -2,
-                                          child: Container(
-                                            width: 15,
-                                            height: 15,
-                                            decoration: BoxDecoration(
-                                              color: Colors.pink,
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                              border: Border.all(
-                                                  width: 3,
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        )
-                                      ]),
+                      itemBuilder: (context, i) {
+                        var sizedBox = SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.asset(chatdata[i].pic),
                                 ),
-                                title: Text(chatdata[i].name),
-                              )
-                            ],
-                          )),
+                                Positioned(
+                                  bottom: -2,
+                                  right: -2,
+                                  child: Container(
+                                    width: 15,
+                                    height: 15,
+                                    decoration: BoxDecoration(
+                                      color: Colors.pink,
+                                      borderRadius: BorderRadius.circular(25),
+                                      border: Border.all(
+                                          width: 3, color: Colors.white),
+                                    ),
+                                  ),
+                                )
+                              ]),
+                        );
+                        return Column(
+                          children: [
+                            ListTile(
+                              onTap: () {
+                                print('object');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ChatScreen(
+                                            c_icon: sizedBox,
+                                            c_name: chatdata[i].name,
+                                            DM: true)));
+                              },
+                              leading: sizedBox,
+                              title: Text(chatdata[i].name),
+                            )
+                          ],
+                        );
+                      }),
                 ),
               ],
             ),

@@ -55,8 +55,11 @@ class _MainDrawerState extends State<MainDrawer> {
               ),
               ListTile(
                 contentPadding: EdgeInsets.only(left: 19),
-                onTap: () => Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Invite())),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Invite()));
+                },
                 dense: true,
                 // visualDensity: VisualDensity(horizontal: -2.0),
                 leading: Icon(Icons.person_add_alt),

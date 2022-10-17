@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:slack/models/mentionsmodel.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChatScreen extends StatefulWidget {
   // const ChatScreen({super.key});
   final Widget c_icon;
   final String c_name;
+  final bool DM;
 
-  ChatScreen({required this.c_icon, required this.c_name});
+  ChatScreen({required this.c_icon, required this.c_name, required this.DM});
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
@@ -19,12 +22,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     bool fab = MediaQuery.of(context).viewInsets.bottom != 0.0;
     FocusScopeNode currentFocus = FocusScope.of(context);
-    // bool focused = currentFocus.isFirstFocus;
 
-    /**bool primaryfocus = currentFocus.hasPrimaryFocus;
-    bool haslisteners = currentFocus.hasListeners;
-    bool isactive = currentFocus.hasFocus;
-    **/
     var top_border = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -52,9 +50,9 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Row(
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.lock)),
+                IconButton(onPressed: () {}, icon: widget.c_icon),
                 Text(
-                  'project team-2022',
+                  widget.c_name,
                   style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -146,7 +144,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 IconButton(
                                   onPressed: () {},
                                   icon: Icon(
-                                    Icons.text_fields,
+                                    Icons.text_fields_outlined,
                                     size: 27,
                                   ),
                                   color: Colors.black54,
