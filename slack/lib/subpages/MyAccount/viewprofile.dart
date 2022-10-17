@@ -121,7 +121,7 @@ class View_profile_page extends StatelessWidget {
                                   backgroundColor: Colors.white,
                                   foregroundColor: Colors.black),
                               onPressed: () {},
-                              child: Text('Edit Profile'))),
+                              child: Text('Message'))),
                       Container(
                         // padding: EdgeInsets.only(left),
                         height: 40,

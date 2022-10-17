@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:slack/models/mentionsmodel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grouped_list/grouped_list.dart';
+import 'package:intl/intl.dart';
+import 'package:slack/models/messageModel.dart';
 
 class ChatScreen extends StatefulWidget {
-  // const ChatScreen({super.key});
   final Widget c_icon;
   final String c_name;
   final bool DM;
@@ -17,6 +19,14 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   TextEditingController text_controller = TextEditingController();
   bool isEnable = false;
+  void submitted(String value) {
+    final message =
+        Message(text: value, date: DateTime.now(), isSentByMe: true);
+    setState(() {
+      messages.add(message);
+      text_controller.text = '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +69,44 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ],
         ),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.mic))],
       ),
       body: Column(
         children: [
-          Container(
-            child: Expanded(child: ListView()),
-          ),
+          Expanded(
+              child: GroupedListView<Message, String>(
+            useStickyGroupSeparators: true,
+            floatingHeader: true,
+            reverse: true,
+            order: GroupedListOrder.DESC,
+            elements: messages,
+            groupBy: (message) => DateTime(
+                    message.date.year, message.date.month, message.date.day)
+                .toString(),
+            groupHeaderBuilder: (Message message) => SizedBox(
+              height: 40,
+              child: Center(
+                child: Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Text(DateFormat.yMMMd().format(message.date)),
+                  ),
+                ),
+              ),
+            ),
+            itemBuilder: ((context, Message message) => Align(
+                  alignment: message.isSentByMe
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: Card(
+                    elevation: 7,
+                    child: Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text(message.text),
+                    ),
+                  ),
+                )),
+          )),
           Card(
             elevation: 6,
             child: Column(
@@ -80,6 +122,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       setState(() {
                         isEnable = true;
                       });
+                    },
+                    onSubmitted: (text) {
+                      submitted(text);
                     },
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
@@ -151,21 +196,22 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ),
                               ],
                             ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundColor: text_controller.text.isEmpty
-                                      ? Colors.white
-                                      : Colors.green.shade900,
-                                  child: Icon(
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                backgroundColor: text_controller.text.isEmpty
+                                    ? Colors.white
+                                    : Colors.green.shade900,
+                                child: IconButton(
+                                  onPressed: () =>
+                                      submitted(text_controller.text),
+                                  icon: Icon(
                                     Icons.send,
                                     size: 23,
-                                    color: text_controller.text.isEmpty
-                                        ? Colors.black38
-                                        : Colors.white,
                                   ),
+                                  color: text_controller.text.isEmpty
+                                      ? Colors.black38
+                                      : Colors.white,
                                 ),
                               ),
                             )
