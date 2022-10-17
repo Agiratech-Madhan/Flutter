@@ -17,11 +17,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool fab = MediaQuery.of(context).viewInsets.bottom != 0.0;
     FocusScopeNode currentFocus = FocusScope.of(context);
-    bool focused = currentFocus.isFirstFocus;
-    // bool primaryfocus = currentFocus.hasPrimaryFocus;
-    // bool haslisteners = currentFocus.hasListeners;
-    // bool isactive = currentFocus.hasFocus;
+    // bool focused = currentFocus.isFirstFocus;
+
+    /**bool primaryfocus = currentFocus.hasPrimaryFocus;
+    bool haslisteners = currentFocus.hasListeners;
+    bool isactive = currentFocus.hasFocus;
+    **/
     var top_border = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -38,154 +41,144 @@ class _ChatScreenState extends State<ChatScreen> {
         )
       ],
     );
-    return GestureDetector(
-      onTap: () {
-        setState(() {});
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 1,
-          iconTheme: const IconThemeData(color: Colors.black87),
-          centerTitle: true,
-          titleTextStyle: GoogleFonts.notoSans(color: Colors.black87),
-          title: Column(
-            children: [
-              Row(
-                children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.lock)),
-                  Text(
-                    'project team-2022',
-                    style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 1,
+        iconTheme: const IconThemeData(color: Colors.black87),
+        centerTitle: true,
+        titleTextStyle: GoogleFonts.notoSans(color: Colors.black87),
+        title: Column(
           children: [
-            Container(
-              child: Expanded(child: ListView()),
+            Row(
+              children: [
+                IconButton(onPressed: () {}, icon: Icon(Icons.lock)),
+                Text(
+                  'project team-2022',
+                  style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-            Card(
-              elevation: 6,
-              child: Column(
-                children: [
-                  if (focused) top_border,
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 1,
-                    height: 60,
-                    child: TextField(
-                      controller: text_controller,
-                      onChanged: (value) {
-                        setState(() {
-                          isEnable = true;
-                        });
-                      },
-                      textAlignVertical: TextAlignVertical.center,
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: !focused
-                                ? CircleAvatar(
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            child: Expanded(child: ListView()),
+          ),
+          Card(
+            elevation: 6,
+            child: Column(
+              children: [
+                if (fab) top_border,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 1,
+                  height: 60,
+                  child: TextField(
+                    // focusNode: currentFocus,
+                    controller: text_controller,
+                    onChanged: (value) {
+                      setState(() {
+                        isEnable = true;
+                      });
+                    },
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: !fab
+                              ? CircleAvatar(
+                                  backgroundColor: Colors.grey.withOpacity(0.2),
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(!fab ? Icons.add : null),
+                                    color: Colors.black.withOpacity(0.6),
+                                  ),
+                                )
+                              : null,
+                        ),
+                        prefixIconColor: Colors.grey,
+                        suffixIcon: !fab ? Icon(Icons.mic) : null,
+                        //  Icon(!fab ? Icons.mic_none_rounded : null),
+                        hintText: 'Message #task-review'),
+                  ),
+                ),
+                fab
+                    ? Container(
+                        padding: EdgeInsets.only(left: 3),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(7.0),
+                                  child: CircleAvatar(
                                     backgroundColor:
                                         Colors.grey.withOpacity(0.2),
                                     child: IconButton(
                                       onPressed: () {},
-                                      icon: Icon(!focused ? Icons.add : null),
+                                      icon: Icon(Icons.add),
+                                      // size: 27,
                                       color: Colors.black.withOpacity(0.6),
-                                    ),
-                                  )
-                                : Icon(null),
-                          ),
-                          prefixIconColor: Colors.grey,
-                          suffixIcon:
-                              Icon(!focused ? Icons.mic_none_rounded : null),
-                          hintText: 'Message #task-review'),
-                    ),
-                  ),
-                  focused
-                      ? Container(
-                          padding: EdgeInsets.only(left: 3),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(7.0),
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Colors.grey.withOpacity(0.2),
-                                      child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.add),
-                                        // size: 27,
-                                        color: Colors.black.withOpacity(0.6),
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.sentiment_satisfied_alt_outlined,
-                                      size: 27,
-                                    ),
-                                    color: Colors.black54,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.alternate_email,
-                                      size: 27,
-                                    ),
-                                    color: Colors.black54,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.text_fields,
-                                      size: 27,
-                                    ),
-                                    color: Colors.black54,
-                                  ),
-                                ],
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: CircleAvatar(
-                                    backgroundColor:
-                                        text_controller.text.isEmpty
-                                            ? Colors.white
-                                            : Colors.green.shade900,
-                                    child: Icon(
-                                      Icons.send,
-                                      size: 23,
-                                      color: text_controller.text.isEmpty
-                                          ? Colors.black38
-                                          : Colors.white,
                                     ),
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                        )
-                      : Container(),
-                ],
-              ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.sentiment_satisfied_alt_outlined,
+                                    size: 27,
+                                  ),
+                                  color: Colors.black54,
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.alternate_email,
+                                    size: 27,
+                                  ),
+                                  color: Colors.black54,
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.text_fields,
+                                    size: 27,
+                                  ),
+                                  color: Colors.black54,
+                                ),
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: CircleAvatar(
+                                  backgroundColor: text_controller.text.isEmpty
+                                      ? Colors.white
+                                      : Colors.green.shade900,
+                                  child: Icon(
+                                    Icons.send,
+                                    size: 23,
+                                    color: text_controller.text.isEmpty
+                                        ? Colors.black38
+                                        : Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

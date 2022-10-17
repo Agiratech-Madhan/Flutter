@@ -43,39 +43,7 @@ class _SetStatusState extends State<SetStatus> {
         ],
       ),
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // SizedBox(
-          //   height: 25,
-          // ),
-          // Row(
-          //   children: [
-          //     Padding(
-          //       padding: const EdgeInsets.only(left: 15),
-          // child: IconButton(
-          //   icon: Icon(Icons.cancel),
-          //   onPressed: () => Navigator.pop(context),
-          //   iconSize: 30,
-          // ),
-          //     ),
-          //     SizedBox(
-          //       width: 18,
-          //     ),
-          //     Expanded(
-          //         child: Text("Set a status",
-          //             style: TextStyle(
-          //                 fontSize: 17, fontWeight: FontWeight.bold))),
-          // TextButton(
-          //     onPressed: () {},
-          //     child: Text("Save",
-          //         style: TextStyle(
-          //             fontSize: 17,
-          //             color: text_controller.text.isNotEmpty
-          //                 ? Colors.black
-          //                 : Colors.grey)))
-          //   ],
-          // ),
-          // Divider(color: Colors.grey),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: TextField(
@@ -104,40 +72,6 @@ class _SetStatusState extends State<SetStatus> {
                   )),
             ),
           ),
-
-          // Row(
-          //   children: [
-          //     Padding(
-          //       padding: const EdgeInsets.only(left: 15),
-          //       child: IconButton(
-          //         icon: text_controller.text.isNotEmpty
-          //             ? Icon(Icons.stacked_line_chart_sharp)
-          //             : Icon(Icons.emoji_emotions_outlined),
-          //         onPressed: () {},
-          //         iconSize: 30,
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: 15,
-          //     ),
-          //     Flexible(
-          //       child: TextField(
-          //         controller: text_controller,
-          //         onChanged: (value) {
-          //           isEnable = true;
-          //         },
-          //         decoration: InputDecoration.collapsed(
-          //           hintText: "What's your status?",
-          //         ),
-          //       ),
-          //     ),
-          //     IconButton(
-          //         onPressed: () {},
-          //         icon: text_controller.text.isEmpty
-          //             ? Icon(Icons.cancel)
-          //             : Icon(null))
-          //   ],
-          // ),
           Column(
             children: [
               false

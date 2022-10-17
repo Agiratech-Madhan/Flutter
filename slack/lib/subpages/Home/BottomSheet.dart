@@ -52,7 +52,7 @@ class _SubBottomSheetState extends State<SubBottomSheet> {
               child: const Text('Sort by')),
           ListTile(
             leading: const Icon(Icons.list_alt_rounded),
-            title: const Text("Sec tions"),
+            title: const Text("Sections"),
             trailing: Radio<dynamic>(
               value: 1,
               groupValue: result,
