@@ -206,7 +206,6 @@ class _HomeState extends State<Home> {
                           children: [
                             ListTile(
                               onTap: () {
-                                print('object');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

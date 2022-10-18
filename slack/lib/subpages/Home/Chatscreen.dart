@@ -132,19 +132,22 @@ class _ChatScreenState extends State<ChatScreen> {
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        prefixIcon: Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: !fab
-                              ? CircleAvatar(
-                                  backgroundColor: Colors.grey.withOpacity(0.2),
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(!fab ? Icons.add : null),
-                                    color: Colors.black.withOpacity(0.6),
-                                  ),
-                                )
-                              : null,
-                        ),
+                        prefixIcon: !fab
+                            ? Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: !fab
+                                    ? CircleAvatar(
+                                        backgroundColor:
+                                            Colors.grey.withOpacity(0.2),
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(Icons.add),
+                                          color: Colors.black.withOpacity(0.6),
+                                        ),
+                                      )
+                                    : SizedBox(),
+                              )
+                            : null,
                         prefixIconColor: Colors.grey,
                         suffixIcon: !fab ? Icon(Icons.mic) : null,
                         //  Icon(!fab ? Icons.mic_none_rounded : null),
