@@ -47,18 +47,12 @@ class _SearchPageState extends State<SearchPage> {
           child: Container(
             width: double.infinity,
             height: 40,
-            // color: Color(white).withOpacity(0.5),
             color: Colors.white,
             child: Center(
               child: TextField(
                 controller: textFieldController,
                 onTap: () => {},
                 onChanged: (value) {
-                  // setState(() {
-                  // changed = value ;
-                  // changed = false;
-                  // print(changed);
-                  // print('value$value');
                   return searchfilter(value);
                 },
                 decoration: InputDecoration(
@@ -115,41 +109,26 @@ class _SearchPageState extends State<SearchPage> {
                     // margin: EdgeInsets.all(12),
                     width: MediaQuery.of(context).size.width * 0.95,
                     child: ElevatedButton.icon(
-                      label: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Browse Channels',
-                            style: GoogleFonts.notoSans(color: Colors.black),
-                            textAlign: TextAlign.left,
-                          ),
-                        ],
-                      ),
-                      icon:
-                          Icon(Icons.transgender_outlined, color: Colors.black),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.grey,
-                          shadowColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
-                      onPressed: () {}
-                      // () => Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(builder: (context) => Jumpto()),
-                      //     )
-                      ,
-                      // icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
-                      // child: const Padding(
-                      //   padding: EdgeInsets.only(right: 220, top: 12, bottom: 12),
-                      //   child: Text(
-                      //     "Jump to....",
-                      //     textAlign: TextAlign.start,
-                      //     style: GoogleFonts.notoSans(fontSize: 15),
-                      //   ),
-                      // )
-                    ),
+                        label: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Browse Channels',
+                              style: GoogleFonts.notoSans(color: Colors.black),
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
+                        ),
+                        icon: Icon(Icons.transgender_outlined,
+                            color: Colors.black),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: Colors.grey,
+                            shadowColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            )),
+                        onPressed: () {}),
                   )
                 : Container(),
             Column(
@@ -167,7 +146,6 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
                 ListView.builder(
-                    // physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: Searchlist.length,
                     itemBuilder: ((context, i) => Container(
@@ -188,8 +166,6 @@ class _SearchPageState extends State<SearchPage> {
                                 ],
                               ),
                               icon: Searchlist[i].icon,
-                              // color: Colors.black,
-
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.transparent,
                                   foregroundColor: Colors.grey,
@@ -203,14 +179,6 @@ class _SearchPageState extends State<SearchPage> {
                         )))
               ],
             ),
-            // ListView.builder(
-            //     // scrollDirection: Axis.horizontal,
-            //     itemCount: displayList.length,
-            //     itemBuilder: ((context, i) => Row(children: [
-            //           const Padding(
-            //               padding: EdgeInsets.all(10), child: Icon(Icons.lock)),
-            //           Text(displayList[i].m_group),
-            //         ]))),
           ],
         ),
       ),

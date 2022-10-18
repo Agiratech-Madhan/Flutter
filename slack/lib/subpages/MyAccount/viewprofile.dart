@@ -111,7 +111,6 @@ class View_profile_page extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  // shadowColor: Colors.white,
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(7),
@@ -123,7 +122,6 @@ class View_profile_page extends StatelessWidget {
                               onPressed: () {},
                               child: Text('Message'))),
                       Container(
-                        // padding: EdgeInsets.only(left),
                         height: 40,
                         width: 40,
                         decoration: BoxDecoration(

@@ -70,8 +70,6 @@ class _PauseState extends State<Pause> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RadioListTile(
-                    // autofocus: true,
-                    // activeColor: Colors.pink,
                     title: const Text('30  minutes'),
                     value: Place.one,
                     groupValue: _options,
@@ -133,28 +131,20 @@ class _PauseState extends State<Pause> {
                     TextField(
                       controller: timeinput,
                       decoration: InputDecoration(
-                          //icon of text field
                           labelText: "Time",
-                          suffixIcon: Icon(Icons.arrow_drop_down)
-                          //label text of field
-                          ),
+                          suffixIcon: Icon(Icons.arrow_drop_down)),
                       onTap: () async {
                         TimeOfDay? newtime = await showTimePicker(
                             context: context, initialTime: TimeOfDay.now());
                         if (newtime != null) {
-                          // print(newtime.format(context)); //output 10:51 PM
                           DateTime parsedTime = DateFormat.jm()
                               .parse(newtime.format(context).toString());
-                          //converting to DateTime so that we can further format on different pattern.
-                          // print(parsedTime); //output 1970-01-01 22:53:00.000
+
                           String formattedTime =
                               DateFormat.jm().format(parsedTime);
-                          // print(formattedTime); //output 14:59:00
-                          //DateFormat() is from intl package, you can format the time on any pattern you need.
 
                           setState(() {
-                            timeinput.text =
-                                formattedTime; //set the value of text field.
+                            timeinput.text = formattedTime;
                           });
                         }
                       },

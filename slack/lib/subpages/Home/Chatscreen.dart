@@ -32,7 +32,9 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     bool fab = MediaQuery.of(context).viewInsets.bottom != 0.0;
     FocusScopeNode currentFocus = FocusScope.of(context);
-
+    // if (fab) {
+    //   currentFocus.unfocus();
+    // }
     var topborder = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -72,6 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.mic))],
       ),
       body: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
               child: GroupedListView<Message, String>(
@@ -124,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       });
                     },
                     onSubmitted: (text) {
-                      submitted(text);
+                      if (text.isNotEmpty) submitted(text);
                     },
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
@@ -203,8 +206,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                     ? Colors.white
                                     : Colors.green.shade900,
                                 child: IconButton(
-                                  onPressed: () =>
-                                      submitted(text_controller.text),
+                                  onPressed: () {
+                                    if (text_controller.text.isNotEmpty)
+                                      submitted(text_controller.text);
+                                  },
                                   icon: Icon(
                                     Icons.send,
                                     size: 23,

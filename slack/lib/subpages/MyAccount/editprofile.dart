@@ -56,9 +56,6 @@ class _EditProfileState extends State<EditProfile> {
                   trailing: TextButton(
                       style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          //  side: BorderSide(
-                          //    color: Colors.deepPurpleAccent, //<-- SEE HERE
-                          //  ),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
@@ -75,7 +72,6 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 margin:
                     EdgeInsets.only(top: 10, left: 10, right: 5, bottom: 10),
-                // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 width: MediaQuery.of(context).size.width * 0.4,
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Stack(children: [

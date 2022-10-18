@@ -60,10 +60,6 @@ class _DraftState extends State<Draft> {
                     style: GoogleFonts.notoSans(fontSize: 17),
                   ),
                 )
-
-                // Tab(icon: Icon(Icons.directions_car)),
-                // Tab(icon: Icon(Icons.directions_transit)),
-                // Tab(icon: Icon(Icons.directions_bike)),
               ],
             ),
           ),

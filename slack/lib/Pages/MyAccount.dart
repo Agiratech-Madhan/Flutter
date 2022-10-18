@@ -20,24 +20,12 @@ class MyAccount extends StatefulWidget {
 
 class _MyAccountState extends State<MyAccount> {
   bool issetted = true;
-  // void checkstatus(bool tapped) {
-  //   setState(() {
-  //     issetted != tapped;
-  //   });
-  //   print(issetted);
-  // }
 
   void view_profile(BuildContext ctex) {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
         isScrollControlled: true,
         isDismissible: true,
-
-        // shape: const RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.vertical(
-        //     top: Radius.circular(20),
-        //   ),
-        // ),
         context: ctex,
         builder: (context) {
           return View_profile_page();
@@ -97,29 +85,7 @@ class _MyAccountState extends State<MyAccount> {
                   textAlign: TextAlign.start,
                   style: GoogleFonts.notoSans(fontSize: 15),
                 ),
-              )
-              // ElevatedButton.icon(
-              //     style: ElevatedButton.styleFrom(
-              //         backgroundColor: Colors.transparent,
-              //         foregroundColor: Colors.grey,
-              //         shadowColor: Colors.transparent,
-              //         shape: RoundedRectangleBorder(
-              //             borderRadius: BorderRadius.circular(10),
-              //             side: const BorderSide(color: Colors.grey))),
-              //     onPressed: () => Navigator.push(
-              //           context,
-              //           MaterialPageRoute(builder: (context) => SetStatus()),
-              //         ),
-              //     icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
-              //     label: Padding(
-              //       padding: EdgeInsets.only(right: 130, top: 15, bottom: 15),
-              //       child: Text(
-              //         "Update your status",
-              //         textAlign: TextAlign.start,
-              //         style: GoogleFonts.notoSans(fontSize: 15),
-              //       ),
-              //     )),
-              ),
+              )),
           ListTile(
             leading: Container(
               margin: EdgeInsets.only(

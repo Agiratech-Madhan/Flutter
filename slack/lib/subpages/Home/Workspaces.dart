@@ -42,14 +42,11 @@ class _WorkspacesState extends State<Workspaces> {
             child: Text(
                 "You're signed in to all of the workspaces for this email address"),
           ),
-          // OutlinedButton.icon( icon: Icons.add, onPressed: (){}, child: child)
           Container(
-            // color: Colors.red,
             margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
             ),
-            // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ListTile(
               contentPadding: EdgeInsets.only(left: 5),
               onTap: () {},

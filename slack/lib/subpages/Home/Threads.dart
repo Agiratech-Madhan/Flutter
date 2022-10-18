@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:slack/models/mentionsmodel.dart';
-// import 'package:slack/models/Chatmodel.dart';
-
-// import './models/mentionsmodel.dart';
-// import '.../pages/';
-// import '....../models/Chatmodel.dart';
 
 class Threads extends StatefulWidget {
   const Threads({super.key});
@@ -106,8 +101,6 @@ class _ThreadsState extends State<Threads> {
                               GoogleFonts.notoSans(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          // "{Mentions_list[i].m_time}",
-                          // Mentions_list[i].m_time,
                           ' Oct 15 3:17 PM',
                           style: GoogleFonts.notoSans(
                               fontSize: 14, color: Colors.grey),
@@ -118,7 +111,6 @@ class _ThreadsState extends State<Threads> {
                       Mentions_list[i].m_message,
                       style: GoogleFonts.notoSans(fontSize: 15),
                     ),
-                    // trailing: Text(Mentions_list[i].m),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
@@ -134,7 +126,6 @@ class _ThreadsState extends State<Threads> {
                               child: Container(
                                 width: 50,
                                 height: 30,
-                                // color: Colors.lightBlue[100],
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 1.5, color: Colors.blue),
@@ -143,9 +134,6 @@ class _ThreadsState extends State<Threads> {
                                       left: Radius.circular(15),
                                       right: Radius.circular(15)),
                                 ),
-                                // decoration: BoxDecoration(
-                                //     border:
-                                //         Border.all(width: 1, color: Colors.blue)),
                               ),
                             ),
                             Positioned.fill(
@@ -172,8 +160,6 @@ class _ThreadsState extends State<Threads> {
                                 width: 40,
                                 height: 30,
                                 color: Colors.grey[200],
-                                // decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(5)),
                               ),
                             ),
                             Builder(builder: (context) {

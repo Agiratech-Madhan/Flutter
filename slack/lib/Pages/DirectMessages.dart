@@ -31,27 +31,6 @@ class _DirectMessagesState extends State<DirectMessages> {
           ),
           body: Column(
             children: [
-              // Container(
-              //   margin: const EdgeInsets.all(15),
-              //   height: 40,
-              //   child: TextField(
-              //     onTap: () => Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => Jumpto()),
-              //     ),
-              //     onChanged: null,
-              //     decoration: InputDecoration(
-              //       hintText: 'Jump to...',
-              //       filled: true,
-              //       enabledBorder: OutlineInputBorder(
-              //         borderSide: const BorderSide(
-              //             width: 1, color: Color.fromARGB(255, 204, 200, 200)),
-              //         borderRadius: BorderRadius.circular(5),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
               Container(
                 margin: EdgeInsets.all(12),
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -67,7 +46,6 @@ class _DirectMessagesState extends State<DirectMessages> {
                           context,
                           MaterialPageRoute(builder: (context) => Jumpto()),
                         ),
-                    // icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
                     child: Padding(
                       padding: EdgeInsets.only(right: 220, top: 12, bottom: 12),
                       child: Text(
@@ -79,10 +57,8 @@ class _DirectMessagesState extends State<DirectMessages> {
               ),
               Expanded(
                 child: ListView.builder(
-                  //  item
                   shrinkWrap: true,
                   itemCount: chatdata.length,
-                  // physics: BouncingScrollPhysics(),
                   itemBuilder: (context, i) {
                     var sizedBox = SizedBox(
                       width: 50,
@@ -112,16 +88,6 @@ class _DirectMessagesState extends State<DirectMessages> {
                     return Column(
                       children: [
                         ListTile(
-                          // onTap: () {
-                          //   print('object');
-                          //   Navigator.pushReplacement(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (context) => ChatScreen(
-                          //               c_icon: sizedBox,
-                          //               c_name: chatdata[i].name,
-                          //               DM: true)));
-                          // },
                           leading: sizedBox,
                           title: Padding(
                             padding: const EdgeInsets.only(top: 5.0),
