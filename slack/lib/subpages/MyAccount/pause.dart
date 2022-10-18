@@ -70,11 +70,14 @@ class _PauseState extends State<Pause> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RadioListTile(
+                    // autofocus: true,
+                    // activeColor: Colors.pink,
                     title: const Text('30  minutes'),
                     value: Place.one,
                     groupValue: _options,
                     onChanged: ((value) => update(value))),
                 RadioListTile(
+                    toggleable: true,
                     title: const Text('1 hour'),
                     value: Place.two,
                     groupValue: _options,

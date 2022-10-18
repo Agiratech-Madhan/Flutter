@@ -20,7 +20,6 @@ class _NotifymeState extends State<Notifyme> {
       // print("vdz");
       result = value;
     });
-    mainresult = result;
   }
 
   Future<void> _dialogBuilder(BuildContext context) {
@@ -102,7 +101,11 @@ class _NotifymeState extends State<Notifyme> {
                         child: Text('CANCEL')),
                     TextButton(
                         onPressed: () {
-                          mainresult = result;
+                          print('beforestate$mainresult');
+                          setState(() {
+                            mainresult = result;
+                          });
+
                           Navigator.pop(context);
                           print(mainresult);
                         },
@@ -112,6 +115,49 @@ class _NotifymeState extends State<Notifyme> {
               ],
             )
           ],
+          // content: ListView(
+          //   children: [
+          //     RadioListTile(
+          //         // selected: true,
+          //         title: Text('Madhan'),
+          //         value: 'Madhan',
+          //         groupValue: 1,
+          //         onChanged: (value) {
+          //           return Changes(value.toString());
+          //         }),
+          // RadioListTile(
+          //     title: Text('Madhan'),
+          //     value: 'Nadhan2',
+          //     groupValue: 1,
+          //     onChanged: (value) {
+          //       return Changes(value.toString());
+          //     })
+          //   ],
+
+          // ),
+          // actions: [],
+          // actions: [
+          // ListView.builder(
+          //   itemCount: notifyme.length,
+          //   itemBuilder: (context, index) => RadioListTile(
+          //       value: notifyme[index].notify,
+          //       groupValue: notifyme[index].notify,
+          //       onChanged: (_) {}),
+          // )
+          // ],
+
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     RadioListTile(
+          //         activeColor: Colors.blue,
+          //         title: const Text('Madhan'),
+          //         value: 1,
+          //         groupValue: result,
+          //         onChanged: (value) => Changes(value.toString())),
+
+          //   ]
+          // )
         );
       },
     );

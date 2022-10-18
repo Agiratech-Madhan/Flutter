@@ -3,59 +3,6 @@ import 'package:slack/models/mentionsmodel.dart';
 import '/models/Chatmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// class Jumpto extends StatefulWidget {
-//   const Jumpto({super.key});
-
-//   @override
-//   State<Jumpto> createState() => _JumptoState();
-// }
-
-// class _JumptoState extends State<Jumpto> {
-// List<Chat> displayList = List.from(chatdata);
-// void Searchfilter(String value) {
-//   setState(() {
-//     displayList = chatdata
-//         .where((element) =>
-//             element.name.toLowerCase().contains(value.toLowerCase()))
-//         .toList();
-//   });
-// }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.white10,
-//         title: Text('Hello Madhan'),
-//       ),
-//       backgroundColor: Colors.white,
-//       body: Column(
-//         children: [
-//           TextField(
-//             onChanged: (value) => Searchfilter(value),
-//             decoration: InputDecoration(
-//                 prefixIcon: Icon(Icons.search),
-//                 hintText: 'madhan',
-//                 filled: true,
-//                 fillColor: Colors.lightBlue.shade100,
-//                 border: OutlineInputBorder(
-//                     borderSide: BorderSide.none,
-//                     borderRadius: BorderRadius.circular(10))),
-//           ),
-//           Expanded(
-//             child: ListView.builder(
-//                 itemCount: displayList.length,
-//                 itemBuilder: ((context, i) => ListTile(
-//                       leading: const Icon(Icons.add),
-//                       title: Text(chatdata[i].name),
-//                     ))),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class Jumpto extends StatefulWidget {
   const Jumpto({super.key});
 
@@ -68,9 +15,6 @@ class _JumptoState extends State<Jumpto> {
   List<MentionsModel> displayList = List.from(Mentions_list);
   void searchfilter(String value) {
     setState(() {
-      // changed = value;
-      // print(changed);
-      // Text_controller.text =value==isEmpty;
       displayList = Mentions_list.where((element) =>
           element.m_group.toLowerCase().contains(value.toLowerCase())).toList();
     });
@@ -87,19 +31,6 @@ class _JumptoState extends State<Jumpto> {
           child: Text("Recent"),
         ));
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: Icon(Icons.arrow_back),
-      //   title: TextField(
-      //     decoration: InputDecoration(
-      //       labelText: 'Jump to...',
-      //       enabledBorder: OutlineInputBorder(
-      //         borderSide: const BorderSide(
-      //             width: 1, color: Color.fromARGB(255, 204, 200, 200)),
-      //         borderRadius: BorderRadius.circular(5),
-      //       ),
-      //     ),
-      //   ),
-      // ),
       body: Column(
         children: [
           Container(
@@ -108,11 +39,8 @@ class _JumptoState extends State<Jumpto> {
             child: TextField(
               controller: Text_controller,
               onChanged: (value) {
-                // setState(() {
-                // changed = value ;
                 changed = false;
-                // print(changed);
-                // print('value$value');
+
                 return searchfilter(value);
               },
               decoration: InputDecoration(
@@ -136,50 +64,13 @@ class _JumptoState extends State<Jumpto> {
               ),
             ),
           ),
-// || Text_controller.text.isNotEmpty
           changed
               ? accountlist(context)
               : (displayList.isNotEmpty || Text_controller.text.isEmpty)
                   ? accountlist(context)
                   : Container(),
           changed ? groups : Container(),
-          // changed
-          //     ? Container()
-          //     : displayList.isEmpty
-          //         ? accountlist(context)
-          //         : Container(),
-          changed
-              ? Expanded(
-                  child: ListView.builder(
-                      // scrollDirection: Axis.horizontal,
-                      itemCount: Mentions_list.length,
-                      itemBuilder: ((context, i) => Row(children: [
-                            const Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Icon(Icons.lock)),
-                            Text(Mentions_list[i].m_group),
-                          ]))),
-                )
-              : Expanded(
-                  child: ListView.builder(
-                      // scrollDirection: Axis.horizontal,
-                      itemCount: displayList.length,
-                      itemBuilder: ((context, i) => Row(children: [
-                            const Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Icon(Icons.lock)),
-                            Text(displayList[i].m_group),
-                          ]))),
-                ),
-
-          // ListView.builder(
-          //     scrollDirection: Axis.horizontal,
-          //     itemCount: 6,
-          //     itemBuilder: ((context, i) => ListTile(
-          //           leading: const Icon(Icons.add),
-          //           title: Text(chatdata[i].name),
-          //         ))),
-          // ListView.builder(itemBuilder: (itemBuilder))
+          changed ? defaultlist() : filterlist(displayList: displayList),
         ],
       ),
     );
@@ -226,6 +117,49 @@ class _JumptoState extends State<Jumpto> {
               );
             }),
       ),
+    );
+  }
+}
+
+class filterlist extends StatelessWidget {
+  const filterlist({
+    Key? key,
+    required this.displayList,
+  }) : super(key: key);
+
+  final List<MentionsModel> displayList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+          // scrollDirection: Axis.horizontal,
+          itemCount: displayList.length,
+          itemBuilder: ((context, i) => Row(children: [
+                const Padding(
+                    padding: EdgeInsets.all(10), child: Icon(Icons.lock)),
+                Text(displayList[i].m_group),
+              ]))),
+    );
+  }
+}
+
+class defaultlist extends StatelessWidget {
+  const defaultlist({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+          // scrollDirection: Axis.horizontal,
+          itemCount: Mentions_list.length,
+          itemBuilder: ((context, i) => Row(children: [
+                const Padding(
+                    padding: EdgeInsets.all(10), child: Icon(Icons.lock)),
+                Text(Mentions_list[i].m_group),
+              ]))),
     );
   }
 }
