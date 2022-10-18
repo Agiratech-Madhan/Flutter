@@ -12,17 +12,18 @@ class CategoryScreen extends StatelessWidget {
         title: const Text("Mealshop"),
       ),
       body: GridView(
-          padding: const EdgeInsets.all(15),
-          children: DUMMY_CATEGORIES
-              .map((catedata) =>
-                  Category_Item(catedata.id, catedata.title, catedata.color))
-              .toList(),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            childAspectRatio: 3 / 3,
-            crossAxisSpacing: 15,
-            mainAxisSpacing: 15,
-          )),
+        padding: const EdgeInsets.all(15),
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 200,
+          childAspectRatio: 3 / 3,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
+        ),
+        children: DUMMY_CATEGORIES
+            .map((catedata) =>
+                Category_Item(catedata.id, catedata.title, catedata.color))
+            .toList(),
+      ),
     );
   }
 }

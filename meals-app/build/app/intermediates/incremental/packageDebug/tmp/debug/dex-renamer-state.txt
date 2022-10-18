@@ -1,4 +1,4 @@
-#Mon Oct 17 22:02:42 IST 2022
+#Tue Oct 18 17:52:46 IST 2022
 base.0=/home/agira/Madhan/Flutter/MEALSAPP/meals_app/meals-app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
