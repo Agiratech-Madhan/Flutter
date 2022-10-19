@@ -17,16 +17,18 @@ class _TabsScreenState extends State<TabsScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Meals'),
-          bottom: TabBar(tabs: [
-            Tab(
-              icon: Icon(Icons.category),
-              text: 'Categories',
-            ),
-            Tab(
-              icon: Icon(Icons.star),
-              text: 'Favourite',
-            ),
-          ]),
+          bottom: const TabBar(
+              // indicatorColor: ,
+              tabs: [
+                Tab(
+                  icon: Icon(Icons.category),
+                  text: 'Categories',
+                ),
+                Tab(
+                  icon: Icon(Icons.star),
+                  text: 'Favourite',
+                ),
+              ]),
         ),
         body: TabBarView(children: [CategoryScreen(), FavouriteScreen()]),
       ),
