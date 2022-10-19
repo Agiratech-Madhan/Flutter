@@ -14,6 +14,7 @@ class CategoryMealsScreen extends StatefulWidget {
 class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   String? categorytitle;
   List<Meal>? displayedMeals;
+  var loadedInitData = false;
   void removeMeal(String mealId) {
     setState(() {
       displayedMeals!.removeWhere((meal) => meal.id == mealId);
@@ -22,17 +23,27 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   void initState() {
-    final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    final categoryid = routeArgs['id'];
-    categorytitle = routeArgs['title'] as String;
-    print(categorytitle);
-
-    displayedMeals = DUMMY_MEALS
-        .where((meal) => meal.categories.contains(categoryid))
-        .toList();
     // TODO: implement initState
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // it will run couple of time after initializtion
+    if (!loadedInitData) {
+      final routeArgs =
+          ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+      final categoryid = routeArgs['id'];
+      categorytitle = routeArgs['title'] as String;
+      // print(categorytitle);
+
+      displayedMeals = DUMMY_MEALS
+          .where((meal) => meal.categories.contains(categoryid))
+          .toList();
+      loadedInitData = true;
+    }
+    //without checking true false the deletion wont work becoz it run sometimes again and again
+    super.didChangeDependencies();
   }
 
   // final String id;
