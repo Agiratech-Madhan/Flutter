@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/Screens/filter_screen.dart';
+import 'package:meals_app/Screens/tab_screen.dart';
 
-class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key});
+class MainDrawer extends StatefulWidget {
+  @override
+  State<MainDrawer> createState() => _MainDrawerState();
+}
 
+class _MainDrawerState extends State<MainDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,16 +27,22 @@ class MainDrawer extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          buildListTile('Meals', Icons.restaurant),
-          buildListTile('Filters', Icons.settings)
+          buildListTile('Meals', Icons.restaurant, () {
+            Navigator.of(context).pushNamed('/');
+            // Navigator.of(context)
+            //     .push(MaterialPageRoute(builder: (context) => TabsScreen()));
+          }),
+          buildListTile('Filters', Icons.settings, () {
+            Navigator.of(context).pushNamed(FiltersScreen.routeName);
+          })
         ],
       ),
     );
   }
 
-  ListTile buildListTile(String title, IconData icon) {
+  Widget buildListTile(String title, IconData icon, VoidCallback tapHandler) {
     return ListTile(
-      onTap: (() {}),
+      onTap: tapHandler,
       leading: Icon(
         icon,
         size: 26,
