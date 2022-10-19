@@ -28,12 +28,12 @@ class _MainDrawerState extends State<MainDrawer> {
             height: 20,
           ),
           buildListTile('Meals', Icons.restaurant, () {
-            Navigator.of(context).pushNamed('/');
+            Navigator.of(context).pushReplacementNamed('/');
             // Navigator.of(context)
             //     .push(MaterialPageRoute(builder: (context) => TabsScreen()));
           }),
           buildListTile('Filters', Icons.settings, () {
-            Navigator.of(context).pushNamed(FiltersScreen.routeName);
+            Navigator.of(context).pushReplacementNamed(FiltersScreen.routeName);
           })
         ],
       ),
