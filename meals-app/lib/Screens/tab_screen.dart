@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/Screens/categories_screen.dart';
-import 'package:meals_app/Screens/favourite_screen.dart';
+import '../Screens/categories_screen.dart';
+import '../Screens/favourite_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   // const TabsScreen({super.key});
@@ -10,48 +10,37 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  final List<Widget> _pages = [CategoryScreen(), FavouriteScreen()];
+  void _selectPage(int index) {
+    setState(() {
+      _selected = index;
+    });
+  }
+
+  int _selected = 0;
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Meals'),
-          bottom: const TabBar(
-              // indicatorColor: ,
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.category),
-                  text: 'Categories',
-                ),
-                Tab(
-                  icon: Icon(Icons.star),
-                  text: 'Favourite',
-                ),
-              ]),
-        ),
-        body: TabBarView(children: [CategoryScreen(), FavouriteScreen()]),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Meals'),
       ),
+      body: _pages[_selected],
+      bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Theme.of(context).colorScheme.secondary,
+          currentIndex: _selected,
+          // type: BottomNavigationBarType.shifting,
+          onTap: _selectPage,
+          items: [
+            BottomNavigationBarItem(
+                backgroundColor: Colors.lightBlue,
+                icon: Icon(Icons.category),
+                label: 'Category'),
+            BottomNavigationBarItem(
+                backgroundColor: Colors.lightBlue,
+                icon: Icon(Icons.star),
+                label: 'Favourite')
+          ]),
     );
   }
 }
-/** DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Meals'),
-          bottom: TabBar(tabs: [
-            Tab(
-              icon: Icon(Icons.category),
-              text: 'Categories',
-            ),
-            Tab(
-              icon: Icon(Icons.star),
-              text: 'Favourite',
-            ),
-            Tab(),
-          ]),
-        ),
-        // body: TabBarView(children: [CategoryScreen(), FavouriteScreen()]),
-      ),
-    ) */
