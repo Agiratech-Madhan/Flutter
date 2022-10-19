@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/agira/Madhan/Flutter/MEALSAPP/meals_app/meals-app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/home/agira/Flutter Task/meals-app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/agira/Madhan/Flutter/MEALSAPP/meals_app/meals-app/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/agira/Flutter Task/meals-app/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
