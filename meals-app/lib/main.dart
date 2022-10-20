@@ -99,13 +99,14 @@ class _MyAppState extends State<MyApp> {
               CategoryMealsScreen(availableMeals: availableMeal),
           MealDetailScreen.routeName: (ctx) =>
               MealDetailScreen(toggleFav: toggleFavorite, isMealFav: isMealFav),
-          // FiltersScreen.routeName: (ctx) =>
-          //     FiltersScreen(currentFilter: _filters, saveFilter: _setFilters),
+          FiltersScreen.routeName: (ctx) =>
+              FiltersScreen(currentFilter: _filters, saveFilter: _setFilters),
+          // Sample().routeName()=>(context)=>Sample1()
         },
-        onGenerateRoute: (settings) {
-          print(settings.name);
-          // return settings.name;
-        },
+        // onGenerateRoute: (settings) {
+        //   print(settings.name);
+        //   return settings.name;
+        // },
         onUnknownRoute: ((settings) =>
             MaterialPageRoute(builder: (context) => CategoryScreen())));
   }
