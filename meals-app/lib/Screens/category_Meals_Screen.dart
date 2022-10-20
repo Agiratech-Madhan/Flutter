@@ -1,11 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:meals_app/Widgets/mealitem.dart';
 import 'package:meals_app/models/category.dart';
 import 'package:meals_app/models/meal.dart';
-import '../dummy.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static const routeName = '/category-meals';
+  final List<Meal> availableMeals;
+  const CategoryMealsScreen({
+    Key? key,
+    required this.availableMeals,
+  }) : super(key: key);
 
   @override
   State<CategoryMealsScreen> createState() => _CategoryMealsScreenState();
@@ -22,12 +28,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   void didChangeDependencies() {
     // it will run couple of time after initializtion
     if (!loadedInitData) {
@@ -37,7 +37,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
       categorytitle = routeArgs['title'] as String;
       // print(categorytitle);
 
-      displayedMeals = DUMMY_MEALS
+      displayedMeals = widget.availableMeals
           .where((meal) => meal.categories.contains(categoryid))
           .toList();
       loadedInitData = true;
