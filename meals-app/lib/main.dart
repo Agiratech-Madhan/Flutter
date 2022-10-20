@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
               CategoryMealsScreen(availableMeals: availableMeal),
           MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
           FiltersScreen.routeName: (ctx) =>
-              FiltersScreen(saveFilter: _setFilters),
+              FiltersScreen(currentFilter: _filters, saveFilter: _setFilters),
         },
         // onGenerateRoute: (settings) {
         //   print(settings.name);
