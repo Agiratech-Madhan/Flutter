@@ -11,11 +11,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Color primaryAccentColor = const Color(0xff002A36);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        colorScheme: ColorScheme.fromSeed(seedColor: primaryAccentColor),
       ),
       home: ProductOverview(),
     );
