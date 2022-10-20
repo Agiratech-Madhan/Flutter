@@ -16,6 +16,7 @@ class Meal {
   final bool isVegan;
   final bool isVegetarian;
   final bool isLactoseFree;
+
   const Meal(
       {required this.id,
       required this.categories,

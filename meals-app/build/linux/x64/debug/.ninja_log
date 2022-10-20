@@ -1,0 +1,28 @@
+# ninja log v5
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/libflutter_linux_gtk.so	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_engine.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_value.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/fl_view.h	3ba656bd029a8136
+0	11217	0	/home/agira/Flutter Task/meals-app/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	3ba656bd029a8136
+0	11217	0	flutter/_phony_	3ba656bd029a8136
+11217	12387	1666244268687446533	CMakeFiles/meals_app.dir/flutter/generated_plugin_registrant.cc.o	275692e293a1c696
+11217	12538	1666244268843451746	CMakeFiles/meals_app.dir/main.cc.o	b0081a3a292d2981
+11217	12598	1666244268899453618	CMakeFiles/meals_app.dir/my_application.cc.o	edfa4a6cbecebd11
+12598	12881	1666244269187463234	intermediates_do_not_run/meals_app	4d30f5465254e2a3
+12881	13060	0	CMakeFiles/install.util	667e06b0a2ec0a9f

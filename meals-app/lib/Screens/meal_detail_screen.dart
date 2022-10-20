@@ -1,8 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import '../dummy.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
+  final Function toggleFav;
+  final Function isMealFav;
+  const MealDetailScreen({
+    Key? key,
+    required this.toggleFav,
+    required this.isMealFav,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +65,8 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.delete),
-          onPressed: () {
-            Navigator.of(context).pop(mealId);
-          }),
+          child: Icon(isMealFav(mealId) ? Icons.star : Icons.star_border),
+          onPressed: () => toggleFav(mealId)),
     );
   }
 
