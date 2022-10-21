@@ -38,12 +38,12 @@ class Products with ChangeNotifier {
     ),
   ];
 
-  var _showOnlyFav = false;
+  // var _showOnlyFav = false;
 
   List<Product> get items {
-    if (_showOnlyFav) {
-      return _items.where((element) => element.isFavorite).toList();
-    }
+    // if (_showOnlyFav) {
+    //   return _items.where((element) => element.isFavorite).toList();
+    // }
     return [..._items];
   }
 
@@ -55,13 +55,16 @@ class Products with ChangeNotifier {
     ChangeNotifier();
   }
 
-  void shoFav() {
-    _showOnlyFav = true;
-    notifyListeners();
+  List<Product> get favorites {
+    return _items.where((productItems) => productItems.isFavorite).toList();
   }
+  // void shoFav() {
+  //   _showOnlyFav = true;
+  //      notifyListeners();
+  // }
 
-  void showAll() {
-    _showOnlyFav = false;
-    notifyListeners();
-  }
+  // void showAll() {
+  //   _showOnlyFav = false;
+  //   notifyListeners();
+  // }
 }

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import '../widgets/products_grid.dart';
-import 'package:shopapp/providers/product_provider.dart';
-import 'package:provider/provider.dart';
 
 enum FilterOptions { Fav, All }
 
-class ProductOverview extends StatelessWidget {
+class ProductOverview extends StatefulWidget {
+  @override
+  State<ProductOverview> createState() => _ProductOverviewState();
+}
+
+class _ProductOverviewState extends State<ProductOverview> {
+  var _showOnlyFav = false;
   @override
   Widget build(BuildContext context) {
-    final productcontroller = Provider.of<Products>(context, listen: false);
+    // final productcontroller = Provider.of<Products>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -17,11 +21,15 @@ class ProductOverview extends StatelessWidget {
         actions: [
           PopupMenuButton(
               onSelected: (FilterOptions selectedValue) {
-                if (selectedValue == FilterOptions.All) {
-                  productcontroller.showAll();
-                } else {
-                  productcontroller.shoFav();
-                }
+                setState(() {
+                  if (selectedValue == FilterOptions.All) {
+                    // productcontroller.showAll();
+                    _showOnlyFav = false;
+                  } else {
+                    // productcontroller.shoFav();
+                    _showOnlyFav = true;
+                  }
+                });
 
                 print(selectedValue);
               },
@@ -38,7 +46,7 @@ class ProductOverview extends StatelessWidget {
                   ])
         ],
       ),
-      body: productGrid(),
+      body: productGrid(showFavorite: _showOnlyFav),
     );
   }
 }
