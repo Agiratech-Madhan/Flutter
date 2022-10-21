@@ -16,12 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color primaryAccentColor = const Color(0xff002A36);
-    return ChangeNotifierProvider.value(
-      value: Products(),
+    return ChangeNotifierProvider(
+      create: (context) => Products(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
+          // splashColor: Colors.pink,
+          // shadowColor: Colors.pink,
           // primarySwatch: Colors.purple,
           primaryColor: Colors.orange,
           colorScheme: ColorScheme.fromSeed(seedColor: primaryAccentColor),
