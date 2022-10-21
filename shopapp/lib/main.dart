@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopapp/screens/products_overview_screens.dart';
 
 void main() {
@@ -16,8 +17,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        // primarySwatch: Colors.purple,
+        primaryColor: Colors.orange,
         colorScheme: ColorScheme.fromSeed(seedColor: primaryAccentColor),
+        textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
       ),
       home: ProductOverview(),
     );
