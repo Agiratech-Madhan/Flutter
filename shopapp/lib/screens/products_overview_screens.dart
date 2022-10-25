@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopapp/providers/card.dart';
 import '../widgets/products_grid.dart';
+import '../widgets/badge.dart';
 
 enum FilterOptions { Fav, All }
 
@@ -13,6 +16,8 @@ class _ProductOverviewState extends State<ProductOverview> {
   @override
   Widget build(BuildContext context) {
     // final productcontroller = Provider.of<Products>(context, listen: false);
+
+    // final cart=Provider.of<Cart>(context) ;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,7 +48,14 @@ class _ProductOverviewState extends State<ProductOverview> {
                       child: Text('show all'),
                       value: FilterOptions.All,
                     ),
-                  ])
+                  ]),
+          Consumer<Cart>(
+              builder: (_, cartdata, ch) => Badge(
+                  child: ch as Widget, value: cartdata.itemCount.toString()),
+              child: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {},
+              )),
         ],
       ),
       body: productGrid(showFavorite: _showOnlyFav),
