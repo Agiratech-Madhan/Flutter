@@ -18,6 +18,20 @@ class productGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final products = showFavorite ? productsData.favorites : productsData.items;
+    return girdview_builder(products: products);
+  }
+}
+
+class girdview_builder extends StatelessWidget {
+  const girdview_builder({
+    Key? key,
+    required this.products,
+  }) : super(key: key);
+
+  final List<Product> products;
+
+  @override
+  Widget build(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: products.length,
