@@ -4,6 +4,7 @@ import 'package:shopapp/screens/product_detail_screen.dart';
 import 'package:shopapp/screens/products_overview_screens.dart';
 import './providers/product_provider.dart';
 import 'package:provider/provider.dart';
+import './providers/card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +17,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color primaryAccentColor = const Color(0xff002A36);
-    return ChangeNotifierProvider(
-      create: (context) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Products(),
+        ),
+        ChangeNotifierProvider(create: (ctx) => Cart()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
