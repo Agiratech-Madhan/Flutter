@@ -43,13 +43,16 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
+              // style: IconButton.styleFrom(backgroundColor: Colors.orange),
               onPressed: () {
                 cart.addItem(product.id, product.price, product.title);
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: const Text('Added Item to cart'),
                     duration: Duration(seconds: 2),
                     action: SnackBarAction(
+                      textColor: Colors.orange,
                       label: 'UNDO',
                       onPressed: () {
                         // Code to execute.
