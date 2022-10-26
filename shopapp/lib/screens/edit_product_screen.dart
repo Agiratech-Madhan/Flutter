@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopapp/providers/product_provider.dart';
 import '../providers/product.dart';
 
 class EditProductScreen extends StatefulWidget {
@@ -14,7 +16,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imgUrlController = TextEditingController();
   final _imgUrlFocusnode = FocusNode();
   final _form = GlobalKey<FormState>();
-  var editedProduct = Product(
+  var _editedProduct = Product(
       id: 'null', title: 'title', description: '', price: 0, imageUrl: '');
   @override
   void initState() {
@@ -53,11 +55,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
       return; // it terminates the this function , print statemwnts wont work
     }
     _form.currentState!.save();
-    print(editedProduct.description);
-    print(editedProduct.title);
-
-    print(editedProduct.imageUrl);
-    print(editedProduct.price);
+    Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+    Navigator.pop(context);
   }
 
   @override
@@ -86,12 +85,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     return null;
                   },
                   onSaved: (newValue) {
-                    editedProduct = Product(
+                    _editedProduct = Product(
                         id: '',
                         title: newValue!,
-                        description: editedProduct.description,
-                        price: editedProduct.price,
-                        imageUrl: editedProduct.imageUrl);
+                        description: _editedProduct.description,
+                        price: _editedProduct.price,
+                        imageUrl: _editedProduct.imageUrl);
                   },
                 ),
                 TextFormField(
@@ -104,12 +103,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           .requestFocus(_descriptionFocusNode);
                     },
                     onSaved: (newprice) {
-                      editedProduct = Product(
+                      _editedProduct = Product(
                           id: '',
-                          title: editedProduct.title,
-                          description: editedProduct.description,
+                          title: _editedProduct.title,
+                          description: _editedProduct.description,
                           price: double.parse(newprice!),
-                          imageUrl: editedProduct.imageUrl);
+                          imageUrl: _editedProduct.imageUrl);
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -134,12 +133,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   // },
                   focusNode: _descriptionFocusNode,
                   onSaved: (newDescription) {
-                    editedProduct = Product(
+                    _editedProduct = Product(
                         id: '',
-                        title: editedProduct.title,
+                        title: _editedProduct.title,
                         description: newDescription!,
-                        price: editedProduct.price,
-                        imageUrl: editedProduct.imageUrl);
+                        price: _editedProduct.price,
+                        imageUrl: _editedProduct.imageUrl);
                   },
                   validator: ((value) {
                     if (value!.isEmpty) {
@@ -177,11 +176,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         focusNode: _imgUrlFocusnode,
                         onFieldSubmitted: ((_) => _saveForm()),
                         onSaved: (newImage) {
-                          editedProduct = Product(
+                          _editedProduct = Product(
                               id: '',
-                              title: editedProduct.title,
-                              description: editedProduct.description,
-                              price: editedProduct.price,
+                              title: _editedProduct.title,
+                              description: _editedProduct.description,
+                              price: _editedProduct.price,
                               imageUrl: newImage!);
                         },
                         decoration: InputDecoration(
