@@ -41,6 +41,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   void _saveForm() {
+    final isValid = _form.currentState!.validate();
+    if (!isValid) {
+      return; // it terminates the this function , print statemwnts wont work
+    }
     _form.currentState!.save();
     print(editedProduct.description);
     print(editedProduct.title);
@@ -67,6 +71,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_priceFocusNode);
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'please enter value';
+                    }
+                    return null;
                   },
                   onSaved: (newValue) {
                     editedProduct = Product(
