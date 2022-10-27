@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopapp/providers/orders.dart';
-// import 'package:shopapp/screens/cart_screen.dart';
-// import 'package:shopapp/screens/edit_product_screen.dart';
-// import 'package:shopapp/screens/orderscreen.dart';
-// import 'package:shopapp/screens/product_detail_screen.dart';
+import 'package:shopapp/screens/cart_screen.dart';
+import 'package:shopapp/screens/edit_product_screen.dart';
+import 'package:shopapp/screens/orderscreen.dart';
+import 'package:shopapp/screens/product_detail_screen.dart';
 import 'package:shopapp/screens/products_overview_screens.dart';
-// import 'package:shopapp/screens/user_product_screen.dart';
-// import 'package:shopapp/widgets/user_product_item.dart';
+import 'package:shopapp/screens/user_product_screen.dart';
+import 'package:shopapp/widgets/user_product_item.dart';
 import './providers/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'providers/cart.dart';
-import './routes/routes.dart' as route;
 
 void main() {
   runApp(const MyApp());
@@ -44,16 +43,13 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
         ),
         home: ProductOverview(),
-        // routes: {
-        //   ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
-        //   CartScreen.routeName: (context) => CartScreen(),
-        //   OrderScreen.routeName: (context) => OrderScreen(),
-        //   UserProductsScreen.routeName: (context) => UserProductsScreen(),
-        //   EditProductScreen.routeName: (context) => EditProductScreen(),
-        // },
-        // initialRoute: ,
-        initialRoute: route.r_ProductOverview,
-        onGenerateRoute: route.controller,
+        routes: {
+          ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
+          CartScreen.routeName: (context) => CartScreen(),
+          OrderScreen.routeName: (context) => OrderScreen(),
+          UserProductsScreen.routeName: (context) => UserProductsScreen(),
+          EditProductScreen.routeName: (context) => EditProductScreen(),
+        },
       ),
     );
   }

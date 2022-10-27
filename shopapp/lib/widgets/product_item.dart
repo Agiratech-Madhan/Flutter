@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shopapp/providers/cart.dart';
 import 'package:shopapp/providers/product.dart';
 import 'package:shopapp/screens/product_detail_screen.dart';
-import '../routes/routes.dart' as route;
 
 class ProductItem extends StatelessWidget {
   // final String id;
@@ -68,8 +67,8 @@ class ProductItem extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .pushNamed(route.r_productDetail, arguments: product.id);
+            Navigator.of(context).pushNamed(ProductDetailScreen.routeName,
+                arguments: product.id);
           },
           child: Image.network(
             product.imageUrl,
