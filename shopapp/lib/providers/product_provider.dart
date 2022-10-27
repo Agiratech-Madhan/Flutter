@@ -60,7 +60,18 @@ class Products with ChangeNotifier {
         imageUrl: product_.imageUrl);
     _items.add(newProduct);
     //_items.insert(0,newProduct);
-    ChangeNotifier();
+    print('add item is called');
+    notifyListeners();
+  }
+
+  void updateProduct(String id, Product newProduct) {
+    final profIndex = _items.indexWhere((element) => element.id == id);
+    if (profIndex >= 0) {
+      _items[profIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
   }
 
   List<Product> get favorites {
@@ -75,4 +86,9 @@ class Products with ChangeNotifier {
   //   _showOnlyFav = false;
   //   notifyListeners();
   // }
+  // notifyListeners();
+  void deleteProduct_(String id) {
+    _items.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
 }

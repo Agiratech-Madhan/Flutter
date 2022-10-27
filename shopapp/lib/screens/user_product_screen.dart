@@ -9,6 +9,8 @@ import '../widgets/app_drawer.dart';
 
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
+  final String id = 'c1';
+  bool isAdd = true;
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
@@ -18,7 +20,8 @@ class UserProductsScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(EditProductScreen.routeName);
+                Navigator.of(context).pushNamed(EditProductScreen.routeName,
+                    arguments: {'id': id, 'isAdd': true});
               },
               icon: const Icon(Icons.add))
         ],
@@ -31,6 +34,7 @@ class UserProductsScreen extends StatelessWidget {
             itemBuilder: (context, i) => Column(
                   children: [
                     UserProductItem(
+                        id: productsData.items[i].id,
                         title: productsData.items[i].title,
                         imgUrl: productsData.items[i].imageUrl),
                     Divider()
