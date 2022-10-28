@@ -89,7 +89,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     super.dispose();
   }
 
-  void _saveForm() {
+  Future<void> _saveForm() async {
     final isValid = _form.currentState!.validate();
     if (!isValid) {
       return; // it terminates the this function , print statemwnts wont work
@@ -112,10 +112,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
         Navigator.pop(context);
       }
     } else {
-      Provider.of<Products>(context, listen: false)
-          .addProduct(_editedProduct)
-          .catchError((error) {
-        return showDialog(
+      try {
+        await Provider.of<Products>(context, listen: false)
+            .addProduct(_editedProduct);
+      } catch (e) {
+        await showDialog(
             context: context,
             builder: (ctx) => AlertDialog(
                   title: Text('an Error Occured'),
@@ -124,19 +125,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     TextButton(
                         onPressed: () {
                           Navigator.of(ctx).pop();
-                          Navigator.of(ctx).pop();
                         },
                         child: Text('Okay'))
                   ],
                 ));
-      }).then(
-        (value) {
-          setState(() {
-            isLoading = false;
-          });
-          Navigator.pop(context);
-        },
-      );
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+        Navigator.pop(context);
+      }
     }
   }
 
