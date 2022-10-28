@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'product.dart';
+import 'package:http/http.dart' as http;
 
 class Products with ChangeNotifier {
-  List<Product> _items = [
+  final List<Product> _items = [
     Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -51,17 +53,39 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  void addProduct(Product product_) {
-    final newProduct = Product(
-        id: DateTime.now().toString(),
-        title: product_.title,
-        description: product_.description,
-        price: product_.price,
-        imageUrl: product_.imageUrl);
-    _items.add(newProduct);
-    //_items.insert(0,newProduct);
-    print('add item is called');
-    notifyListeners();
+  addProduct(Product product) {
+    final url = Uri.parse(
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/products.json');
+
+    http
+        .post(
+      url,
+      body: json.encode({
+        'title': product.title,
+        'description': product.description,
+        'imageUrl': product.imageUrl,
+        'price': product.price,
+        'isFavorite': product.isFavorite,
+      }),
+    )
+        .then((value) {
+      print(value); // Instance of Response
+      print(json
+          .decode(value.body)); // {name: sadhsbajsbdhabshdbsh->id in firebase}
+
+      final newProduct = Product(
+          id: json.decode(value.body)['name'],
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          imageUrl: product.imageUrl);
+      _items.add(newProduct);
+      notifyListeners();
+    });
+    // } catch (error) {
+    //   print(error);
+    //   throw error;
+    // }
   }
 
   void updateProduct(String id, Product newProduct) {
