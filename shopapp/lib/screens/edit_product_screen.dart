@@ -103,13 +103,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (productId['isAdd'] == false) {
       if (_editedProduct.id.isNotEmpty) {
         print('_editedProduct.id${_editedProduct.id}');
-        Provider.of<Products>(context, listen: false)
+        await Provider.of<Products>(context, listen: false)
             .updateProduct(_editedProduct.id, _editedProduct);
-        setState(() {
-          isLoading = false;
-        });
-
-        Navigator.pop(context);
       }
     } else {
       try {
@@ -129,13 +124,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         child: Text('Okay'))
                   ],
                 ));
-      } finally {
-        setState(() {
-          isLoading = false;
-        });
-        Navigator.pop(context);
       }
+      // finally {
+      //   setState(() {
+      //     isLoading = false;
+      //   });
+      //   Navigator.pop(context);
+      // }
     }
+    setState(() {
+      isLoading = false;
+    });
+
+    Navigator.pop(context);
   }
 
   @override
