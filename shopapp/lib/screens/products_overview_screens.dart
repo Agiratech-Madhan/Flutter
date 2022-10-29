@@ -5,6 +5,7 @@ import 'package:shopapp/screens/cart_screen.dart';
 import 'package:shopapp/widgets/app_drawer.dart';
 import '../widgets/products_grid.dart';
 import '../widgets/badge.dart';
+import '../providers/product_provider.dart';
 
 enum FilterOptions { Fav, All }
 
@@ -14,7 +15,26 @@ class ProductOverview extends StatefulWidget {
 }
 
 class _ProductOverviewState extends State<ProductOverview> {
-  var _showOnlyFav = false;
+  bool _showOnlyFav = false;
+  bool _isInit = true;
+  @override
+  void initState() {
+    // Provider.of<Products>(context).fetchAndSetProduct(); //wont work
+    // Future.delayed(Duration.zero).then((value) {
+    //   Provider.of<Products>(context).fetchAndSetProduct();
+    // });
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<Products>(context).fetchAndSetProduct();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     // final productcontroller = Provider.of<Products>(context, listen: false);
@@ -38,31 +58,33 @@ class _ProductOverviewState extends State<ProductOverview> {
                   }
                 });
 
-                print(selectedValue);
+                // print(selectedValue);
               },
-              icon: Icon(Icons.more_vert),
-              itemBuilder: (_) => [
+              icon: const Icon(Icons.more_vert),
+              itemBuilder: (_) => const [
                     PopupMenuItem(
-                      child: Text('Only fav'),
                       value: FilterOptions.Fav,
+                      child: Text('Only fav'),
                     ),
                     PopupMenuItem(
-                      child: Text('show all'),
                       value: FilterOptions.All,
+                      child: Text('show all'),
                     ),
                   ]),
           Consumer<Cart>(
               builder: (_, cartdata, ch) => Badge(
-                  child: ch as Widget, value: cartdata.itemCount.toString()),
+                    value: cartdata.itemCount.toString(),
+                    child: ch as Widget,
+                  ),
               child: IconButton(
-                icon: Icon(Icons.shopping_cart),
+                icon: const Icon(Icons.shopping_cart),
                 onPressed: () {
                   Navigator.of(context).pushNamed(CartScreen.routeName);
                 },
               )),
         ],
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: productGrid(showFavorite: _showOnlyFav),
     );
   }

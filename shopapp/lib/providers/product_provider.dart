@@ -83,6 +83,18 @@ class Products with ChangeNotifier {
     }
   }
 
+  Future<void> fetchAndSetProduct() async {
+    final url = Uri.parse(
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/products.json');
+    try {
+      final response = await http.get(url);
+
+      print(json.decode(response.body)); //instance of respone
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   void updateProduct(String id, Product newProduct) {
     final profIndex = _items.indexWhere((element) => element.id == id);
     if (profIndex >= 0) {
