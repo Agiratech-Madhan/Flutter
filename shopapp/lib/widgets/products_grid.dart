@@ -7,9 +7,9 @@ import '../providers/product_provider.dart';
 import '../providers/product.dart';
 import '../widgets/product_item.dart';
 
-class productGrid extends StatelessWidget {
+class ProductGrid extends StatelessWidget {
   final bool showFavorite;
-  const productGrid({
+  const ProductGrid({
     Key? key,
     required this.showFavorite,
   }) : super(key: key);
@@ -19,12 +19,12 @@ class productGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final products = showFavorite ? productsData.favorites : productsData.items;
-    return girdview_builder(products: products);
+    return GirdviewBuilder(products: products);
   }
 }
 
-class girdview_builder extends StatelessWidget {
-  const girdview_builder({
+class GirdviewBuilder extends StatelessWidget {
+  const GirdviewBuilder({
     Key? key,
     required this.products,
   }) : super(key: key);
@@ -36,7 +36,7 @@ class girdview_builder extends StatelessWidget {
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: products.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,
           crossAxisSpacing: 10,

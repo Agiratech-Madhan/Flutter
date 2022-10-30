@@ -7,7 +7,7 @@ import '../widgets/products_grid.dart';
 import '../widgets/badge.dart';
 import '../providers/product_provider.dart';
 
-enum FilterOptions { Fav, All }
+enum FilterOptions { fav, All }
 
 class ProductOverview extends StatefulWidget {
   @override
@@ -50,7 +50,7 @@ class _ProductOverviewState extends State<ProductOverview> {
     // final cart=Provider.of<Cart>(context) ;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'MyShop',
         ),
         actions: [
@@ -71,7 +71,7 @@ class _ProductOverviewState extends State<ProductOverview> {
               icon: const Icon(Icons.more_vert),
               itemBuilder: (_) => const [
                     PopupMenuItem(
-                      value: FilterOptions.Fav,
+                      value: FilterOptions.fav,
                       child: Text('Only fav'),
                     ),
                     PopupMenuItem(
@@ -94,7 +94,7 @@ class _ProductOverviewState extends State<ProductOverview> {
       ),
       drawer: const AppDrawer(),
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(
                 color: Colors.pink,
                 backgroundColor: Colors.green,
@@ -102,7 +102,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                 semanticsLabel: 'Madhan',
               ),
             )
-          : productGrid(showFavorite: _showOnlyFav),
+          : ProductGrid(showFavorite: _showOnlyFav),
     );
   }
 }

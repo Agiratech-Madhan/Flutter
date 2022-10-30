@@ -21,7 +21,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
     final cart = Provider.of<Cart>(context, listen: false);
-    print("rebuilds");
+    // print("rebuilds");
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -50,7 +50,7 @@ class ProductItem extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: const Text('Added Item to cart'),
-                    duration: Duration(seconds: 2),
+                    duration: const Duration(seconds: 2),
                     action: SnackBarAction(
                       textColor: Colors.orange,
                       label: 'UNDO',

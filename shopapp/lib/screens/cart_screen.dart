@@ -11,21 +11,21 @@ class CartScreen extends StatelessWidget {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("my Cart"),
+        title: const Text("my Cart"),
       ),
       body: Column(
         children: [
           Card(
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Total', style: TextStyle(fontSize: 20)),
+                    const Text('Total', style: TextStyle(fontSize: 20)),
                     // SizedBox(width: 10),
 
-                    Spacer(),
+                    const Spacer(),
                     Chip(
                       label: Text('\$${cart.totalAmount.toStringAsFixed(2)}'),
                     ),
@@ -33,7 +33,7 @@ class CartScreen extends StatelessWidget {
                   ],
                 ),
               )),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Expanded(

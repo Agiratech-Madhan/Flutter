@@ -30,7 +30,7 @@ class UserProductsScreen extends StatelessWidget {
               icon: const Icon(Icons.add))
         ],
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: RefreshIndicator(
         onRefresh: () => _refreshProduct(context),
         child: Padding(
@@ -43,7 +43,7 @@ class UserProductsScreen extends StatelessWidget {
                           id: productsData.items[i].id,
                           title: productsData.items[i].title,
                           imgUrl: productsData.items[i].imageUrl),
-                      Divider()
+                      const Divider()
                     ],
                   )),
         ),

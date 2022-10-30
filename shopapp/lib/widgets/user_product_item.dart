@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shopapp/screens/edit_product_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/product_provider.dart';
-import '../providers/product_provider.dart';
-import '../providers/product.dart';
+// import '../providers/product_provider.dart';
+// import '../providers/product.dart';
 
 class UserProductItem extends StatelessWidget {
   final String id;
@@ -21,7 +21,7 @@ class UserProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
-    bool isAdd = false;
+    // bool isAdd = false;
     return ListTile(
       title: Text(title),
       leading: CircleAvatar(
@@ -36,7 +36,7 @@ class UserProductItem extends StatelessWidget {
                 Navigator.of(context).pushNamed(EditProductScreen.routeName,
                     arguments: {'id': id, 'isAdd': false});
               },
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
               color: Theme.of(context).colorScheme.secondary,
             ),
             IconButton(
@@ -45,7 +45,7 @@ class UserProductItem extends StatelessWidget {
                   await Provider.of<Products>(context, listen: false)
                       .deleteProduct_(id);
                 } catch (error) {
-                  scaffold.showSnackBar(SnackBar(
+                  scaffold.showSnackBar(const SnackBar(
                     content: Text(
                       'deleting failed',
                       textAlign: TextAlign.center,
@@ -53,7 +53,7 @@ class UserProductItem extends StatelessWidget {
                   ));
                 }
               },
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               color: Theme.of(context).errorColor,
             ),
           ],

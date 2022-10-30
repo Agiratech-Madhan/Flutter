@@ -32,37 +32,37 @@ class CartItem extends StatelessWidget {
         return showDialog(
             context: context,
             builder: (ctx) => AlertDialog(
-                  title: Text('Are you sure ? '),
-                  content:
-                      Text("do  you wan to remove the item from the card ?"),
+                  title: const Text('Are you sure ? '),
+                  content: const Text(
+                      "do  you wan to remove the item from the card ?"),
                   actions: [
                     TextButton(
                         onPressed: () {
                           Navigator.of(ctx).pop(false);
                         },
-                        child: Text('No')),
+                        child: const Text('No')),
                     TextButton(
                         onPressed: () {
                           Navigator.of(ctx).pop(true);
                         },
-                        child: Text('Yes')),
+                        child: const Text('Yes')),
                   ],
                 ));
       },
       background: Container(
-        padding: EdgeInsets.only(right: 20),
+        padding: const EdgeInsets.only(right: 20),
         alignment: Alignment.centerRight,
         color: Theme.of(context).errorColor,
-        child: Icon(
+        child: const Icon(
           Icons.delete,
           color: Colors.white,
           size: 25,
         ),
       ),
       child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: ListTile(
               leading: CircleAvatar(
                 child: Padding(

@@ -7,7 +7,7 @@ import 'package:shopapp/screens/orderscreen.dart';
 import 'package:shopapp/screens/product_detail_screen.dart';
 import 'package:shopapp/screens/products_overview_screens.dart';
 import 'package:shopapp/screens/user_product_screen.dart';
-import 'package:shopapp/widgets/user_product_item.dart';
+// import 'package:shopapp/widgets/user_product_item.dart';
 import './providers/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'providers/cart.dart';
