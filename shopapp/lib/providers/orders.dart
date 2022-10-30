@@ -4,12 +4,12 @@ import 'package:shopapp/providers/cart.dart';
 import 'package:http/http.dart' as http;
 
 class OrderItem {
-  final String id;
+  final String? id;
   final double amount;
   final List<CartItem> products;
   final DateTime dateTime;
   OrderItem({
-    required this.id,
+    this.id,
     required this.amount,
     required this.products,
     required this.dateTime,
@@ -20,6 +20,38 @@ class Orders with ChangeNotifier {
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
     return [..._orders];
+  }
+
+  Future<void> fetchAndSetOrder() async {
+    final url = Uri.parse(
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders.json');
+    final response = await http.get(url);
+
+    final List<OrderItem> loadedOrders = [];
+    final extractedData = json.decode(response.body) as Map<String, dynamic>;
+    if (extractedData.isEmpty) {
+      print('empty');
+      // return;
+    }
+    print(extractedData);
+    extractedData.forEach(((key, orderData) {
+      loadedOrders.add(OrderItem(
+        //(json['name'] ?? '').toString();
+        id: key,
+        amount: orderData['amount'],
+        dateTime: DateTime.parse(orderData['dateTime']),
+        products: (orderData['products'] as List<dynamic>).map((item) {
+          return CartItem(
+            id: 'id',
+            price: item['price'],
+            quantity: item['quantity'],
+            title: item['title'],
+          );
+        }).toList(),
+      ));
+    }));
+    _orders = loadedOrders.reversed.toList();
+    notifyListeners();
   }
 
   Future<void> addOrder(
