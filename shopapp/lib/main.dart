@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopapp/providers/auth.dart';
 import 'package:shopapp/providers/orders.dart';
+import 'package:shopapp/screens/authscreen.dart';
 import 'package:shopapp/screens/cart_screen.dart';
 import 'package:shopapp/screens/edit_product_screen.dart';
 import 'package:shopapp/screens/orderscreen.dart';
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
     Color primaryAccentColor = const Color(0xff002A36);
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: Auth()),
         ChangeNotifierProvider(
           create: (ctx) => Products(),
         ),
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: primaryAccentColor),
           textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
         ),
-        home: ProductOverview(),
+        home: AuthScreen(),
         routes: {
           ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
           CartScreen.routeName: (context) => CartScreen(),
