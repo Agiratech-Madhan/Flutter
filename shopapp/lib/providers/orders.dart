@@ -4,12 +4,12 @@ import 'package:shopapp/providers/cart.dart';
 import 'package:http/http.dart' as http;
 
 class OrderItem {
-  final String? id;
+  final String id;
   final double amount;
   final List<CartItem> products;
   final DateTime dateTime;
   OrderItem({
-    this.id,
+    required this.id,
     required this.amount,
     required this.products,
     required this.dateTime,
@@ -30,8 +30,8 @@ class Orders with ChangeNotifier {
     final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     if (extractedData.isEmpty) {
-      print('empty');
-      // return;
+      // print('empty');
+      return;
     }
     print(extractedData);
     extractedData.forEach(((key, orderData) {
