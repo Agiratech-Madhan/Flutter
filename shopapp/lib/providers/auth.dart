@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopapp/model/http_exceptions.dart';
@@ -7,6 +8,7 @@ class Auth with ChangeNotifier {
   String? _token;
   DateTime? _expiryDate;
   String? _userId;
+  Timer? _authTimer;
 
   bool get isAuth {
     print('token.isNotEmpty${token.isNotEmpty}');
@@ -50,10 +52,11 @@ class Auth with ChangeNotifier {
       _expiryDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
 
-      print('_token$_token');
-      print('_userId$_userId');
+      // print('_token$_token');
+      // print('_userId$_userId');
 
-      print('_expiryDate$_expiryDate');
+      // print('_expiryDate$_expiryDate');
+      autologout();
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -73,6 +76,19 @@ class Auth with ChangeNotifier {
     _token = '';
     _userId = '';
     _expiryDate = null;
+    if (_authTimer != null) {
+      _authTimer!.cancel();
+      _authTimer = null;
+    }
     notifyListeners();
+  }
+
+  void autologout() {
+    if (_authTimer != null) {
+      _authTimer!.cancel();
+    }
+    final expirytime = _expiryDate!.difference(DateTime.now()).inSeconds;
+    print('expirytime$expirytime'); //expirytime3599
+    _authTimer = Timer(Duration(seconds: expirytime), logout);
   }
 }
