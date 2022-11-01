@@ -17,14 +17,17 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
-  List<OrderItem> _orders = [];
+  List<OrderItem> orders_ = [];
+
+  Orders({required this.authToken, required this.orders_});
   List<OrderItem> get orders {
-    return [..._orders];
+    return [...orders_];
   }
 
+  final String authToken;
   Future<void> fetchAndSetOrder() async {
     final url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders.json');
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders.json?auth=$authToken');
     final response = await http.get(url);
 
     final List<OrderItem> loadedOrders = [];
@@ -50,7 +53,7 @@ class Orders with ChangeNotifier {
         }).toList(),
       ));
     }));
-    _orders = loadedOrders.reversed.toList();
+    orders_ = loadedOrders.reversed.toList();
     notifyListeners();
   }
 
@@ -59,7 +62,7 @@ class Orders with ChangeNotifier {
     double total,
   ) async {
     final url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders.json');
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders.json?auth=$authToken');
     final DateTime timestamp = DateTime.now();
     final response = await http.post(url,
         body: json.encode({
@@ -74,7 +77,7 @@ class Orders with ChangeNotifier {
                   })
               .toList()
         }));
-    _orders.insert(
+    orders_.insert(
         0,
         OrderItem(
             id: json.decode(response.body)['name'],
