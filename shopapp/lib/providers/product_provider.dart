@@ -75,6 +75,7 @@ class Products with ChangeNotifier {
           'description': product.description,
           'imageUrl': product.imageUrl,
           'price': product.price,
+          'creatorId': userId
           // 'isFavorite': product.isFavorite,
         }),
       );
@@ -96,7 +97,7 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProduct() async {
     var url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/products.json?auth=$authtoken');
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/products.json?auth=$authtoken&orderBy="creatorId"&equalTo="$userId"');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
