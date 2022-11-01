@@ -18,7 +18,7 @@ class UserProductsScreen extends StatelessWidget {
   bool isAdd = true;
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context);
+    // final productsData = Provider.of<Products>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Product'),
@@ -32,22 +32,34 @@ class UserProductsScreen extends StatelessWidget {
         ],
       ),
       drawer: const AppDrawer(),
-      body: RefreshIndicator(
-        onRefresh: () => _refreshProduct(context),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: ListView.builder(
-              itemCount: productsData.items.length,
-              itemBuilder: (context, i) => Column(
-                    children: [
-                      UserProductItem(
-                          id: productsData.items[i].id,
-                          title: productsData.items[i].title,
-                          imgUrl: productsData.items[i].imageUrl),
-                      const Divider()
-                    ],
-                  )),
-        ),
+      body: FutureBuilder(
+        future: _refreshProduct(context),
+
+        /// when int the main screen it shows all products and moved to manage it showing all products when u u refresh then only produt is showing by filter that's y we are using future builder
+        builder: (context, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : RefreshIndicator(
+                    onRefresh: () => _refreshProduct(context),
+                    child: Consumer<Products>(
+                      builder: (context, productsData, _) => Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: ListView.builder(
+                            itemCount: productsData.items.length,
+                            itemBuilder: (context, i) => Column(
+                                  children: [
+                                    UserProductItem(
+                                        id: productsData.items[i].id,
+                                        title: productsData.items[i].title,
+                                        imgUrl: productsData.items[i].imageUrl),
+                                    const Divider()
+                                  ],
+                                )),
+                      ),
+                    ),
+                  ),
       ),
     );
   }
