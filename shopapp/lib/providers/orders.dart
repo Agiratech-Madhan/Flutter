@@ -1,7 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:shopapp/providers/cart.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopapp/providers/cart.dart';
 
 class OrderItem {
   final String id;
@@ -18,8 +20,12 @@ class OrderItem {
 
 class Orders with ChangeNotifier {
   List<OrderItem> orders_ = [];
-
-  Orders({required this.authToken, required this.orders_});
+  String userId;
+  Orders({
+    required this.orders_,
+    required this.userId,
+    required this.authToken,
+  });
   List<OrderItem> get orders {
     return [...orders_];
   }
@@ -27,13 +33,15 @@ class Orders with ChangeNotifier {
   final String authToken;
   Future<void> fetchAndSetOrder() async {
     final url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders.json?auth=$authToken');
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
     final response = await http.get(url);
 
     final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     if (extractedData.isEmpty) {
-      // print('empty');
+      // Center(
+      //   child: Text('no orders'),
+      // );
       return;
     }
     print(extractedData);
@@ -62,7 +70,7 @@ class Orders with ChangeNotifier {
     double total,
   ) async {
     final url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders.json?auth=$authToken');
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
     final DateTime timestamp = DateTime.now();
     final response = await http.post(url,
         body: json.encode({

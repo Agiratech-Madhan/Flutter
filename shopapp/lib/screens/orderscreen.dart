@@ -40,7 +40,7 @@ class _OrderScreenState extends State<OrderScreen> {
               } else {
                 if (snapshot.error != null) {
                   return const Center(
-                    child: Text('error occured'),
+                    child: Text('No Orders Found'),
                   );
                 } else {
                   return Consumer<Orders>(
