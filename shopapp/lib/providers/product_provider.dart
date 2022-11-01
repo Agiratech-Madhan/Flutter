@@ -95,9 +95,11 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> fetchAndSetProduct() async {
+  Future<void> fetchAndSetProduct([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     var url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/products.json?auth=$authtoken&orderBy="creatorId"&equalTo="$userId"');
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/products.json?auth=$authtoken&$filterString');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;

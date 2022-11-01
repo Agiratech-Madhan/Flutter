@@ -10,7 +10,8 @@ import '../widgets/app_drawer.dart';
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
   Future<void> _refreshProduct(BuildContext context) async {
-    await Provider.of<Products>(context, listen: false).fetchAndSetProduct();
+    await Provider.of<Products>(context, listen: false)
+        .fetchAndSetProduct(true);
   }
 
   final String id = 'c1';
