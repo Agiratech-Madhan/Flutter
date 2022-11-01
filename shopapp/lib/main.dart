@@ -28,32 +28,40 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: Auth()),
-        ChangeNotifierProvider(
-          create: (ctx) => Products(),
+        ChangeNotifierProxyProvider<Auth, Products>(
+          // update: 'update',
+          create: (_) => Products('', []),
+          update: (context, auth, previousProducts) => Products(auth.token,
+              previousProducts == null ? [] : previousProducts.items),
         ),
         ChangeNotifierProvider(create: (ctx) => Cart()),
         ChangeNotifierProvider(create: (ctx) => Orders()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          // splashColor: Colors.pink,
-          // shadowColor: Colors.pink,
-          // primarySwatch: Colors.purple,
-          primaryColor: Colors.orange,
-          colorScheme: ColorScheme.fromSeed(seedColor: primaryAccentColor),
-          textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
-        ),
-        home: AuthScreen(),
-        routes: {
-          ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
-          CartScreen.routeName: (context) => CartScreen(),
-          OrderScreen.routeName: (context) => OrderScreen(),
-          UserProductsScreen.routeName: (context) => UserProductsScreen(),
-          EditProductScreen.routeName: (context) => EditProductScreen(),
-        },
-      ),
+      child: Consumer<Auth>(
+          builder: (context, auth, _) => MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                  // splashColor: Colors.pink,
+                  // shadowColor: Colors.pink,
+                  // primarySwatch: Colors.purple,
+                  primaryColor: Colors.orange,
+                  colorScheme:
+                      ColorScheme.fromSeed(seedColor: primaryAccentColor),
+                  textTheme: GoogleFonts.notoSansTextTheme(
+                      Theme.of(context).textTheme),
+                ),
+                home: auth.isAuth ? ProductOverview() : AuthScreen(),
+                routes: {
+                  ProductDetailScreen.routeName: (context) =>
+                      ProductDetailScreen(),
+                  CartScreen.routeName: (context) => CartScreen(),
+                  OrderScreen.routeName: (context) => OrderScreen(),
+                  UserProductsScreen.routeName: (context) =>
+                      UserProductsScreen(),
+                  EditProductScreen.routeName: (context) => EditProductScreen(),
+                },
+              )),
     );
   }
 }
