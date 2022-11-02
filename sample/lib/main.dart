@@ -5,6 +5,7 @@ import 'package:sample/Message.dart';
 import 'package:sample/Ongenerate.dart';
 import 'package:sample/alertdialogue.dart';
 import 'package:sample/authentication.dart';
+import 'package:sample/awaitandasync.dart';
 import 'package:sample/camera.dart';
 import 'package:sample/dates.dart';
 import 'package:sample/dropdown.dart';
@@ -230,6 +231,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (context) => StreamExample()));
                     },
                     child: Text("Streams")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AsyncAwait()));
+                    },
+                    child: Text("await and async")),
               ],
             ),
           ),
