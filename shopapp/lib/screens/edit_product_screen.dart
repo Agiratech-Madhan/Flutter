@@ -43,7 +43,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (_isInit) {
       productId =
           ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
-
       print('productId$productId');
       if (productId['isAdd'] == false) {
         if (productId.isNotEmpty) {
@@ -53,7 +52,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
             'title': _editedProduct.title,
             'price': _editedProduct.price.toString(),
             'description': _editedProduct.description,
-            // 'imageUrl':_editedProduct.imageUrl
             'imageUrl': ''
           };
           _imgUrlController.text = _editedProduct.imageUrl;

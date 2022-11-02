@@ -8,6 +8,7 @@ import 'package:shopapp/screens/edit_product_screen.dart';
 import 'package:shopapp/screens/orderscreen.dart';
 import 'package:shopapp/screens/product_detail_screen.dart';
 import 'package:shopapp/screens/products_overview_screens.dart';
+import 'package:shopapp/screens/splashScreen.dart';
 import 'package:shopapp/screens/user_product_screen.dart';
 // import 'package:shopapp/widgets/user_product_item.dart';
 import './providers/product_provider.dart';
@@ -58,7 +59,15 @@ class MyApp extends StatelessWidget {
                   textTheme: GoogleFonts.notoSansTextTheme(
                       Theme.of(context).textTheme),
                 ),
-                home: auth.isAuth ? ProductOverview() : AuthScreen(),
+                home: auth.isAuth
+                    ? ProductOverview()
+                    : FutureBuilder(
+                        future: auth.autologin(),
+                        builder: (ctx, authsnapshot) =>
+                            authsnapshot.connectionState ==
+                                    ConnectionState.waiting
+                                ? SplashScreen()
+                                : AuthScreen()),
                 routes: {
                   ProductDetailScreen.routeName: (context) =>
                       ProductDetailScreen(),
