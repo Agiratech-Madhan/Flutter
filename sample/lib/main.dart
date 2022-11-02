@@ -17,6 +17,7 @@ import 'package:sample/popupmenu.dart';
 import 'package:sample/searchbar.dart';
 import 'package:sample/sliverappbar.dart';
 import 'package:sample/stack.dart';
+import 'package:sample/streams.dart';
 import '../Cards.dart';
 import './Children2.dart';
 import './drawer.dart';
@@ -221,6 +222,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (context) => FutureExample()));
                     },
                     child: Text("Futures")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StreamExample()));
+                    },
+                    child: Text("Streams")),
               ],
             ),
           ),
