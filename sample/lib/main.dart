@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 import 'package:language_picker/languages.dart';
 import 'package:language_picker/languages.g.dart';
 import 'package:sample/Message.dart';
@@ -17,6 +19,7 @@ import 'package:sample/pageview.dart';
 import 'package:sample/popupmenu.dart';
 import 'package:sample/searchbar.dart';
 import 'package:sample/sliverappbar.dart';
+import 'package:sample/splashorg.dart';
 import 'package:sample/stack.dart';
 import 'package:sample/streams.dart';
 import '../Cards.dart';
@@ -30,7 +33,13 @@ import './emojies.dart';
 import './Searchlist.dart';
 
 void main(List<String> args) {
-  return runApp(MyApp());
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(MyApp());
+}
+
+Future initialization(BuildContext? context) async {
+  await Future.delayed(Duration(seconds: 4));
 }
 
 class MyApp extends StatefulWidget {
@@ -42,6 +51,27 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
+
+  void initialization() async {
+    // This is where you can initialize the resources needed by your app while
+    // the splash screen is displayed.  Remove the following example because
+    // delaying the user experience is a bad design practice!
+    // ignore_for_file: avoid_print
+    print('ready in 3...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('ready in 2...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('ready in 1...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('go!');
+    FlutterNativeSplash.remove();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
@@ -50,7 +80,6 @@ class _MyAppState extends State<MyApp> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -239,6 +268,12 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (context) => AsyncAwait()));
                     },
                     child: Text("await and async")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SplashOrg()));
+                    },
+                    child: Text("Splash")),
               ],
             ),
           ),

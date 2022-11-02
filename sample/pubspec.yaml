@@ -41,6 +41,7 @@ dependencies:
   # grouped_list: ^4.2.0
   grouped_list: ^5.1.2
   flutter_chat_bubble: ^2.0.0
+  flutter_native_splash: ^2.2.13
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,6 +65,10 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+# flutter_native_splash:
+#  color: "#fffff"
+#  image: "assets/images/shop.png"
+
 flutter:
 
   # The following line ensures that the Material Icons font is
