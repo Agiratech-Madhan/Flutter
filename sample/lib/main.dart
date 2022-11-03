@@ -1,29 +1,29 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:language_picker/languages.dart';
 import 'package:language_picker/languages.g.dart';
-import 'package:sample/Message.dart';
-import 'package:sample/Ongenerate.dart';
-import 'package:sample/alertdialogue.dart';
-import 'package:sample/authentication.dart';
-import 'package:sample/awaitandasync.dart';
-import 'package:sample/camera.dart';
-import 'package:sample/dates.dart';
-import 'package:sample/dropdown.dart';
-import 'package:sample/futures.dart';
-import 'package:sample/groupedlist.dart';
-import 'package:sample/language.dart';
-import 'package:sample/mic.dart';
-import 'package:sample/pageview.dart';
-import 'package:sample/popupmenu.dart';
-import 'package:sample/searchbar.dart';
-import 'package:sample/sliverappbar.dart';
-import 'package:sample/splashorg.dart';
-import 'package:sample/stack.dart';
-import 'package:sample/streams.dart';
+import 'package:sample/MEssagegoogle.dart';
+import 'package:sample/animations.dart';
+import '../Message.dart';
+import '../alertdialogue.dart';
+import '../authentication.dart';
+import '../awaitandasync.dart';
+import '../camera.dart';
+import '../dropdown.dart';
+import '../futures.dart';
+import '../groupedlist.dart';
+import '../language.dart';
+import '../mic.dart';
+import '../pageview.dart';
+import '../popupmenu.dart';
+import '../searchbar.dart';
+import '../sliverappbar.dart';
+import '../splashorg.dart';
+import '../stack.dart';
+import '../streams.dart';
 import '../Cards.dart';
-import './Children2.dart';
 import './drawer.dart';
 import './snackbarmessage.dart';
 import './container_example.dart';
@@ -31,46 +31,20 @@ import './expansiontile.dart';
 import './Radio.dart';
 import './emojies.dart';
 import './Searchlist.dart';
+import '../gridmain.dart';
 
 void main(List<String> args) {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
 
-Future initialization(BuildContext? context) async {
-  await Future.delayed(Duration(seconds: 4));
-}
-
 class MyApp extends StatefulWidget {
-  // const MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    initialization();
-  }
-
-  void initialization() async {
-    // This is where you can initialize the resources needed by your app while
-    // the splash screen is displayed.  Remove the following example because
-    // delaying the user experience is a bad design practice!
-    // ignore_for_file: avoid_print
-    print('ready in 3...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('ready in 2...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('ready in 1...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('go!');
-    FlutterNativeSplash.remove();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,9 +59,144 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<RoutesExample> types = [
+    RoutesExample(
+      Names: "moveto drawer",
+      widget: Drawer1(),
+    ),
+    RoutesExample(
+      Names: "SnackBarDemo",
+      widget: SnackBarDemo(),
+    ),
+    RoutesExample(
+      Names: "ContainerExample",
+      widget: ContainerExample(),
+    ),
+    RoutesExample(
+      Names: "Cards",
+      widget: Cards(),
+    ),
+    RoutesExample(
+      Names: "Drop",
+      widget: Drop(),
+    ),
+    RoutesExample(
+      Names: "MyStatefulWidget",
+      widget: MyStatefulWidget(),
+    ),
+    RoutesExample(
+      Names: "Radiosam",
+      widget: Radiosam(),
+    ),
+    RoutesExample(
+      Names: "Emojies",
+      widget: Emojies(),
+    ),
+    RoutesExample(
+      Names: "Stacks",
+      widget: Stacks(),
+    ),
+    RoutesExample(
+      Names: "Sliver",
+      widget: Sliver(),
+    ),
+    RoutesExample(
+      Names: "Searchbar",
+      widget: Searchbar(),
+    ),
+    RoutesExample(
+      Names: "SearchList",
+      widget: SearchList(),
+    ),
+    RoutesExample(
+      Names: "PageViewController",
+      widget: PageViewController(),
+    ),
+    RoutesExample(
+      Names: "Popupmenu",
+      widget: Popupmenu(),
+    ),
+    RoutesExample(
+      Names: "AlertDialogue",
+      widget: AlertDialogue(),
+    ),
+    RoutesExample(
+      Names: "MicExample",
+      widget: MicExample(),
+    ),
+    RoutesExample(
+      Names: "CameraExample",
+      widget: CameraExample(),
+    ),
+    RoutesExample(
+      Names: "Langauges",
+      widget: Langauges(),
+    ),
+    RoutesExample(
+      Names: "Messages",
+      widget: Messages(),
+    ),
+    RoutesExample(
+      Names: "Group1",
+      widget: Group1(),
+    ),
+    RoutesExample(
+      Names: "AuthScreen",
+      widget: AuthScreen(),
+    ),
+    RoutesExample(
+      Names: "FutureExample",
+      widget: FutureExample(),
+    ),
+    RoutesExample(
+      Names: "StreamExample",
+      widget: StreamExample(),
+    ),
+    RoutesExample(
+      Names: "AsyncAwait",
+      widget: AsyncAwait(),
+    ),
+    RoutesExample(
+      Names: "AsyncAwait",
+      widget: SplashOrg(),
+    ),
+    RoutesExample(
+      Names: "AnimationExample",
+      widget: AnimationExample(),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      child: Scaffold(
+        body: GridView.builder(
+            padding: const EdgeInsets.all(10),
+            itemCount: types.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10),
+            itemBuilder: (context, index) => Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Container(
+                      // color: Colors.blue.withOpacity(0.7),
+                      child: GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => types[index].widget)),
+                          child: Center(
+                              child: Text(
+                            '${types[index].Names}',
+                            style: TextStyle(color: Colors.black),
+                          )))),
+                )),
+      ),
+    );
+
+    /**     SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
@@ -281,5 +390,35 @@ class _MyHomePageState extends State<MyHomePage> {
         // body: Generate(),
       ),
     );
+ */
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter/src/widgets/framework.dart';
+
+// void main(List<String> args) {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatefulWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
+
+// class _MyAppState extends State<MyApp> {
+//   @override
+//   Widget build(BuildContext context) {
+    // return GridView.builder(
+    //     padding: const EdgeInsets.all(10),
+    //     itemCount: 7,
+    //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    //         crossAxisCount: 2,
+    //         childAspectRatio: 3 / 2,
+    //         crossAxisSpacing: 10,
+    //         mainAxisSpacing: 10),
+    //     itemBuilder: (context, index) => Text('data'));
+//   }
+// }
