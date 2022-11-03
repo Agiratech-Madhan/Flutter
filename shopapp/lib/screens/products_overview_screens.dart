@@ -50,8 +50,8 @@ class _ProductOverviewState extends State<ProductOverview> {
     // final cart=Provider.of<Cart>(context) ;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'MyShop',
+        title: Text(
+          _showOnlyFav ? 'Your Favorites' : 'All Products',
         ),
         actions: [
           PopupMenuButton(
