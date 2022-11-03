@@ -10,19 +10,43 @@ import 'package:shopapp/screens/product_detail_screen.dart';
 import 'package:shopapp/screens/products_overview_screens.dart';
 import 'package:shopapp/screens/splashScreen.dart';
 import 'package:shopapp/screens/user_product_screen.dart';
-// import 'package:shopapp/widgets/user_product_item.dart';
 import './providers/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'providers/cart.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  void initialization() async {
+    print('ready in 3...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('ready in 2...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('ready in 1...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('go!');
+    FlutterNativeSplash.remove();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
+
   @override
   Widget build(BuildContext context) {
     Color primaryAccentColor = const Color(0xff002A36);
