@@ -1,4 +1,5 @@
 // import 'dart:convert';
+
 import 'package:provider/provider.dart';
 import 'package:shopapp/model/http_exceptions.dart';
 
@@ -51,7 +52,7 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                    flex: deviceSize.width > 600 ? 2 : 1,
+                    // flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
                   ),
                 ],
@@ -73,7 +74,8 @@ class AuthCard extends StatefulWidget {
   AuthCardState createState() => AuthCardState();
 }
 
-class AuthCardState extends State<AuthCard> {
+class AuthCardState extends State<AuthCard>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey();
   AuthMode _authMode = AuthMode.login;
   final Map<String, String> _authData = {
@@ -84,17 +86,17 @@ class AuthCardState extends State<AuthCard> {
   final _passwordController = TextEditingController();
 
   void _showDialog(String message) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('An error Occured'),
-              content: Text(message),
-              actions: [
-                TextButton(
-                    onPressed: (() => Navigator.of(context).pop()),
-                    child: Text('Okay'))
-              ],
-            ));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+        action: SnackBarAction(
+          textColor: Colors.orange,
+          label: 'Okay',
+          onPressed: () {},
+        ),
+      ),
+    );
   }
 
   Future<void> _submit() async {
@@ -145,12 +147,32 @@ class AuthCardState extends State<AuthCard> {
       setState(() {
         _authMode = AuthMode.signUp;
       });
+      // _aController!.forward();
     } else {
       setState(() {
         _authMode = AuthMode.login;
       });
+      // _aController!.reverse();
     }
   }
+
+  AnimationController? _aController;
+  // Animation<Size>? _heightAnimation;
+  // Animation<double>? _opacityAnimation;
+  @override
+  void didChangeDependencies() {
+    // _aController =
+    //     AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    // _opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _aController!, curve: Curves.E)) ;
+    super.didChangeDependencies();
+  }
+
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   _aController!.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -160,10 +182,13 @@ class AuthCardState extends State<AuthCard> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       elevation: 8.0,
-      child: Container(
-        height: _authMode == AuthMode.signUp ? 320 : 260,
+      child: AnimatedContainer(
+        height: _authMode == AuthMode.signUp ? 320 : 280,
+        // height: _heightAnimation!.value.height,
+        duration: Duration(milliseconds: 500),
         constraints:
-            BoxConstraints(minHeight: _authMode == AuthMode.signUp ? 320 : 260),
+            BoxConstraints(minHeight: _authMode == AuthMode.signUp ? 320 : 280),
+        // constraints: BoxConstraints(minHeight: _heightAnimation!.value.height),
         width: deviceSize.width * 0.75,
         padding: const EdgeInsets.all(16.0),
         child: Form(
