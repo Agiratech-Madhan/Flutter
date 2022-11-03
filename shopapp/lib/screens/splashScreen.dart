@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: Color(0xff008B8B),
       body: Center(
-        child: LinearProgressIndicator(),
+        child: Image.asset('assets/images/shop.png'),
       ),
     );
   }
