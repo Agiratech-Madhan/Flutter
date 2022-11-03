@@ -286,7 +286,9 @@ class AuthCardState extends State<AuthCard>
                     foregroundColor: Theme.of(context).primaryColor,
                   ),
                   child: Text(
-                      '${_authMode == AuthMode.login ? 'signUp' : 'Login'} INSTEAD'),
+                    '${_authMode == AuthMode.login ? 'signUp' : 'Login'} INSTEAD',
+                    style: TextStyle(color: Colors.pink),
+                  ),
                 ),
               ],
             ),
