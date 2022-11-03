@@ -1,37 +1,38 @@
-import 'package:flutter/gestures.dart';
+// import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import './widgets/animated_align.dart';
+// import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'package:language_picker/languages.dart';
-import 'package:language_picker/languages.g.dart';
-import 'package:sample/MEssagegoogle.dart';
+// import 'package:language_picker/languages.dart';
+// import 'package:language_picker/languages.g.dart';
+// import './widgets/MEssagegoogle.dart';
 import 'package:sample/animations.dart';
-import '../Message.dart';
-import '../alertdialogue.dart';
-import '../authentication.dart';
-import '../awaitandasync.dart';
-import '../camera.dart';
-import '../dropdown.dart';
-import '../futures.dart';
-import '../groupedlist.dart';
-import '../language.dart';
-import '../mic.dart';
-import '../pageview.dart';
-import '../popupmenu.dart';
-import '../searchbar.dart';
-import '../sliverappbar.dart';
-import '../splashorg.dart';
-import '../stack.dart';
-import '../streams.dart';
-import '../Cards.dart';
-import './drawer.dart';
+import './widgets/Message.dart';
+import './widgets/alertdialogue.dart';
+import './widgets/authentication.dart';
+import './widgets/awaitandasync.dart';
+import './widgets/camera.dart';
+import './widgets/dropdown.dart';
+import './widgets/futures.dart';
+import './widgets/groupedlist.dart';
+import './widgets/language.dart';
+import './widgets/mic.dart';
+import './widgets/pageview.dart';
+import './widgets/popupmenu.dart';
+import './widgets/searchbar.dart';
+import './widgets/sliverappbar.dart';
+import './widgets/splashorg.dart';
+import './widgets/stack.dart';
+import './widgets/streams.dart';
+import './widgets/Cards.dart';
+import './widgets/drawer.dart';
 import './snackbarmessage.dart';
-import './container_example.dart';
-import './expansiontile.dart';
-import './Radio.dart';
-import './emojies.dart';
-import './Searchlist.dart';
-import '../gridmain.dart';
+import './widgets/container_example.dart';
+import './widgets/expansiontile.dart';
+import './widgets/Radio.dart';
+import './widgets/emojies.dart';
+import './widgets/Searchlist.dart';
+import './gridmain.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -79,10 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
     RoutesExample(
       Names: "Drop",
       widget: Drop(),
-    ),
-    RoutesExample(
-      Names: "MyStatefulWidget",
-      widget: MyStatefulWidget(),
     ),
     RoutesExample(
       Names: "Radiosam",
@@ -163,6 +160,10 @@ class _MyHomePageState extends State<MyHomePage> {
     RoutesExample(
       Names: "AnimationExample",
       widget: AnimationExample(),
+    ),
+    RoutesExample(
+      Names: "AnimationAlignExample",
+      widget: AnimatedAlignExample(),
     ),
   ];
 
