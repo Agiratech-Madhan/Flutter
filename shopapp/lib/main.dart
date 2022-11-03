@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopapp/helpers/custom_route.dart';
 import 'package:shopapp/providers/auth.dart';
 import 'package:shopapp/providers/orders.dart';
 import 'package:shopapp/screens/authscreen.dart';
@@ -74,15 +75,18 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
                 theme: ThemeData(
-                  // splashColor: Colors.pink,
-                  // shadowColor: Colors.pink,
-                  // primarySwatch: Colors.purple,
-                  primaryColor: Colors.orange,
-                  colorScheme:
-                      ColorScheme.fromSeed(seedColor: primaryAccentColor),
-                  textTheme: GoogleFonts.notoSansTextTheme(
-                      Theme.of(context).textTheme),
-                ),
+                    // splashColor: Colors.pink,
+                    // shadowColor: Colors.pink,
+                    // primarySwatch: Colors.purple,
+                    primaryColor: Colors.orange,
+                    colorScheme:
+                        ColorScheme.fromSeed(seedColor: primaryAccentColor),
+                    textTheme: GoogleFonts.notoSansTextTheme(
+                        Theme.of(context).textTheme),
+                    pageTransitionsTheme: PageTransitionsTheme(builders: {
+                      TargetPlatform.android: CustomPageTransition(),
+                      TargetPlatform.iOS: CustomPageTransition()
+                    })),
                 home: auth.isAuth
                     ? ProductOverview()
                     : FutureBuilder(

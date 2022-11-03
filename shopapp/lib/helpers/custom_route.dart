@@ -20,3 +20,23 @@ class CustomRoute<T> extends MaterialPageRoute<T> {
     );
   }
 }
+
+class CustomPageTransition extends PageTransitionsBuilder {
+  Widget buildTransitions<T>(
+      PageRoute route,
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child) {
+    // TODO: implement buildTransitions
+    // return super
+    //     .buildTransitions(context, animation, secondaryAnimation, child);
+    if (route.settings.name == '/') {
+      return child;
+    }
+    return FadeTransition(
+      opacity: animation,
+      child: child,
+    );
+  }
+}
