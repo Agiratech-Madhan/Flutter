@@ -1,7 +1,7 @@
 // import 'dart:convert';
 
 import 'package:provider/provider.dart';
-import 'package:shopapp/model/http_exceptions.dart';
+import '../model/http_exceptions.dart';
 
 import '../providers/auth.dart';
 import 'package:flutter/material.dart';

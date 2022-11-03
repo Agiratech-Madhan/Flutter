@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shopapp/providers/cart.dart';
-import 'package:shopapp/providers/orders.dart' as ord;
+import '../providers/cart.dart';
+import '../providers/orders.dart' as ord;
 import 'package:intl/intl.dart';
 import 'dart:math';
 

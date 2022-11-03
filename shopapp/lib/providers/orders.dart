@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shopapp/providers/cart.dart';
+import '../providers/cart.dart';
 
 class OrderItem {
   final String id;

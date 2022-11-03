@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:shopapp/screens/edit_product_screen.dart';
+import '../screens/edit_product_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/product_provider.dart';
 // import '../providers/product_provider.dart';

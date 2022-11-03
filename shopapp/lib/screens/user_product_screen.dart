@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopapp/screens/edit_product_screen.dart';
-import 'package:shopapp/widgets/user_product_item.dart';
+import '../screens/edit_product_screen.dart';
+import '../widgets/user_product_item.dart';
 // import 'package:provider/single_child_widget.dart';
 // import '../providers/product.dart';
 import '../providers/product_provider.dart';
