@@ -147,32 +147,35 @@ class AuthCardState extends State<AuthCard>
       setState(() {
         _authMode = AuthMode.signUp;
       });
-      // _aController!.forward();
+      _aController!.forward();
     } else {
       setState(() {
         _authMode = AuthMode.login;
       });
-      // _aController!.reverse();
+      _aController!.reverse();
     }
   }
 
   AnimationController? _aController;
-  // Animation<Size>? _heightAnimation;
-  // Animation<double>? _opacityAnimation;
+  Animation<Offset>? _slideAnimation;
+  Animation<double>? _opacityAnimation;
+
   @override
   void didChangeDependencies() {
-    // _aController =
-    //     AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    // _opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _aController!, curve: Curves.E)) ;
+    _aController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _slideAnimation = Tween(begin: Offset(0, -1.5), end: Offset(0, 0)).animate(
+        CurvedAnimation(parent: _aController!, curve: Curves.fastOutSlowIn));
+    _opacityAnimation = Tween(begin: 0.0, end: 1.0)
+        .animate(CurvedAnimation(parent: _aController!, curve: Curves.easeIn));
     super.didChangeDependencies();
   }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   _aController!.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    _aController!.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -228,19 +231,33 @@ class AuthCardState extends State<AuthCard>
                     _authData['password'] = value.toString();
                   },
                 ),
-                if (_authMode == AuthMode.signUp)
-                  TextFormField(
-                    enabled: _authMode == AuthMode.signUp,
-                    decoration: InputDecoration(labelText: 'Confirm Password'),
-                    obscureText: true,
-                    validator: _authMode == AuthMode.signUp
-                        ? (value) {
-                            if (value != _passwordController.text) {
-                              return 'Passwords do not match!';
-                            }
-                          }
-                        : null,
+                // if (_authMode == AuthMode.signUp)
+                AnimatedContainer(
+                  curve: Curves.easeIn,
+                  constraints: BoxConstraints(
+                      minHeight: _authMode == AuthMode.signUp ? 60 : 0,
+                      maxHeight: _authMode == AuthMode.signUp ? 120 : 0),
+                  duration: Duration(milliseconds: 300),
+                  child: FadeTransition(
+                    opacity: _opacityAnimation!,
+                    child: SlideTransition(
+                      position: _slideAnimation!,
+                      child: TextFormField(
+                        enabled: _authMode == AuthMode.signUp,
+                        decoration:
+                            InputDecoration(labelText: 'Confirm Password'),
+                        obscureText: true,
+                        validator: _authMode == AuthMode.signUp
+                            ? (value) {
+                                if (value != _passwordController.text) {
+                                  return 'Passwords do not match!';
+                                }
+                              }
+                            : null,
+                      ),
+                    ),
                   ),
+                ),
                 SizedBox(
                   height: 20,
                 ),
