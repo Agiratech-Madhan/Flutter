@@ -14,17 +14,39 @@ class AddressExample extends StatefulWidget {
 class _AddressExampleState extends State<AddressExample> {
   @override
   void initState() {
-    Provider.of<AddressProvider>(context, listen: false).getvalues();
-
     super.initState();
+    Provider.of<AddressProvider>(context, listen: false).getAddressValues();
+    Provider.of<AddressProvider>(context, listen: false).getAddressesValues();
   }
 
   @override
   Widget build(BuildContext context) {
-    final values = Provider.of<AddressProvider>(context);
+    final address = Provider.of<AddressProvider>(context);
     return Scaffold(
       body: Center(
-        child: Text(values.alist!.streets![0]),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+          height: MediaQuery.of(context).size.height * 0.2,
+          child: Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    alignment: Alignment.center,
+                    width: 100,
+                    color: Colors.black54,
+                    child: Text(address.alist!.city.toString())),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(address.alist!.streets![0]),
+                    Text(address.alist!.streets![1])
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

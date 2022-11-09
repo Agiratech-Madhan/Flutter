@@ -14,9 +14,25 @@ class AddressProvider with ChangeNotifier {
   }
 
   Address? alist;
-  Future<void> getvalues() async {
+  Future<void> getAddressValues() async {
     alist = await loadadress();
     print('alist$alist');
+    notifyListeners();
+  }
+
+  Future<List<Address>> loadadresses() async {
+    String jsonAddress = await rootBundle.loadString('json/addresses.json');
+    final jsonResponse = json.decode(jsonAddress) as List<dynamic>;
+    List<Address> address =
+        jsonResponse.map((e) => Address.fromJson(e)).toList();
+    return address;
+  }
+
+  List<Address>? alists;
+  Future<void> getAddressesValues() async {
+    final response = await loadadresses();
+    alists = response;
+    print('alists$alists');
     notifyListeners();
   }
 }
