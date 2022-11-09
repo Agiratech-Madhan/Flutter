@@ -12,7 +12,7 @@ class ProviderExample with ChangeNotifier {
         await rootbundle.rootBundle.loadString('json/student.json');
     final list = json.decode(jsondata) as List<dynamic>;
     listItems = list.map((data) => Student.fromJson(data)).toList();
-    print(listItems);
+    // print(listItems);
     return listItems;
   }
 

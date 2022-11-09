@@ -1,4 +1,5 @@
 import 'package:apiexample/providers/page_provider.dart';
+import 'package:apiexample/providers/providerexample.dart';
 import 'package:apiexample/widgets/pagedetail.dart';
 import 'package:apiexample/widgets/pageslist.dart';
 
@@ -14,6 +15,12 @@ class ComplexData extends StatefulWidget {
 }
 
 class _ComplexDataState extends State<ComplexData> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<ProviderExample>(context, listen: false).getvalues();
+  }
+
   @override
   Widget build(BuildContext context) {
     final values = Provider.of<PageProvider>(context);

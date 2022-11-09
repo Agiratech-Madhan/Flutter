@@ -1,3 +1,5 @@
+import 'package:apiexample/models/address_model.dart';
+import 'package:apiexample/pages/adress.dart';
 import 'package:apiexample/pages/todopage.dart';
 import 'package:apiexample/providers/page_provider.dart';
 import 'package:provider/provider.dart';
@@ -30,13 +32,13 @@ class _SampleState extends State<Sample> {
   final List<Widget> _widgetOptions = <Widget>[
     GridListItems(),
     ComplexData(),
-    TodoPage()
+    TodoPage(),
+    AddressExample()
   ];
 
   @override
   void initState() {
     super.initState();
-    Provider.of<ProviderExample>(context, listen: false).getvalues();
     Provider.of<PageProvider>(context, listen: false).getvalues();
   }
 
@@ -49,6 +51,7 @@ class _SampleState extends State<Sample> {
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.black12,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -57,6 +60,10 @@ class _SampleState extends State<Sample> {
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: 'Business',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'School',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),

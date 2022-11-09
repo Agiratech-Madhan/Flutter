@@ -1,8 +1,5 @@
-import 'package:apiexample/models/pagemodel.dart';
 import 'package:apiexample/providers/page_provider.dart';
-import 'package:apiexample/widgets/pagedetail.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class PageList extends StatelessWidget {
@@ -21,7 +18,7 @@ class PageList extends StatelessWidget {
           itemBuilder: ((context, index) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: OutlinedButton(
-                    onPressed: null,
+                    onPressed: () {},
                     child: Text(values.items[index].page.toString())),
               ))),
     );
