@@ -28,10 +28,43 @@ class _CollegeExampleState extends State<CollegeExample> {
     print('orgdata${CollegeData.col_data!.majors![1]}');
     print('subdata${CollegeData.col_data!.subjects![0].subjectName}');
 
-    return const Scaffold(
-      body: Center(
-        child: Text('data'),
-      ),
-    );
+    return Scaffold(
+        body: Column(
+      children: [
+        Card(
+          margin: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              ListTile(
+                leading: Text('${CollegeData.col_data!.name}'),
+                title: Text('Subjects'),
+                subtitle: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            'Subjectname:${CollegeData.col_data!.subjects![0].subjectName}'),
+                        Text(
+                            'Teacher:${CollegeData.col_data!.subjects![0].teacher}'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            'Subjectname:${CollegeData.col_data!.subjects![1].subjectName}'),
+                        Text(
+                            'Teacher:${CollegeData.col_data!.subjects![1].teacher}'),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ));
   }
 }
