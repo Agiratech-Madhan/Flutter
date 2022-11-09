@@ -1,0 +1,8 @@
+{
+    "user":{
+        "userId": 1, "title": "Hello madhan", "body": "body",
+        "address":{
+            "street":"crv nagar",
+            "area":"paradarami"
+        }
+}}
