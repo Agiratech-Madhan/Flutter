@@ -23,7 +23,7 @@ class _BakeryExampleState extends State<BakeryExample> {
   @override
   Widget build(BuildContext context) {
     final BakeryData = Provider.of<Bakeryprovider>(context);
-    print(BakeryData.bakeryItems!.batters!.btype);
+    // print(BakeryData.bakeryItems!.batters!.btype);
     // print(BakeryData.);
     print({' bakeries${BakeryData.BakeriesItem!.batters!.bid}'});
     return Scaffold(
