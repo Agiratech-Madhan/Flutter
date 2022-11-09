@@ -17,6 +17,7 @@ class _BakeryExampleState extends State<BakeryExample> {
     // TODO: implement initState
     super.initState();
     Provider.of<Bakeryprovider>(context, listen: false).getBakeryValues();
+    Provider.of<Bakeryprovider>(context, listen: false).getBakeriesValues();
   }
 
   @override
@@ -24,6 +25,7 @@ class _BakeryExampleState extends State<BakeryExample> {
     final BakeryData = Provider.of<Bakeryprovider>(context);
     print(BakeryData.bakeryItems!.batters!.btype);
     // print(BakeryData.);
+    print({' bakeries${BakeryData.BakeriesItem!.batters!.bid}'});
     return Scaffold(
       body: Column(
         children: [

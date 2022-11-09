@@ -35,7 +35,7 @@ class _AddressExampleState extends State<AddressExample> {
                     alignment: Alignment.center,
                     width: 100,
                     color: Colors.black54,
-                    child: Text(address.alist!.city.toString())),
+                    child: Text('${address.alist?.city}')),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

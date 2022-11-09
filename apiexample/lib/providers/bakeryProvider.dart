@@ -24,4 +24,26 @@ class Bakeryprovider with ChangeNotifier {
     print('bakeryItems$bakeryItems');
     return bakeryItems;
   }
+
+  Future loadbakeries() async {
+    String loadedaddress = await rootBundle.loadString('json/bakery.json');
+    final jsonvalues = json.decode(loadedaddress) as List<dynamic>;
+    print('jsonvalues${jsonvalues}');
+    List<Bakery> bakerydata =
+        jsonvalues.map((e) => Bakery.fromJson(e)).toList();
+    print('bakerydata${bakerydata[0].batters!.bid}');
+    return bakerydata;
+  }
+
+  List<Bakery>? bakeriesItems;
+  Future<void> getBakeriesValues() async {
+    bakeriesItems = await loadbakeries();
+    print('getvalues${bakeriesItems![0].batters!.bid}');
+    notifyListeners();
+  }
+
+  Bakery? get BakeriesItem {
+    print('bakeryItems$bakeryItems');
+    return bakeryItems;
+  }
 }
