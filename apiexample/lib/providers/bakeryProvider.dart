@@ -9,14 +9,14 @@ class Bakeryprovider with ChangeNotifier {
     final jsonvalues = json.decode(loadedaddress);
     print('jsonvalues${jsonvalues}');
     Bakery bakerydata = Bakery.fromJson(jsonvalues);
-    print('bakerydata${bakerydata}');
+    print('bakerydata${bakerydata.batters!.bid}');
     return bakerydata;
   }
 
   Bakery? bakeryItems;
   Future<void> getBakeryValues() async {
     bakeryItems = await loadbakery();
-    print('getvalues$bakeryItems');
+    print('getvalues${bakeryItems!.batters!.btype}');
     notifyListeners();
   }
 

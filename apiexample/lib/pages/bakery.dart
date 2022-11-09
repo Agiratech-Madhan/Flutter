@@ -22,11 +22,30 @@ class _BakeryExampleState extends State<BakeryExample> {
   @override
   Widget build(BuildContext context) {
     final BakeryData = Provider.of<Bakeryprovider>(context);
-    print(BakeryData.bakeryItems!.name);
+    print(BakeryData.bakeryItems!.batters!.btype);
     // print(BakeryData.);
     return Scaffold(
-      body: Container(
-        child: Center(child: Text(BakeryData.BakeryItem!.type.toString())),
+      body: Column(
+        children: [
+          Card(
+              margin: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('ID        :${BakeryData.BakeryItem!.id.toString()}'),
+                  Text('Name:${BakeryData.BakeryItem!.name}'),
+                  Row(
+                    children: [
+                      Text('Types:${BakeryData.BakeryItem!.type![0]}'),
+                      Text(' ${BakeryData.BakeryItem!.type![1]}'),
+                    ],
+                  ),
+                  Text('PPu:${BakeryData.BakeryItem!.ppu}'),
+                  Text('batters:${BakeryData.BakeryItem!.batters!.bid}'),
+                  Text('             ${BakeryData.BakeryItem!.batters!.btype}'),
+                ],
+              )),
+        ],
       ),
     );
   }

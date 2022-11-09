@@ -3,5 +3,5 @@
     "type": ["donut", "bread-cake"],
     "name": "Cake",
     "ppu": 0.55,
-    "batters": { "id": "1001", "type": "Regular" }
+    "batters": {"id": "1001", "type": "Regular" }
   }

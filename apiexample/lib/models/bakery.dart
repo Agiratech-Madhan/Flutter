@@ -36,10 +36,10 @@ class Batters {
   String? bid;
   String? btype;
   Batters({
-    this.bid,
-    this.btype,
+    required this.bid,
+    required this.btype,
   });
   factory Batters.fromJson(Map<String, dynamic> json) {
-    return Batters(bid: json['bid'], btype: json['btype']);
+    return Batters(bid: json['id'], btype: json['type']);
   }
 }
