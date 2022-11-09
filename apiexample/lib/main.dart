@@ -1,4 +1,5 @@
 import 'package:apiexample/providers/address_provider.dart';
+import 'package:apiexample/providers/bakeryProvider.dart';
 import 'package:apiexample/providers/page_provider.dart';
 import 'package:apiexample/providers/todo_provider.dart';
 
@@ -15,6 +16,7 @@ void main() {
           ChangeNotifierProvider(create: ((context) => PageProvider())),
           ChangeNotifierProvider(create: ((context) => TodoProvider())),
           ChangeNotifierProvider(create: ((context) => AddressProvider())),
+          ChangeNotifierProvider(create: ((context) => Bakeryprovider())),
         ],
         child: const MaterialApp(
             debugShowCheckedModeBanner: false, home: Sample())),

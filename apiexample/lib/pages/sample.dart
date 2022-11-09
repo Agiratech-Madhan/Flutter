@@ -1,6 +1,8 @@
 import 'package:apiexample/models/address_model.dart';
 import 'package:apiexample/pages/adress.dart';
+import 'package:apiexample/pages/bakery.dart';
 import 'package:apiexample/pages/todopage.dart';
+import 'package:apiexample/providers/bakeryProvider.dart';
 import 'package:apiexample/providers/page_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +35,8 @@ class _SampleState extends State<Sample> {
     GridListItems(),
     ComplexData(),
     TodoPage(),
-    AddressExample()
+    AddressExample(),
+    BakeryExample()
   ];
 
   @override
@@ -68,6 +71,10 @@ class _SampleState extends State<Sample> {
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'School',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.food_bank),
+            label: 'Bakery',
           ),
         ],
         currentIndex: _selectedIndex,
