@@ -28,9 +28,25 @@ class _ProductExampleState extends State<ProductExample> {
     print('object${productData.productData!.images![0].id}');
     print('object${productData.productData!.images![0].imageName}');
 
-    return const Scaffold(
-      body: Center(
-        child: Text('data'),
+    return Scaffold(
+      body: Container(
+        margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+                'ID:                                       ${productData.productData!.id}'),
+            Text(
+                'FirstImage ID:                  ${productData.productData!.images![0].id}'),
+            Text(
+                'FirstImage ImageName:  ${productData.productData!.images![0].imageName}'),
+            Text(
+                'SecondImage ID:             ${productData.productData!.images![1].id}'),
+            Text(
+                'SecondImage ImageName:  ${productData.productData!.images![1].imageName}'),
+          ],
+        ),
       ),
     );
   }
