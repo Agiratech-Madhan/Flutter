@@ -4,6 +4,7 @@ import 'package:apiexample/providers/collegeProvider.dart';
 import 'package:apiexample/providers/page_provider.dart';
 import 'package:apiexample/providers/photo_provider.dart';
 import 'package:apiexample/providers/productProvider.dart';
+import 'package:apiexample/providers/shapeProvider.dart';
 import 'package:apiexample/providers/todo_provider.dart';
 
 import './providers/providerexample.dart';
@@ -23,6 +24,7 @@ void main() {
           ChangeNotifierProvider(create: ((context) => CollegeProvider())),
           ChangeNotifierProvider(create: ((context) => PhotoProvider())),
           ChangeNotifierProvider(create: ((context) => ProductProvider())),
+          ChangeNotifierProvider(create: ((context) => ShapeProvider())),
         ],
         child: const MaterialApp(
             debugShowCheckedModeBanner: false, home: Sample())),

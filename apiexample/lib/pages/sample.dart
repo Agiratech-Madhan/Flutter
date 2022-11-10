@@ -4,6 +4,7 @@ import 'package:apiexample/pages/bakery.dart';
 import 'package:apiexample/pages/collegePage.dart';
 import 'package:apiexample/pages/photo.dart';
 import 'package:apiexample/pages/product.dart';
+import 'package:apiexample/pages/shapePage.dart';
 import 'package:apiexample/pages/todopage.dart';
 import 'package:apiexample/providers/bakeryProvider.dart';
 import 'package:apiexample/providers/page_provider.dart';
@@ -42,7 +43,8 @@ class _SampleState extends State<Sample> {
     BakeryExample(),
     CollegeExample(),
     PhotoExample(),
-    ProductExample()
+    ProductExample(),
+    ShapeExample()
   ];
 
   @override
@@ -93,6 +95,10 @@ class _SampleState extends State<Sample> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shop),
             label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.food_bank_sharp),
+            label: 'Shape',
           ),
         ],
         currentIndex: _selectedIndex,
