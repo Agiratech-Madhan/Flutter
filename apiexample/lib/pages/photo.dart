@@ -25,10 +25,74 @@ class _PhotoExampleState extends State<PhotoExample> {
     print('photosDataLen${photosData.photodata!.photos!.length}');
     print('photosDataLen${photosData.photodata!.photos![0].albumId}');
 
-    return const Scaffold(
-      body: Center(
-        child: Text('data'),
-      ),
-    );
+    return Scaffold(
+        body: Column(
+      children: [
+        Expanded(
+            child: ListView.builder(
+                itemCount: photosData.photodata!.photos!.length,
+                itemBuilder: (context, index) => Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          // width: 300,
+                          // height: 300,
+                          // color: Colors.black54,
+                          child: Center(
+                              child: Image.network(
+                            photosData.photodata!.photos![index].url.toString(),
+                          )),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          left: 20,
+                          right: 20,
+                          child: Row(
+                            // crossAxisAlignment: Cross,
+                            children: [
+                              Container(
+                                color: Colors.black54,
+                                padding: EdgeInsets.all(5),
+                                width: 350,
+                                child: Text(
+                                    photosData.photodata!.photos![index].title
+                                        .toString(),
+                                    softWrap: true,
+                                    // overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white)),
+                              )
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 20,
+                          left: 20,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                photosData.photodata!.photos![index].id
+                                    .toString(),
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 30),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 200,
+                          height: 200,
+                          // color: Colors.black54,
+                          child: Image.network(
+                              photosData.photodata!.photos![index].thumbnailUrl
+                                  .toString(),
+                              opacity: AlwaysStoppedAnimation(.9)),
+                        ),
+                      ],
+                    )))
+      ],
+    ));
   }
 }
