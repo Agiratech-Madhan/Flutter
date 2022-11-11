@@ -12,6 +12,7 @@ class DetailsProvider with ChangeNotifier {
     //     password: 'user.password',
     //     phoneNo: 343434)
   ];
+
   Future<void> addUser(User user) {
     final newUser = User(
         id: DateTime.now().toString(),
@@ -20,7 +21,7 @@ class DetailsProvider with ChangeNotifier {
         password: user.password,
         phoneNo: user.phoneNo);
     // final x = User.toJson(user);
-    _users.add(user);
+    _users.add(newUser);
 
     notifyListeners();
     final url = Uri.parse(
@@ -42,30 +43,27 @@ class DetailsProvider with ChangeNotifier {
     // print(user);
   }
 
-  // Future<void> fetchAndSetProduct() async {
-  //   final url = Uri.parse(
-  //       'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
-  //   try {
-  //     final response = await http.get(url);
-  //     String extractdata = json.decode(response.body) ;
-  //     print(json.decode(response.body)); //instance of respone
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  Future<void> fetchusers() async {
+    final url = Uri.parse(
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
+    try {
+      final response = await http.get(url);
+      final extractedUserData =
+          json.decode(response.body) as Map<String, dynamic>;
+      final List<User> usersList = [];
+      extractedUserData.forEach((key, value) {
+        usersList.add(User.fromJson(value));
+      });
+      print('object');
+      print(usersList);
+      _users = usersList;
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   List<User> get users {
     return _users;
   }
 }
-/** void addProduct(Product product_) {
-    final newProduct = Product(
-        id: DateTime.now().toString(),
-        title: product_.title,
-        description: product_.description,
-        price: product_.price,
-        imageUrl: product_.imageUrl);
-    _items.add(newProduct);
-    //_items.insert(0,newProduct);
-    ChangeNotifier();
-  } */

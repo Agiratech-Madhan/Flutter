@@ -12,15 +12,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = false;
   @override
   void initState() {
-    // Provider.of<DetailsProvider>(context, listen: false).fetchAndSetProduct();
+    isLoading = true;
+    Provider.of<DetailsProvider>(context, listen: false).fetchusers();
+    // Provider.of<DetailsProvider>(context, listen: false).getpost();
+    isLoading = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userValues = Provider.of<DetailsProvider>(context);
+    final userValues = Provider.of<DetailsProvider>(
+      context,
+    );
+    print(userValues);
+    // print('${userValues.users[0].password}');
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -35,12 +43,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.add))
           ],
         ),
-        body: ListView.builder(
-            itemCount: userValues.users.length,
-            itemBuilder: ((context, index) => ListTile(
-                  title: Text(userValues.users[index].name!),
-                  subtitle: Text(userValues.users[index].email!),
-                  trailing: Text(userValues.users[index].phoneNo!.toString()),
-                ))));
+        body: isLoading
+            ? CircularProgressIndicator()
+            : ListView.builder(
+                itemCount: userValues.users.length,
+                itemBuilder: ((context, index) => ListTile(
+                      title: Text('${userValues.users[index].name}'),
+                      subtitle: Text('${userValues.users[index].email}'),
+                      trailing:
+                          Text(userValues.users[index].phoneNo.toString()),
+                    ))));
   }
 }

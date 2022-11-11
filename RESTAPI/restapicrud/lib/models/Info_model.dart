@@ -1,4 +1,28 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+/**class Photos {
+  List<Photo>? photos;
+  Photos({
+    this.photos,
+  });
+  factory Photos.fromJson(List<dynamic> json) {
+    List<Photo> photos = json.map((e) => Photo.fromJson(e)).toList();
+
+    return Photos(photos: photos);
+  }
+}
+ */
+class Users {
+  List<User>? users;
+  Users({
+    this.users,
+  });
+  factory Users.fromJson(List<dynamic> Json) {
+    print('json$Json');
+    List<User> Userslist = Json.map((e) => User.fromJson(e)).toList();
+    return Users(users: Userslist);
+  }
+}
+
 class User {
   String? id;
   String? name;
