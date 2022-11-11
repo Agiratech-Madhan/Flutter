@@ -13,6 +13,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    // Provider.of<DetailsProvider>(context, listen: false).fetchAndSetProduct();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final userValues = Provider.of<DetailsProvider>(context);
     return Scaffold(
