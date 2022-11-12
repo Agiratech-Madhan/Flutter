@@ -1,21 +1,30 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restapicrud/models/Info_model.dart';
 import 'package:restapicrud/providers/detailsprovider.dart';
 
 class EditScreen extends StatefulWidget {
-  const EditScreen({super.key});
+  static const routeName = '/edit-screen';
+  // final bool isAdd;
+
+  //  EditScreen({
+  //   required this.isAdd,
+  // });
 
   @override
   State<EditScreen> createState() => _EditScreenState();
 }
 
 class _EditScreenState extends State<EditScreen> {
-  User _editedUser = User(name: '', email: '', password: '', phoneNo: 0);
+  // bool? isAdd;
+  User _editedUser =
+      User(id: '', name: '', email: '', password: '', phoneNo: '');
 
   Map initValue = {'name': '', 'email': '', 'password': '', 'phoneNo': ''};
   bool isLoading = false;
-  Future<void> _save() async {
+  Future<void> _save(bool isadd) async {
+    print('save called');
     final isValid = _form.currentState!.validate();
     if (!isValid) {
       return;
@@ -25,19 +34,53 @@ class _EditScreenState extends State<EditScreen> {
       // print('update product');
       isLoading = true;
     });
-    Provider.of<DetailsProvider>(context, listen: false)
-        .addUser(_editedUser)
-        .then((value) => setState((() {
-              isLoading = false;
-            })));
-
+    if (isadd) {
+      await Provider.of<DetailsProvider>(context, listen: false)
+          .addUser(_editedUser);
+    } else {
+      // print('editorUser');
+      // print('editoruser Id${_editedUser.id}');
+      // print('editoruser name${_editedUser.name}');
+      // print('editoruser email${_editedUser.email}');
+      // print('editoruser passwrod${_editedUser.password}');
+      await Provider.of<DetailsProvider>(context, listen: false)
+          .updateUser(_editedUser.id!, _editedUser);
+    }
+    setState((() {
+      isLoading = false;
+    }));
     Navigator.pop(context);
   }
 
-  final _form = GlobalKey<FormState>();
+  bool _isInit = true;
+  var uservalues;
 
   @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      uservalues =
+          ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
+      print('diddependency called');
+      print(uservalues['id']);
+      if (uservalues['id'] != '') {
+        _editedUser = Provider.of<DetailsProvider>(context, listen: false)
+            .findById(uservalues['id']);
+        initValue = {
+          'name': _editedUser.name,
+          'email': _editedUser.email,
+          'password': _editedUser.password,
+          'phoneNo': _editedUser.phoneNo,
+        };
+      }
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
+  final _form = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
+    print(' edit screen${_editedUser.id}');
     return Scaffold(
       body: Center(
         child: isLoading
@@ -119,7 +162,7 @@ class _EditScreenState extends State<EditScreen> {
                                 name: _editedUser.name,
                                 email: _editedUser.email,
                                 password: _editedUser.password,
-                                phoneNo: int.parse(newValue!),
+                                phoneNo: newValue!,
                                 id: _editedUser.id,
                               );
                             },
@@ -145,7 +188,9 @@ class _EditScreenState extends State<EditScreen> {
                                   padding: const EdgeInsets.only(
                                       left: 8.0, right: 10),
                                   child: ElevatedButton(
-                                      onPressed: _save, child: Text('Save')),
+                                      onPressed: () =>
+                                          _save(uservalues['isAdd']),
+                                      child: Text('Save')),
                                 ),
                               ],
                             ),

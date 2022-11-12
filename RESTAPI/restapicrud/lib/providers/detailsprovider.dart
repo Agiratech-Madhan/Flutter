@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class DetailsProvider with ChangeNotifier {
-  List<User> _users = [
+  List<User> users = [
     // User(
     //     id: DateTime.now().toString(),
     //     name: 'user.name',
@@ -13,33 +13,35 @@ class DetailsProvider with ChangeNotifier {
     //     phoneNo: 343434)
   ];
 
-  Future<void> addUser(User user) {
-    final newUser = User(
-        id: DateTime.now().toString(),
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        phoneNo: user.phoneNo);
-    // final x = User.toJson(user);
-    _users.add(newUser);
-
-    notifyListeners();
+  Future<void> addUser(User user) async {
     final url = Uri.parse(
         'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
-    return http
-        .post(url,
-            body: json.encode({
-              'id': user.id,
-              'name': user.name,
-              'email': user.email,
-              'password': user.password,
-              'phoneNo': user.phoneNo
-            }))
-        .then((value) {
-      print('object');
-      print(json.decode(value.body));
-    });
+    try {
+      final value = http
+          .post(url,
+              body: json.encode({
+                'name': user.name,
+                'email': user.email,
+                'password': user.password,
+                'phoneNo': user.phoneNo
+              }))
+          .then((value) {
+        print('object');
+        print('${json.decode(value.body)['name']}');
+        final newUser = User(
+            id: json.decode(value.body)['name'],
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            phoneNo: user.phoneNo);
 
+        users.add(newUser);
+        print('users${users[0].id}');
+        notifyListeners();
+      });
+    } catch (e) {
+      rethrow;
+    }
     // print(user);
   }
 
@@ -52,18 +54,76 @@ class DetailsProvider with ChangeNotifier {
           json.decode(response.body) as Map<String, dynamic>;
       final List<User> usersList = [];
       extractedUserData.forEach((key, value) {
-        usersList.add(User.fromJson(value));
+        print('values$value');
+        usersList.add(User(
+                id: key,
+                name: value['name'],
+                email: value['email'],
+                password: value['password'],
+                phoneNo: value['PhoneNo'])
+
+            // User.fromJson(value)
+
+            );
       });
       print('object');
-      print(usersList);
-      _users = usersList;
+      users = usersList;
+
       notifyListeners();
+      print(users[0].id);
     } catch (e) {
       rethrow;
     }
   }
 
-  List<User> get users {
-    return _users;
+  User findById(String id) {
+    return users.firstWhere((element) => element.id == id);
   }
-}
+
+  Future<void> updateUser(String id, User newUser) async {
+    final userIndex = users.indexWhere((element) => element.id == id);
+    print('userIndex$userIndex');
+    if (userIndex > 0) {
+      final url = Uri.parse(
+          'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
+      await http.patch(url,
+          body: json.encode({
+            'name': newUser.name,
+            'email': newUser.email,
+            'password': newUser.password,
+            'phoneNo': newUser.phoneNo
+          }));
+      print('old data email${users[userIndex].email}');
+      print(' new mail data${newUser.email}');
+
+      users[userIndex] = newUser;
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteUser(String id) async {
+    final url = Uri.parse(
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
+    final exisUser = users.indexWhere((element) => element.id == id);
+    users.removeAt(exisUser);
+    notifyListeners();
+    final response = await http.delete(url);
+  }
+}/**Future<void> updateProduct(String id, Product newProduct) async {
+    final profIndex = items_.indexWhere((element) => element.id == id);
+    if (profIndex >= 0) {
+      final url = Uri.parse(
+          'https://shop-app-4b081-default-rtdb.firebaseio.com/products/$id.json?auth=$authtoken');
+      await http.patch(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price
+          }));
+      items_[profIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
+  } */
