@@ -50,6 +50,14 @@ class DetailsProvider with ChangeNotifier {
         'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
     try {
       final response = await http.get(url);
+      print('response${response.contentLength}');
+      print('response headers${response.headers}');
+      print('response is redirect ${response.isRedirect}');
+      print('response persistentConnection${response.persistentConnection}');
+      print('response request${response.request}');
+      print('response statusCode${response.statusCode}');
+      print('response body${response.body}');
+
       final extractedUserData =
           json.decode(response.body) as Map<String, dynamic>;
       final List<User> usersList = [];
@@ -60,7 +68,7 @@ class DetailsProvider with ChangeNotifier {
                 name: value['name'],
                 email: value['email'],
                 password: value['password'],
-                phoneNo: value['PhoneNo'])
+                phoneNo: value['phoneNo'])
 
             // User.fromJson(value)
 
@@ -82,21 +90,32 @@ class DetailsProvider with ChangeNotifier {
 
   Future<void> updateUser(String id, User newUser) async {
     final userIndex = users.indexWhere((element) => element.id == id);
+    print(id);
+    print('update index$userIndex');
+    print('userIndex\$${newUser.name}');
     print('userIndex$userIndex');
-    if (userIndex > 0) {
+    print('userIndex$userIndex');
+    print('userIndex$userIndex');
+    if (userIndex >= 0) {
+      print('data matched');
       final url = Uri.parse(
           'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
-      await http.patch(url,
-          body: json.encode({
-            'name': newUser.name,
-            'email': newUser.email,
-            'password': newUser.password,
-            'phoneNo': newUser.phoneNo
-          }));
+      await http
+          .patch(url,
+              body: json.encode({
+                'name': newUser.name,
+                'email': newUser.email,
+                'password': newUser.password,
+                'phoneNo': newUser.phoneNo
+              }))
+          .then((value) {
+        print(value);
+      });
       print('old data email${users[userIndex].email}');
       print(' new mail data${newUser.email}');
 
       users[userIndex] = newUser;
+
       notifyListeners();
     }
   }
