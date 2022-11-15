@@ -23,4 +23,27 @@ class PhotoProvider with ChangeNotifier {
     photodata = response;
     notifyListeners();
   }
+
+  Future<Photo> updateAlbum(Photo photo, int id) async {
+    var x = json.encode(photo.toJson());
+    final responses = await http.put(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: x,
+    );
+
+    print(responses.statusCode);
+    if (responses.statusCode == 200) {
+      print(photodata);
+
+      print(responses.body);
+      var updatevalue = Photo.fromJson(jsonDecode(responses.body));
+      notifyListeners();
+      return updatevalue;
+    } else {
+      throw Exception('Failed to update album.');
+    }
+  }
 }
