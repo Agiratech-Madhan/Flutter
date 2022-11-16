@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HttpExample extends StatefulWidget {
+  const HttpExample({super.key});
 
   @override
-  State<HomePage> createState() {
-    return _HomePageState();
+  State<HttpExample> createState() {
+    return _HttpExampleState();
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _HttpExampleState extends State<HttpExample> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController idcontroller = TextEditingController();
   late Future<Album> _futureAlbum;
@@ -101,6 +101,7 @@ Future<Album> updateAlbum(Album album) async {
     },
     body: x,
   );
+
   if (response.statusCode == 200) {
     return Album.fromJson(jsonDecode(response.body));
   } else {
