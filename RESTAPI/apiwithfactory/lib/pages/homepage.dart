@@ -89,6 +89,16 @@ class _HomePageState extends State<HomePage> {
 
   showdialogue(
       BuildContext context, PhotoProvider providervalue, int? ids) async {
+    final photodataIndex = providervalue.photodata!.photos!
+        .indexWhere((element) => element.id == ids);
+    int? exisId;
+    String? existtitle;
+    if (ids != 0) {
+      existtitle = providervalue.photodata!.photos![photodataIndex].title;
+      exisId = providervalue.photodata!.photos![photodataIndex].id;
+    } else {}
+    // print(providervalue.photodata!.photos![photodataIndex].title);
+    // print(providervalue.photodata!.photos![photodataIndex].id);
     showDialog(
         context: (context),
         builder: ((context) => AlertDialog(
@@ -97,13 +107,15 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       TextField(
                         controller: titlecontroller,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                          labelText: existtitle,
                           hintText: 'Enter Title',
                         ),
                       ),
                       TextField(
                         controller: idcontroller,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                          labelText: (ids != 0) ? exisId.toString() : null,
                           hintText: 'Enter id',
                         ),
                       ),
