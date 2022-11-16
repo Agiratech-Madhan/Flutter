@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                               titlecontroller.text = '';
                               return Navigator.of(context).pop();
                             },
-                            child: Text('Okay'))
+                            child: Text(ids == 0 ? 'Add' : 'Update'))
                       ],
                     )
                   ],
