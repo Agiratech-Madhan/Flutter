@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('api'),
+        title: Text('API EXAMPLE'),
         actions: [
           IconButton(
               onPressed: () async {
@@ -78,7 +78,10 @@ class _HomePageState extends State<HomePage> {
 
                                   providervalue.deleteUser(ids!);
                                 },
-                                icon: Icon(Icons.delete))
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ))
                           ],
                         ),
                       )),
