@@ -1,7 +1,9 @@
 import 'package:apiwithfactory/models/photomodel.dart';
+import 'package:apiwithfactory/provider/photoprovider.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class EditPhoto extends StatefulWidget {
   static const routeName = '/edit-screen';
@@ -15,59 +17,128 @@ class _EditPhotoState extends State<EditPhoto> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController idcontroller = TextEditingController();
   late Future<Photos> _futureAlbum;
+  late Future<Photo> _album;
+
+  Future<dynamic> editscreen(
+      BuildContext context, PhotoProvider providervalue, int? ids) {
+    return showDialog(
+        context: (context),
+        builder: ((context) => AlertDialog(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        controller: titlecontroller,
+                        decoration: const InputDecoration(
+                          hintText: 'Enter Title',
+                        ),
+                      ),
+                      TextField(
+                        controller: idcontroller,
+                        decoration: const InputDecoration(
+                          hintText: 'Enter id',
+                        ),
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Cancel')),
+                        TextButton(
+                            onPressed: () {
+                              Photo photosdd =
+                                  Photo(title: titlecontroller.text);
+                              setState(() {
+                                _album =
+                                    providervalue.updateAlbum(photosdd, ids!);
+                              });
+                              idcontroller.text = '';
+                              titlecontroller.text = '';
+                              return Navigator.of(context).pop();
+                            },
+                            child: Text('Okay'))
+                      ],
+                    )
+                  ],
+                )
+
+            //  EditPhoto(id: id!,)
+
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          showDialog(
-              context: (context),
-              builder: ((context) => AlertDialog(
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextField(
-                          controller: titlecontroller,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter Title',
-                          ),
+    final providervalue = Provider.of<PhotoProvider>(
+      context,
+    );
+    return
+        // IconButton(
+        //                     onPressed: () {
+        //                       print(providervalue.photodata!.photos![index]);
+        //                       int? ids =
+        //                           providervalue.photodata!.photos![index].id;
+        //                       editscreen(context, providervalue, ids);
+        //                     },
+        //                     icon: Icon(Icons.edit))
+
+        IconButton(
+            onPressed: () {
+              showDialog(
+                  context: (context),
+                  builder: ((context) => AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              controller: titlecontroller,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter Title',
+                              ),
+                            ),
+                            TextField(
+                              controller: idcontroller,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter id',
+                              ),
+                            ),
+                          ],
                         ),
-                        TextField(
-                          controller: idcontroller,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter id',
-                          ),
-                        ),
-                      ],
-                    ),
-                    actions: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                Photo photosdd = Photo(
-                                    // id: int.parse(idcontroller.text),
-                                    title: titlecontroller.text);
-                                setState(() {
-                                  // print(
-                                  //     'updated values of photo');
-                                  // print(photosdd.id);
-                                  // print(photosdd.title);
-                                  // print(ids);
-                                  updateAlbum(photosdd, 6);
-                                });
-                                // Navigator.of(context)
-                                //     .pop();
-                              },
-                              child: Text('Cancel')),
-                          TextButton(onPressed: () {}, child: Text('Okay'))
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                  onPressed: () async {
+                                    Photo photosdd = Photo(
+                                        // id: int.parse(idcontroller.text),
+                                        title: titlecontroller.text);
+                                    // setState(() {
+                                    // print(
+                                    //     'updated values of photo');
+                                    // print(photosdd.id);
+                                    // print(photosdd.title);
+                                    // print(ids);
+                                    final x = await providervalue.updateAlbum(
+                                        photosdd, 6);
+                                    // });
+                                    // Navigator.of(context)
+                                    //     .pop();
+                                  },
+                                  child: Text('Cancel')),
+                              TextButton(onPressed: () {}, child: Text('Okay'))
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  )));
-        },
-        icon: Icon(Icons.edit));
+                      )));
+            },
+            icon: Icon(Icons.edit));
   }
 }
 
