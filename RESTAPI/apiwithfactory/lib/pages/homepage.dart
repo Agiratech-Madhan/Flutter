@@ -49,17 +49,38 @@ class _HomePageState extends State<HomePage> {
               ? ListView.builder(
                   itemCount: providervalue.photodata!.photos!.length,
                   itemBuilder: ((context, index) => ListTile(
-                        leading: Text(providervalue
-                            .photodata!.photos![index].title
+                        leading: Text(providervalue.photodata!.photos![index].id
                             .toString()),
-                        trailing: IconButton(
-                            onPressed: () async {
-                              print(providervalue.photodata!.photos![index]);
-                              int? ids =
-                                  providervalue.photodata!.photos![index].id;
-                              await showdialogue(context, providervalue, ids);
-                            },
-                            icon: Icon(Icons.edit)),
+                        title: Text(
+                          providervalue.photodata!.photos![index].title
+                              .toString(),
+                          // softWrap: true,
+                          // textWidthBasis: TextWidthBasis.parent
+                        ),
+                        trailing: Row(
+                          // mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                                onPressed: () async {
+                                  print(
+                                      providervalue.photodata!.photos![index]);
+                                  int? ids = providervalue
+                                      .photodata!.photos![index].id;
+                                  await showdialogue(
+                                      context, providervalue, ids);
+                                },
+                                icon: Icon(Icons.edit)),
+                            IconButton(
+                                onPressed: () {
+                                  int? ids = providervalue
+                                      .photodata!.photos![index].id;
+
+                                  providervalue.deleteUser(ids!);
+                                },
+                                icon: Icon(Icons.delete))
+                          ],
+                        ),
                       )),
                 )
               : CircularProgressIndicator()),

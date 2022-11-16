@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class PhotoProvider with ChangeNotifier {
   Photos? photodata;
-  List<Photo> photodatas = [];
+  // dynamic photodatas = [];
 
   Future<Photos> loadphoto() async {
     final response = await http.get(
@@ -42,7 +42,12 @@ class PhotoProvider with ChangeNotifier {
 
     if (response.statusCode == 201) {
       var newValue = Photo.fromJson(jsonDecode(response.body));
-      photodatas.add(newValue);
+      photodata!.photos!.add(newValue);
+      // photodatas.add(newValue);
+      // photodata = photodatas;
+      print('created value');
+      // print(photodatas);
+      // photodata.add(newValue);
       notifyListeners();
       return newValue;
     } else {
@@ -93,5 +98,18 @@ class PhotoProvider with ChangeNotifier {
     } else {
       throw Exception('Failed to update album.');
     }
+  }
+
+  Future<void> deleteUser(int id) async {
+    final url = Uri.parse(
+        'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
+    final photodataIndex =
+        photodata!.photos!.indexWhere((element) => element.id == id);
+    final response = await http.delete(url);
+    if (response.statusCode == 200) {
+      photodata!.photos!.removeAt(photodataIndex);
+      notifyListeners();
+    }
+    // final existPhoto = photodatas.indexWhere((element) => element.id == id);
   }
 }
