@@ -34,7 +34,6 @@ class DetailsProvider with ChangeNotifier {
             email: user.email,
             password: user.password,
             phoneNo: user.phoneNo);
-
         users.add(newUser);
         print('users${users[0].id}');
         notifyListeners();

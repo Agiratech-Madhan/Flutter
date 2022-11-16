@@ -39,11 +39,11 @@ class User {
         password: json['password'],
         phoneNo: json['phoneNo']);
   }
-  // Map<String, dynamic> toJson() => {
-  //       'id': this.id,
-  //       'name': this.name,
-  //       'email': this.email,
-  //       'password': this.password,
-  //       'phoneNo': this.phoneNo
-  //     };
+  Map<String, dynamic> toJson() => {
+        'id': this.id,
+        'name': this.name,
+        'email': this.email,
+        'password': this.password,
+        'phoneNo': this.phoneNo
+      };
 }
