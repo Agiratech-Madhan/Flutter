@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final userValues = Provider.of<DetailsProvider>(
       context,
     );
-    // print(userValues.users[0].phoneNo);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -52,9 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text('${userValues.users[index].email}'),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          // child: Text(userValues.users[index].phoneNo!),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
                         )
                       ],
                     ),
@@ -65,15 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           IconButton(
                               color: Colors.blue,
                               onPressed: () {
-                                print(
-                                    'id of edited product${userValues.users[index].id}');
                                 final id =
                                     userValues.users[index].id.toString();
                                 Navigator.of(context).pushNamed(
                                     EditScreen.routeName,
                                     arguments: {'id': id, 'isAdd': false});
                               },
-                              icon: Icon(Icons.edit)),
+                              icon: const Icon(Icons.edit)),
                           IconButton(
                               color: Colors.red,
                               onPressed: () {
@@ -82,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .deleteUser(
                                         userValues.users[index].id.toString());
                               },
-                              icon: Icon(Icons.delete)),
+                              icon: const Icon(Icons.delete)),
                         ],
                       ),
                     ),

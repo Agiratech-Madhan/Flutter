@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restapicrud/models/Info_model.dart';
@@ -6,60 +5,51 @@ import '../providers/detailsprovider.dart';
 
 class EditScreen extends StatefulWidget {
   static const routeName = '/edit-screen';
+
+  const EditScreen({super.key});
   @override
   State<EditScreen> createState() => _EditScreenState();
 }
 
 class _EditScreenState extends State<EditScreen> {
-  // bool? isAdd;
   User _editedUser =
       User(id: '', name: '', email: '', password: '', phoneNo: '');
 
   Map initValue = {'name': '', 'email': '', 'password': '', 'phoneNo': ''};
   bool isLoading = false;
   Future<void> _save(bool isadd) async {
-    print('save called');
     final isValid = _form.currentState!.validate();
     if (!isValid) {
       return;
     }
     _form.currentState!.save();
     setState(() {
-      // print('update product');
       isLoading = true;
     });
     if (isadd) {
       await Provider.of<DetailsProvider>(context, listen: false)
           .addUser(_editedUser);
     } else {
-      print('editorUser');
-      print('editoruser Id${_editedUser.id}');
-      print('editoruser name${_editedUser.name}');
-      print('editoruser email${_editedUser.email}');
-      print('editoruser passwrod${_editedUser.password}');
       await Provider.of<DetailsProvider>(context, listen: false)
           .updateUser(_editedUser.id!, _editedUser);
     }
     setState((() {
       isLoading = false;
     }));
-    Navigator.pop(context);
   }
 
   bool _isInit = true;
-  var uservalues;
+  dynamic uservalues;
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
       uservalues =
           ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
-      print('diddependency called');
-      print(uservalues['id']);
+
       if (uservalues['id'] != '') {
         _editedUser = Provider.of<DetailsProvider>(context, listen: false)
             .findById(uservalues['id']);
-        print(_editedUser.phoneNo);
         initValue = {
           'name': _editedUser.name,
           'email': _editedUser.email,
@@ -75,16 +65,13 @@ class _EditScreenState extends State<EditScreen> {
   final _form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    print(' edit screen${_editedUser.id}');
     return Scaffold(
       body: Center(
         child: isLoading
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : SingleChildScrollView(
                 child: SizedBox(
-                  // padding: EdgeInsets.all(10),
                   width: MediaQuery.of(context).size.width * 0.8,
-                  // height: MediaQuery.of(context).size.height * 0.50,
                   child: Card(
                     child: Form(
                         key: _form,
@@ -98,7 +85,7 @@ class _EditScreenState extends State<EditScreen> {
                                 children: [
                                   TextFormField(
                                     decoration:
-                                        InputDecoration(hintText: 'Name'),
+                                        const InputDecoration(hintText: 'Name'),
                                     initialValue: initValue['name'],
                                     keyboardType: TextInputType.name,
                                     onSaved: (newValue) {
@@ -118,8 +105,8 @@ class _EditScreenState extends State<EditScreen> {
                                     },
                                   ),
                                   TextFormField(
-                                    decoration:
-                                        InputDecoration(hintText: 'email'),
+                                    decoration: const InputDecoration(
+                                        hintText: 'email'),
                                     initialValue: initValue['email'],
                                     keyboardType: TextInputType.emailAddress,
                                     onSaved: (newValue) {
@@ -140,8 +127,8 @@ class _EditScreenState extends State<EditScreen> {
                                     },
                                   ),
                                   TextFormField(
-                                    decoration:
-                                        InputDecoration(hintText: 'password'),
+                                    decoration: const InputDecoration(
+                                        hintText: 'password'),
                                     initialValue: initValue['password'],
                                     keyboardType: TextInputType.visiblePassword,
                                     onSaved: (newValue) {
@@ -154,8 +141,6 @@ class _EditScreenState extends State<EditScreen> {
                                       );
                                     },
                                     validator: (value) {
-                                      // print(value?.contains('@'));
-
                                       if (value!.isEmpty) {
                                         return 'please enter value';
                                       }
@@ -164,8 +149,8 @@ class _EditScreenState extends State<EditScreen> {
                                     },
                                   ),
                                   TextFormField(
-                                    decoration:
-                                        InputDecoration(hintText: 'Phone'),
+                                    decoration: const InputDecoration(
+                                        hintText: 'Phone'),
                                     initialValue: initValue['phoneNo'],
                                     keyboardType: TextInputType.number,
                                     onSaved: (newValue) {
@@ -187,7 +172,7 @@ class _EditScreenState extends State<EditScreen> {
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.only(top: 10.0),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -196,13 +181,15 @@ class _EditScreenState extends State<EditScreen> {
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('Cancel')),
+                                        child: const Text('Cancel')),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           left: 8.0, right: 10),
                                       child: ElevatedButton(
-                                          onPressed: () =>
-                                              _save(uservalues['isAdd']),
+                                          onPressed: () {
+                                            _save(uservalues['isAdd']);
+                                            Navigator.pop(context);
+                                          },
                                           child: Text(uservalues['isAdd']
                                               ? 'Save'
                                               : 'Update')),

@@ -9,7 +9,7 @@ void main() {
       create: (context) => DetailsProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
-        routes: {EditScreen.routeName: (context) => EditScreen()},
+        home: const HomeScreen(),
+        routes: {EditScreen.routeName: (context) => const EditScreen()},
       )));
 }
