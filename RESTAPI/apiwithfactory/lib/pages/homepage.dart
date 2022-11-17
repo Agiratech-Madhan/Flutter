@@ -1,11 +1,7 @@
-import 'package:apiwithfactory/models/photomodel.dart';
-import 'package:apiwithfactory/provider/photoprovider.dart';
-// import 'package:apiwithfactory/widgets/editphoto.dart';
+import '../models/photomodel.dart';
+import '../provider/photoprovider.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,12 +13,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController idcontroller = TextEditingController();
-  late Future<Photos> _futureAlbum;
-  late Future<Photo> _album;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<PhotoProvider>(context, listen: false).getvalues();
   }
@@ -35,13 +28,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('API EXAMPLE'),
+        title: const Text('API EXAMPLE'),
         actions: [
           IconButton(
               onPressed: () async {
                 await showdialogue(context, providervalue, 0);
               },
-              icon: Icon(Icons.add))
+              icon: const Icon(Icons.add))
         ],
       ),
       body: Center(
@@ -54,23 +47,19 @@ class _HomePageState extends State<HomePage> {
                         title: Text(
                           providervalue.photodata!.photos![index].title
                               .toString(),
-                          // softWrap: true,
-                          // textWidthBasis: TextWidthBasis.parent
                         ),
                         trailing: Row(
-                          // mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                                 onPressed: () async {
-                                  print(
-                                      providervalue.photodata!.photos![index]);
                                   int? ids = providervalue
                                       .photodata!.photos![index].id;
+
                                   await showdialogue(
                                       context, providervalue, ids);
                                 },
-                                icon: Icon(Icons.edit)),
+                                icon: const Icon(Icons.edit)),
                             IconButton(
                                 onPressed: () {
                                   int? ids = providervalue
@@ -78,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 
                                   providervalue.deleteUser(ids!);
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.delete,
                                   color: Colors.red,
                                 ))
@@ -86,11 +75,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                       )),
                 )
-              : CircularProgressIndicator()),
+              : const CircularProgressIndicator()),
     );
   }
 
-  showdialogue(
+  Future<void> showdialogue(
       BuildContext context, PhotoProvider providervalue, int? ids) async {
     final photodataIndex = providervalue.photodata!.photos!
         .indexWhere((element) => element.id == ids);
@@ -100,66 +89,58 @@ class _HomePageState extends State<HomePage> {
       existtitle = providervalue.photodata!.photos![photodataIndex].title;
       exisId = providervalue.photodata!.photos![photodataIndex].id;
     } else {}
-    // print(providervalue.photodata!.photos![photodataIndex].title);
-    // print(providervalue.photodata!.photos![photodataIndex].id);
     showDialog(
         context: (context),
         builder: ((context) => AlertDialog(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        controller: titlecontroller,
-                        decoration: InputDecoration(
-                          labelText: existtitle,
-                          hintText: 'Enter Title',
-                        ),
-                      ),
-                      TextField(
-                        controller: idcontroller,
-                        decoration: InputDecoration(
-                          labelText: (ids != 0) ? exisId.toString() : null,
-                          hintText: 'Enter id',
-                        ),
-                      ),
-                    ],
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: titlecontroller,
+                    decoration: InputDecoration(
+                      labelText: existtitle,
+                      hintText: 'Enter Title',
+                    ),
                   ),
-                  actions: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('Cancel')),
-                        TextButton(
-                            onPressed: () async {
-                              Photo photonew = Photo(
-                                  title: titlecontroller.text,
-                                  id: int.parse(idcontroller.text));
-                              if (ids == 0) {
-                                // providervalue
-                                providervalue.createAlbum(
-                                    photonew, idcontroller.text);
-                              } else {
-                                Photo photosdd =
-                                    Photo(title: titlecontroller.text);
-                                await providervalue.updateAlbum(photosdd, ids!);
-                              }
+                  TextField(
+                    controller: idcontroller,
+                    decoration: InputDecoration(
+                      labelText: (ids != 0) ? exisId.toString() : null,
+                      hintText: 'Enter id',
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Cancel')),
+                    TextButton(
+                        onPressed: () async {
+                          Photo photonew = Photo(
+                              title: titlecontroller.text,
+                              id: int.parse(idcontroller.text));
+                          if (ids == 0) {
+                            providervalue.createAlbum(
+                                photonew, idcontroller.text);
+                          } else {
+                            Photo photosdd = Photo(title: titlecontroller.text);
+                            providervalue.updateAlbum(photosdd, ids!);
+                          }
 
-                              idcontroller.text = '';
-                              titlecontroller.text = '';
-                              return Navigator.of(context).pop();
-                            },
-                            child: Text(ids == 0 ? 'Add' : 'Update'))
-                      ],
-                    )
+                          idcontroller.text = '';
+                          titlecontroller.text = '';
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(ids == 0 ? 'Add' : 'Update'))
                   ],
                 )
-
-            //  EditPhoto(id: id!,)
-
-            ));
+              ],
+            )));
   }
 }

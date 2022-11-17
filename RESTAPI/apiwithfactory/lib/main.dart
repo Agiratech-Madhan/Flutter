@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(ChangeNotifierProvider(
     create: (context) => PhotoProvider(),
-    child: MaterialApp(
+    child: const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     ),
