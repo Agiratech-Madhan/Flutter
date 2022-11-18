@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../screens/editScreen.dart';
 import '../providers/detailsprovider.dart';
 import '../routes/routes.dart' as route;
 

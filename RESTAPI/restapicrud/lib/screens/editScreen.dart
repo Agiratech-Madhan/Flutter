@@ -46,14 +46,10 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   bool _isInit = true;
-  // dynamic uservalues;
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      // uservalues =
-      //     ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
-
       if (widget.id != '') {
         _editedUser = Provider.of<DetailsProvider>(context, listen: false)
             .findById(widget.id);

@@ -3,13 +3,13 @@ import 'package:restapicrud/screens/editScreen.dart';
 import 'package:restapicrud/screens/homeScreen.dart';
 
 const editUser = '/edit-user';
-const r_home_page = '/home-page';
+const homePage = '/home-page';
 
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
-    case r_home_page:
+    case homePage:
       return MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+        builder: (context) => const HomeScreen(),
       );
     case editUser:
       var data = settings.arguments as Map<String, dynamic>;
