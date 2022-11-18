@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../screens/editScreen.dart';
 import '../providers/detailsprovider.dart';
+import '../routes/routes.dart' as route;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final userValues = Provider.of<DetailsProvider>(
       context,
     );
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(EditScreen.routeName,
+                Navigator.of(context).pushNamed(route.editUser,
                     arguments: {'id': '', 'isAdd': true});
               },
               icon: const Icon(Icons.add))
@@ -66,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: () {
                                 final id =
                                     userValues.users[index].id.toString();
-                                Navigator.of(context).pushNamed(
-                                    EditScreen.routeName,
+
+                                Navigator.of(context).pushNamed(route.editUser,
                                     arguments: {'id': id, 'isAdd': false});
                               },
                               icon: const Icon(Icons.edit)),
@@ -88,8 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.of(context).pushNamed(EditScreen.routeName,
-              arguments: {'id': '', 'isAdd': true});
+          Navigator.of(context)
+              .pushNamed(route.editUser, arguments: {'id': '', 'isAdd': true});
         },
         label: Row(
           children: const [

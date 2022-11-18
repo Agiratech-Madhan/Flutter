@@ -1,12 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restapicrud/models/Info_model.dart';
+
 import '../providers/detailsprovider.dart';
 
 class EditScreen extends StatefulWidget {
   static const routeName = '/edit-screen';
-
-  const EditScreen({super.key});
+  final String id;
+  final bool isAdd;
+  const EditScreen({
+    Key? key,
+    required this.id,
+    required this.isAdd,
+  }) : super(key: key);
   @override
   State<EditScreen> createState() => _EditScreenState();
 }
@@ -39,17 +46,17 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   bool _isInit = true;
-  dynamic uservalues;
+  // dynamic uservalues;
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      uservalues =
-          ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
+      // uservalues =
+      //     ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
 
-      if (uservalues['id'] != '') {
+      if (widget.id != '') {
         _editedUser = Provider.of<DetailsProvider>(context, listen: false)
-            .findById(uservalues['id']);
+            .findById(widget.id);
         initValue = {
           'name': _editedUser.name,
           'email': _editedUser.email,
@@ -187,10 +194,10 @@ class _EditScreenState extends State<EditScreen> {
                                           left: 8.0, right: 10),
                                       child: ElevatedButton(
                                           onPressed: () {
-                                            _save(uservalues['isAdd']);
+                                            _save(widget.isAdd);
                                             Navigator.pop(context);
                                           },
-                                          child: Text(uservalues['isAdd']
+                                          child: Text(widget.isAdd
                                               ? 'Save'
                                               : 'Update')),
                                     ),
