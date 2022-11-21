@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restapicrud/models/Info_model.dart';
 import '../providers/detailsprovider.dart';
 import '../routes/routes.dart' as route;
 
@@ -11,16 +12,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<List<User>>? futureUser;
   bool isLoading = false;
   bool isadd = true;
   bool isedit = true;
   @override
   void initState() {
     super.initState();
-    isLoading = true;
-
-    Provider.of<DetailsProvider>(context, listen: false).fetchusers();
-    isLoading = false;
+    futureUser =
+        Provider.of<DetailsProvider>(context, listen: false).fetchusers();
   }
 
   @override
@@ -41,16 +41,18 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: isLoading
-          ? const CircularProgressIndicator()
-          : ListView.builder(
-              itemCount: userValues.users.length,
+      body: FutureBuilder(
+        future: futureUser,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data?.length,
               itemBuilder: ((context, index) => ListTile(
-                    title: Text('${userValues.users[index].name}'),
+                    title: Text('${snapshot.data![index].name}'),
                     subtitle: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('${userValues.users[index].email}'),
+                        Text('${snapshot.data![index].email}'),
                         const Padding(
                           padding: EdgeInsets.only(left: 8.0),
                         )
@@ -83,7 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   )),
-            ),
+            );
+          } else if (snapshot.hasError) {
+            return const Center(child: Text('Error occured in server'));
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

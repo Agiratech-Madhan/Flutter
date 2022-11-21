@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../models/Info_model.dart';
 import 'package:http/http.dart' as http;
@@ -5,7 +6,6 @@ import 'dart:convert';
 
 class DetailsProvider with ChangeNotifier {
   List<User> users = [];
-
   Future<void> addUser(User user) async {
     final url = Uri.parse(
         'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
@@ -33,7 +33,7 @@ class DetailsProvider with ChangeNotifier {
     }
   }
 
-  Future<void> fetchusers() async {
+  Future<List<User>> fetchusers() async {
     final url = Uri.parse(
         'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
     try {
@@ -51,8 +51,8 @@ class DetailsProvider with ChangeNotifier {
             phoneNo: value['phoneNo']));
       });
       users = usersList;
-
       notifyListeners();
+      return users;
     } catch (e) {
       rethrow;
     }
