@@ -37,22 +37,23 @@ class DetailsProvider with ChangeNotifier {
     final url = Uri.parse(
         'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
     try {
-      final response = await http.get(url);
-
-      final extractedUserData =
-          json.decode(response.body) as Map<String, dynamic>;
-      final List<User> usersList = [];
-      extractedUserData.forEach((key, value) {
-        usersList.add(User(
-            id: key,
-            name: value['name'],
-            email: value['email'],
-            password: value['password'],
-            phoneNo: value['phoneNo']));
-      });
-      users = usersList;
-      notifyListeners();
-      return users;
+      {
+        final response = await http.get(url);
+        final extractedUserData =
+            json.decode(response.body) as Map<String, dynamic>;
+        final List<User> usersList = [];
+        extractedUserData.forEach((key, value) {
+          usersList.add(User(
+              id: key,
+              name: value['name'],
+              email: value['email'],
+              password: value['password'],
+              phoneNo: value['phoneNo']));
+        });
+        users = usersList;
+        notifyListeners();
+        return users;
+      }
     } catch (e) {
       rethrow;
     }
@@ -64,7 +65,6 @@ class DetailsProvider with ChangeNotifier {
 
   Future<void> updateUser(String id, User newUser) async {
     final userIndex = users.indexWhere((element) => element.id == id);
-
     if (userIndex >= 0) {
       final url = Uri.parse(
           'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');

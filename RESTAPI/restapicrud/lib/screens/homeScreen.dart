@@ -18,9 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isedit = true;
   @override
   void initState() {
+    Future.delayed(const Duration(seconds: 10), () {
+      futureUser =
+          Provider.of<DetailsProvider>(context, listen: false).fetchusers();
+    });
     super.initState();
-    futureUser =
-        Provider.of<DetailsProvider>(context, listen: false).fetchusers();
   }
 
   @override
@@ -86,9 +88,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )),
             );
+          } else if (snapshot.data == null) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              const Center(
+                child: Text('No Data found'),
+              );
+            }
           } else if (snapshot.hasError) {
             return const Center(child: Text('Error occured in server'));
           }
+
           return const Center(child: CircularProgressIndicator());
         },
       ),

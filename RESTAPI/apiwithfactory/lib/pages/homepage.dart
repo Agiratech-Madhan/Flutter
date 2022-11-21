@@ -18,8 +18,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<PhotoProvider>(context, listen: false).getvalues();
-
     futurePhoto =
         Provider.of<PhotoProvider>(context, listen: false).loadphoto();
   }
