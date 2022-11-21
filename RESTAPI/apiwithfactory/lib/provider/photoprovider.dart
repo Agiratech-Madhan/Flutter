@@ -1,3 +1,4 @@
+import 'package:apiwithfactory/models/custom_exception.dart';
 import 'package:apiwithfactory/models/photomodel.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -6,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class PhotoProvider with ChangeNotifier {
   Photos? photodata;
-
+  bool isOkay = true;
   Future<Photos> loadphoto() async {
     final response = await http.get(
       Uri.parse('https://jsonplaceholder.typicode.com/albums/'),
@@ -14,7 +15,6 @@ class PhotoProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       Photos x = Photos.fromJson(jsonDecode(response.body));
       photodata = x;
-
       notifyListeners();
       return x;
     } else {
@@ -70,13 +70,12 @@ class PhotoProvider with ChangeNotifier {
 
       return updatevalue;
     } else {
-      throw Exception('Failed to update album.');
+      throw OwnHttpException(message: 'Some Error Occured');
     }
   }
 
   Future<void> deleteUser(int id) async {
-    final url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
+    final url = Uri.parse('https://jsonplaceholder.typicode.com/albums/$id');
     final photodataIndex =
         photodata!.photos!.indexWhere((element) => element.id == id);
     final response = await http.delete(url);
