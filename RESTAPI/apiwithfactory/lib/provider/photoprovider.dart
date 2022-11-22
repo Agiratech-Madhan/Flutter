@@ -9,16 +9,17 @@ class PhotoProvider with ChangeNotifier {
   Photos? photodata;
   bool isOkay = true;
   Future<Photos> loadphoto() async {
-    final response = await http.get(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums/'),
-    );
-    if (response.statusCode == 200) {
+    try {
+      final response = await http.get(
+        Uri.parse('https://jsonplaceholder.typicode.com/photos'),
+      );
+
       Photos x = Photos.fromJson(jsonDecode(response.body));
       photodata = x;
       notifyListeners();
-      return x;
-    } else {
-      throw Exception('Failed to load album');
+      return photodata!;
+    } catch (e) {
+      throw CustomException(message: 'Failed to load Photos');
     }
   }
 
@@ -29,59 +30,58 @@ class PhotoProvider with ChangeNotifier {
   }
 
   Future<Photo> createAlbum(Photo photo, String id) async {
-    var x = json.encode(photo.toJson());
-    final response = await http.post(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: x,
-    );
-
-    if (response.statusCode == 201) {
+    try {
+      var x = json.encode(photo.toJson());
+      final response = await http.post(
+        Uri.parse('https://jsonplaceholder.typicode.com/photos'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: x,
+      );
       var newValue = Photo.fromJson(jsonDecode(response.body));
       photodata!.photos!.add(newValue);
-
       notifyListeners();
       return newValue;
-    } else {
-      throw Exception('Failed to create album.');
+    } catch (e) {
+      throw CustomException(message: 'Faild to Create  Photos');
     }
   }
 
   Future<Photo> updateAlbum(Photo photo, int id) async {
-    var x = json.encode(photo.toJson());
-    final photodataIndex =
-        photodata!.photos!.indexWhere((element) => element.id == id);
+    try {
+      var x = json.encode(photo.toJson());
+      final photodataIndex =
+          photodata!.photos!.indexWhere((element) => element.id == id);
 
-    final responses = await http.put(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums/$id'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: x,
-    );
-
-    if (responses.statusCode == 200) {
+      final responses = await http.put(
+        Uri.parse('https://jsonplaceholder.typicode.com/photos/$id'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: x,
+      );
       var updatevalue = Photo.fromJson(jsonDecode(responses.body));
       photodata!.photos![photodataIndex] = photo;
 
       notifyListeners();
 
       return updatevalue;
-    } else {
-      throw OwnHttpException(message: 'Some Error Occured');
+    } catch (e) {
+      throw CustomException(message: ' Failed to update data');
     }
   }
 
   Future<void> deleteUser(int id) async {
-    final url = Uri.parse('https://jsonplaceholder.typicode.com/albums/$id');
-    final photodataIndex =
-        photodata!.photos!.indexWhere((element) => element.id == id);
-    final response = await http.delete(url);
-    if (response.statusCode == 200) {
+    try {
+      final url = Uri.parse('https://jsonplaceholder.typicode.com/photos/$id');
+      final photodataIndex =
+          photodata!.photos!.indexWhere((element) => element.id == id);
+      await http.delete(url);
       photodata!.photos!.removeAt(photodataIndex);
       notifyListeners();
+    } catch (e) {
+      throw CustomException(message: ' Failed to delete Photos');
     }
   }
 }

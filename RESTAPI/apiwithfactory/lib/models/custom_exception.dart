@@ -1,11 +1,9 @@
-class OwnHttpException implements Exception {
-  final message;
+class CustomException implements Exception {
+  String? message;
 
-  OwnHttpException({required this.message});
+  CustomException({required this.message});
   @override
   String toString() {
-    print('ownwxceptions message $message');
-    return message;
-    // return super.toString(); //Instance of exception
+    return message!;
   }
 }

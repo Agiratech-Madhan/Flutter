@@ -1,3 +1,5 @@
+import 'package:apiwithfactory/models/custom_exception.dart';
+
 import '../models/photomodel.dart';
 import '../provider/photoprovider.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +13,38 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<Photos> futurePhoto;
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController idcontroller = TextEditingController();
+  bool isLoading = false;
+  void loadData() async {
+    try {
+      await Provider.of<PhotoProvider>(context, listen: false).getvalues();
+    } on CustomException catch (e) {
+      showMessage(e.toString());
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  void showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+        action: SnackBarAction(
+          textColor: Colors.blue,
+          label: 'OKAY',
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
-    futurePhoto =
-        Provider.of<PhotoProvider>(context, listen: false).loadphoto();
+    isLoading = true;
+    loadData();
   }
 
   @override
@@ -28,31 +53,27 @@ class _HomePageState extends State<HomePage> {
       context,
     );
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('API EXAMPLE'),
-        actions: [
-          IconButton(
-              onPressed: () async {
-                await showdialogue(context, providervalue, 0);
-              },
-              icon: const Icon(Icons.add))
-        ],
-      ),
-      body: Center(
-          child: FutureBuilder(
-              future: futurePhoto,
-              builder: ((context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: providervalue.photodata!.photos!.length,
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('API EXAMPLE'),
+          actions: [
+            IconButton(
+                onPressed: () async {
+                  await showdialogue(context, providervalue, 0);
+                },
+                icon: const Icon(Icons.add))
+          ],
+        ),
+        body: Center(
+            child: (isLoading)
+                ? const CircularProgressIndicator()
+                : ListView.builder(
+                    itemCount: providervalue.photodata?.photos!.length,
                     itemBuilder: ((context, index) => ListTile(
-                          leading: Text(providervalue
-                              .photodata!.photos![index].id
-                              .toString()),
+                          leading: Text(
+                              '${providervalue.photodata?.photos![index].id}'),
                           title: Text(
-                            providervalue.photodata!.photos![index].title
-                                .toString(),
+                            '${providervalue.photodata?.photos![index].title}',
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -60,8 +81,7 @@ class _HomePageState extends State<HomePage> {
                               IconButton(
                                   onPressed: () async {
                                     int? ids = providervalue
-                                        .photodata!.photos![index].id;
-
+                                        .photodata?.photos![index].id;
                                     await showdialogue(
                                         context, providervalue, ids);
                                   },
@@ -69,8 +89,7 @@ class _HomePageState extends State<HomePage> {
                               IconButton(
                                   onPressed: () {
                                     int? ids = providervalue
-                                        .photodata!.photos![index].id;
-
+                                        .photodata?.photos![index].id;
                                     providervalue.deleteUser(ids!);
                                   },
                                   icon: const Icon(
@@ -80,73 +99,18 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         )),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Some Error Occured'));
-                }
-                return const CircularProgressIndicator();
-              }))
-
-          /** 
-            
-            
-            
-             ListView.builder(
-                itemCount: providervalue.photodata!.photos!.length,
-                itemBuilder: ((context, index) => ListTile(
-                      leading: Text(providervalue.photodata!.photos![index].id
-                          .toString()),
-                      title: Text(
-                        providervalue.photodata!.photos![index].title
-                            .toString(),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                              onPressed: () async {
-                                int? ids =
-                                    providervalue.photodata!.photos![index].id;
-
-                                await showdialogue(context, providervalue, ids);
-                              },
-                              icon: const Icon(Icons.edit)),
-                          IconButton(
-                              onPressed: () {
-                                int? ids =
-                                    providervalue.photodata!.photos![index].id;
-
-                                providervalue.deleteUser(ids!);
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                              ))
-                        ],
-                      ),
-                    )),
-              )
-            : const CircularProgressIndicator(),
-
-
-
-
-
-
-            */
-          ),
-    );
+                  )));
   }
 
   Future<void> showdialogue(
       BuildContext context, PhotoProvider providervalue, int? ids) async {
-    final photodataIndex = providervalue.photodata!.photos!
+    int photodataIndex = providervalue.photodata!.photos!
         .indexWhere((element) => element.id == ids);
     int? exisId;
     String? existtitle;
     if (ids != 0) {
-      existtitle = providervalue.photodata!.photos![photodataIndex].title;
-      exisId = providervalue.photodata!.photos![photodataIndex].id;
+      existtitle = providervalue.photodata?.photos![photodataIndex].title;
+      exisId = providervalue.photodata?.photos![photodataIndex].id;
     } else {}
     showDialog(
       context: (context),
@@ -184,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () async {
                         Photo photonew = Photo(
                           title: titlecontroller.text,
-                          // id: int.parse(idcontroller.text),
                         );
                         if (ids == 0) {
                           providervalue.createAlbum(
