@@ -21,14 +21,14 @@ class _HomePageState extends State<HomePage> {
     try {
       await Provider.of<PhotoProvider>(context, listen: false).getvalues();
     } on CustomException catch (e) {
-      showMessage(context, e.toString());
+      showMessage(e.toString());
     } finally {
       isLoading = false;
     }
     isLoading = false;
   }
 
-  void showMessage(BuildContext context, String message) {
+  void showMessage(String message) {
     // print('object');
     // showDialog(
     //   context: context,
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                                     try {
                                       await providervalue.deleteUser(ids!);
                                     } on CustomException catch (e) {
-                                      showMessage(context, e.toString());
+                                      showMessage(e.toString());
                                     }
                                   },
                                   icon: const Icon(
@@ -137,7 +137,19 @@ class _HomePageState extends State<HomePage> {
             existtitle: existtitle,
             ids: ids,
             exisId: exisId,
-            // showMessage: () => showMessage,
+            showMessage: (String message) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(message),
+                  duration: const Duration(seconds: 2),
+                  action: SnackBarAction(
+                    textColor: Colors.blue,
+                    label: 'OKAY',
+                    onPressed: () {},
+                  ),
+                ),
+              );
+            },
           )),
     );
   }

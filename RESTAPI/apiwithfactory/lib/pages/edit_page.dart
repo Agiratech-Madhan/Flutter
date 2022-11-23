@@ -8,44 +8,43 @@ class EditPage extends StatefulWidget {
   String? existtitle;
   int? ids;
   int? exisId;
-  // Function? showMessage;
-  EditPage({
-    super.key,
-    this.existtitle,
-    this.ids,
-    this.exisId,
-    // required this.showMessage
-  });
+  Function? showMessage;
+  EditPage(
+      {super.key,
+      this.existtitle,
+      this.ids,
+      this.exisId,
+      required this.showMessage});
 
   @override
   State<EditPage> createState() => _EditPageState();
 }
 
 class _EditPageState extends State<EditPage> {
-  void showMessage(BuildContext context, String message) {
-    print('object');
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => AlertDialog(
-    //     content: Text(message),
-    //     actions: [
-    //       TextButton(
-    //           onPressed: () => Navigator.of(context).pop(), child: Text('Okay'))
-    //     ],
-    //   ),
-    // );
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 2),
-        action: SnackBarAction(
-          textColor: Colors.blue,
-          label: 'OKAY',
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
+  // void showMessage(BuildContext context, String message) {
+  //   print('object');
+  //   // showDialog(
+  //   //   context: context,
+  //   //   builder: (context) => AlertDialog(
+  //   //     content: Text(message),
+  //   //     actions: [
+  //   //       TextButton(
+  //   //           onPressed: () => Navigator.of(context).pop(), child: Text('Okay'))
+  //   //     ],
+  //   //   ),
+  //   // );
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text(message),
+  //       duration: const Duration(seconds: 2),
+  //       action: SnackBarAction(
+  //         textColor: Colors.blue,
+  //         label: 'OKAY',
+  //         onPressed: () {},
+  //       ),
+  //     ),
+  //   );
+  // }
 
   final TextEditingController titlecontroller = TextEditingController();
 
@@ -98,8 +97,10 @@ class _EditPageState extends State<EditPage> {
                       //          idcontroller.text = '';
                       // titlecontroller.text = '';
                     } on CustomException catch (e) {
-                      showMessage(context, e.toString());
+                      // showMessage(context, e.toString());
+                      widget.showMessage!(e.toString());
                     }
+                    // Navigator.of(context).pop();
                   } else {
                     try {
                       Photo photosdd = Photo(
@@ -107,7 +108,8 @@ class _EditPageState extends State<EditPage> {
                           id: int.parse(idcontroller.text));
                       await providervalue.updateAlbum(photosdd, widget.ids!);
                     } on CustomException catch (e) {
-                      showMessage(context, e.toString());
+                      // showMessage(context, e.toString());
+                      widget.showMessage!(e.toString());
                     }
                   }
 

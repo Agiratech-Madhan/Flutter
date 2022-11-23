@@ -33,7 +33,7 @@ class PhotoProvider with ChangeNotifier {
     try {
       var x = json.encode(photo.toJson());
       final response = await http.post(
-        Uri.parse('https://jsonplaceholder.typicode.com/photos'),
+        Uri.parse('https://jsonplaceholdicode.com/photos'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
