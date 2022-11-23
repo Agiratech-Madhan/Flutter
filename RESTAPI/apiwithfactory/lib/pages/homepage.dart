@@ -1,4 +1,5 @@
 import 'package:apiwithfactory/models/custom_exception.dart';
+import 'package:apiwithfactory/pages/edit_page.dart';
 
 import '../models/photomodel.dart';
 import '../provider/photoprovider.dart';
@@ -20,13 +21,25 @@ class _HomePageState extends State<HomePage> {
     try {
       await Provider.of<PhotoProvider>(context, listen: false).getvalues();
     } on CustomException catch (e) {
-      showMessage(e.toString());
+      showMessage(context, e.toString());
     } finally {
       isLoading = false;
     }
+    isLoading = false;
   }
 
-  void showMessage(String message) {
+  void showMessage(BuildContext context, String message) {
+    // print('object');
+    // showDialog(
+    //   context: context,
+    //   builder: (context) => AlertDialog(
+    //     content: Text(message),
+    //     actions: [
+    //       TextButton(
+    //           onPressed: () => Navigator.of(context).pop(), child: Text('Okay'))
+    //     ],
+    //   ),
+    // );
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -45,6 +58,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     isLoading = true;
     loadData();
+    // isLoading = false;
   }
 
   @override
@@ -82,15 +96,20 @@ class _HomePageState extends State<HomePage> {
                                   onPressed: () async {
                                     int? ids = providervalue
                                         .photodata?.photos![index].id;
+
                                     await showdialogue(
                                         context, providervalue, ids);
                                   },
                                   icon: const Icon(Icons.edit)),
                               IconButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     int? ids = providervalue
                                         .photodata?.photos![index].id;
-                                    providervalue.deleteUser(ids!);
+                                    try {
+                                      await providervalue.deleteUser(ids!);
+                                    } on CustomException catch (e) {
+                                      showMessage(context, e.toString());
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.delete,
@@ -111,61 +130,14 @@ class _HomePageState extends State<HomePage> {
     if (ids != 0) {
       existtitle = providervalue.photodata?.photos![photodataIndex].title;
       exisId = providervalue.photodata?.photos![photodataIndex].id;
-    } else {}
+    }
     showDialog(
-      context: (context),
-      builder: ((context) => AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: titlecontroller,
-                  decoration: InputDecoration(
-                    labelText: existtitle,
-                    hintText: 'Enter Title',
-                  ),
-                ),
-                if (ids != 0)
-                  TextField(
-                    controller: idcontroller,
-                    decoration: InputDecoration(
-                      labelText: (ids != 0) ? exisId.toString() : null,
-                      hintText: 'Enter id',
-                    ),
-                  ),
-              ],
-            ),
-            actions: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Cancel')),
-                  TextButton(
-                      onPressed: () async {
-                        Photo photonew = Photo(
-                          title: titlecontroller.text,
-                        );
-                        if (ids == 0) {
-                          providervalue.createAlbum(
-                              photonew, idcontroller.text);
-                        } else {
-                          Photo photosdd = Photo(
-                              title: titlecontroller.text,
-                              id: int.parse(idcontroller.text));
-                          providervalue.updateAlbum(photosdd, ids!);
-                        }
-                        idcontroller.text = '';
-                        titlecontroller.text = '';
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(ids == 0 ? 'Add' : 'Update'))
-                ],
-              )
-            ],
+      context: context,
+      builder: ((context) => EditPage(
+            existtitle: existtitle,
+            ids: ids,
+            exisId: exisId,
+            // showMessage: () => showMessage,
           )),
     );
   }
