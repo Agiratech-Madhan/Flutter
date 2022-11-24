@@ -5,9 +5,11 @@ import '../models/photomodel.dart';
 import '../provider/photoprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'show_dialog.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  // ShowDialog? sample;
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,25 +21,11 @@ class _HomePageState extends State<HomePage> {
     try {
       await Provider.of<PhotoProvider>(context, listen: false).getvalues();
     } on CustomException catch (e) {
-      showMessage(e.toString());
+      ShowDialog().showMessage(context, e.toString());
     } finally {
       isLoading = false;
     }
     isLoading = false;
-  }
-
-  void showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 2),
-        action: SnackBarAction(
-          textColor: Colors.blue,
-          label: 'OKAY',
-          onPressed: () {},
-        ),
-      ),
-    );
   }
 
   @override
@@ -49,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final providervalue = Provider.of<PhotoProvider>(
+    final providerValue = Provider.of<PhotoProvider>(
       context,
     );
     return Scaffold(
@@ -59,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
                 onPressed: () async {
-                  await showdialogue(context, providervalue, 0);
+                  await ShowDialog().showdialogue(context, providerValue, 0);
                 },
                 icon: const Icon(Icons.add))
           ],
@@ -68,33 +56,34 @@ class _HomePageState extends State<HomePage> {
             child: (isLoading)
                 ? const CircularProgressIndicator()
                 : ListView.builder(
-                    itemCount: providervalue.photodata?.photos!.length,
+                    itemCount: providerValue.photodata?.photos!.length,
                     itemBuilder: ((context, index) => ListTile(
                           leading: Text(
-                              '${providervalue.photodata?.photos![index].id}'),
+                              '${providerValue.photodata?.photos![index].id}'),
                           title: Text(
-                            '${providervalue.photodata?.photos![index].title}',
+                            '${providerValue.photodata?.photos![index].title}',
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               IconButton(
                                   onPressed: () async {
-                                    int? ids = providervalue
+                                    int? ids = providerValue
                                         .photodata?.photos![index].id;
-
-                                    await showdialogue(
-                                        context, providervalue, ids);
+                                    // await showdialogue(context, providerValue, ids)
+                                    await ShowDialog().showdialogue(
+                                        context, providerValue, ids);
                                   },
                                   icon: const Icon(Icons.edit)),
                               IconButton(
                                   onPressed: () async {
-                                    int? ids = providervalue
+                                    int? ids = providerValue
                                         .photodata?.photos![index].id;
                                     try {
-                                      await providervalue.deleteUser(ids!);
+                                      await providerValue.deleteUser(ids!);
                                     } on CustomException catch (e) {
-                                      showMessage(e.toString());
+                                      ShowDialog()
+                                          .showMessage(context, e.toString());
                                     }
                                   },
                                   icon: const Icon(
@@ -105,28 +94,5 @@ class _HomePageState extends State<HomePage> {
                           ),
                         )),
                   )));
-  }
-
-  Future<void> showdialogue(
-      BuildContext context, PhotoProvider providervalue, int? ids) async {
-    int photodataIndex = providervalue.photodata!.photos!
-        .indexWhere((element) => element.id == ids);
-    int? exisId;
-    String? existTitle;
-    if (ids != 0) {
-      existTitle = providervalue.photodata?.photos![photodataIndex].title;
-      exisId = providervalue.photodata?.photos![photodataIndex].id;
-    }
-    showDialog(
-      context: context,
-      builder: ((context) => EditPage(
-            existTitle: existTitle,
-            ids: ids,
-            exisId: exisId,
-            showMessage: (String message) {
-              showMessage(message);
-            },
-          )),
-    );
   }
 }

@@ -74,7 +74,7 @@ class PhotoProvider with ChangeNotifier {
 
   Future<void> deleteUser(int id) async {
     try {
-      final url = Uri.parse('https://jsonplaceholder.typicode.com/photos/$id');
+      final url = Uri.parse('https://jsonpler.typicode.com/photos/$id');
       final photodataIndex =
           photodata!.photos!.indexWhere((element) => element.id == id);
       await http.delete(url);
