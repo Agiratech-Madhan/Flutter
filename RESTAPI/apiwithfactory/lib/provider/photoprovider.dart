@@ -6,18 +6,17 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class PhotoProvider with ChangeNotifier {
-  Photos? photodata;
+  Photos? photoData;
   bool isOkay = true;
   Future<Photos> loadphoto() async {
     try {
       final response = await http.get(
         Uri.parse('https://jsonplaceholder.typicode.com/photos'),
       );
-
       Photos x = Photos.fromJson(jsonDecode(response.body));
-      photodata = x;
+      photoData = x;
       notifyListeners();
-      return photodata!;
+      return photoData!;
     } catch (e) {
       throw CustomException(message: 'Failed to load Photos');
     }
@@ -25,7 +24,7 @@ class PhotoProvider with ChangeNotifier {
 
   Future<void> getvalues() async {
     final response = await loadphoto();
-    photodata = response;
+    photoData = response;
     notifyListeners();
   }
 
@@ -40,7 +39,7 @@ class PhotoProvider with ChangeNotifier {
         body: x,
       );
       var newValue = Photo.fromJson(jsonDecode(response.body));
-      photodata!.photos!.add(newValue);
+      photoData!.photos!.add(newValue);
       notifyListeners();
       return newValue;
     } catch (e) {
@@ -51,8 +50,8 @@ class PhotoProvider with ChangeNotifier {
   Future<Photo> updateAlbum(Photo photo, int id) async {
     try {
       var x = json.encode(photo.toJson());
-      final photodataIndex =
-          photodata!.photos!.indexWhere((element) => element.id == id);
+      final photoDataIndex =
+          photoData!.photos!.indexWhere((element) => element.id == id);
 
       final responses = await http.put(
         Uri.parse('https://jsonplaceholder.typicode.com/photos/$id'),
@@ -62,7 +61,7 @@ class PhotoProvider with ChangeNotifier {
         body: x,
       );
       var updatevalue = Photo.fromJson(jsonDecode(responses.body));
-      photodata!.photos![photodataIndex] = photo;
+      photoData!.photos![photoDataIndex] = photo;
 
       notifyListeners();
 
@@ -75,10 +74,10 @@ class PhotoProvider with ChangeNotifier {
   Future<void> deleteUser(int id) async {
     try {
       final url = Uri.parse('https://jsonplaceholder.typicode.com/photos/$id');
-      final photodataIndex =
-          photodata!.photos!.indexWhere((element) => element.id == id);
+      final photoDataIndex =
+          photoData!.photos!.indexWhere((element) => element.id == id);
       await http.delete(url);
-      photodata!.photos!.removeAt(photodataIndex);
+      photoData!.photos!.removeAt(photoDataIndex);
       notifyListeners();
     } catch (e) {
       throw CustomException(message: ' Failed to delete Photos');

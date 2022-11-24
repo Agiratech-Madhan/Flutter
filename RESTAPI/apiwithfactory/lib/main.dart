@@ -9,7 +9,9 @@ void main() {
     create: (context) => PhotoProvider(),
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: HomePage(
+        sample: ShowDialog(),
+      ),
     ),
   ));
 }

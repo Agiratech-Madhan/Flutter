@@ -1,15 +1,13 @@
 import 'package:apiwithfactory/models/custom_exception.dart';
-import 'package:apiwithfactory/pages/edit_page.dart';
 
-import '../models/photomodel.dart';
 import '../provider/photoprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'show_dialog.dart';
 
 class HomePage extends StatefulWidget {
-  // ShowDialog? sample;
-  HomePage({super.key});
+  final ShowDialog sample;
+  const HomePage({required this.sample, super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     } finally {
       isLoading = false;
     }
-    isLoading = false;
+    // isLoading = false;
   }
 
   @override
@@ -47,52 +45,55 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
                 onPressed: () async {
-                  await ShowDialog().showdialogue(context, providerValue, 0);
+                  await widget.sample.showdialogue(context, providerValue, 0);
                 },
                 icon: const Icon(Icons.add))
           ],
         ),
         body: Center(
-            child: (isLoading)
+            child: (isLoading && providerValue.photoData == null)
                 ? const CircularProgressIndicator()
-                : ListView.builder(
-                    itemCount: providerValue.photodata?.photos!.length,
-                    itemBuilder: ((context, index) => ListTile(
-                          leading: Text(
-                              '${providerValue.photodata?.photos![index].id}'),
-                          title: Text(
-                            '${providerValue.photodata?.photos![index].title}',
-                          ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                  onPressed: () async {
-                                    int? ids = providerValue
-                                        .photodata?.photos![index].id;
-                                    // await showdialogue(context, providerValue, ids)
-                                    await ShowDialog().showdialogue(
-                                        context, providerValue, ids);
-                                  },
-                                  icon: const Icon(Icons.edit)),
-                              IconButton(
-                                  onPressed: () async {
-                                    int? ids = providerValue
-                                        .photodata?.photos![index].id;
-                                    try {
-                                      await providerValue.deleteUser(ids!);
-                                    } on CustomException catch (e) {
-                                      ShowDialog()
-                                          .showMessage(context, e.toString());
-                                    }
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ))
-                            ],
-                          ),
-                        )),
-                  )));
+                : (!isLoading && providerValue.photoData == null)
+                    ? const Center(
+                        child: Text('No data found'),
+                      )
+                    : ListView.builder(
+                        itemCount: providerValue.photoData?.photos!.length,
+                        itemBuilder: ((context, index) => ListTile(
+                              leading: Text(
+                                  '${providerValue.photoData?.photos![index].id}'),
+                              title: Text(
+                                '${providerValue.photoData?.photos![index].title}',
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                      onPressed: () async {
+                                        int? ids = providerValue
+                                            .photoData?.photos![index].id;
+                                        await widget.sample.showdialogue(
+                                            context, providerValue, ids);
+                                      },
+                                      icon: const Icon(Icons.edit)),
+                                  IconButton(
+                                      onPressed: () async {
+                                        int? ids = providerValue
+                                            .photoData?.photos![index].id;
+                                        try {
+                                          await providerValue.deleteUser(ids!);
+                                        } on CustomException catch (e) {
+                                          widget.sample.showMessage(
+                                              context, e.toString());
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ))
+                                ],
+                              ),
+                            )),
+                      )));
   }
 }

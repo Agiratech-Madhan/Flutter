@@ -19,13 +19,13 @@ class ShowDialog {
 
   Future<void> showdialogue(
       BuildContext context, PhotoProvider providerValue, int? ids) async {
-    int photodataIndex = providerValue.photodata!.photos!
+    int photoDataIndex = providerValue.photoData!.photos!
         .indexWhere((element) => element.id == ids);
     int? exisId;
     String? existTitle;
     if (ids != 0) {
-      existTitle = providerValue.photodata?.photos![photodataIndex].title;
-      exisId = providerValue.photodata?.photos![photodataIndex].id;
+      existTitle = providerValue.photoData?.photos![photoDataIndex].title;
+      exisId = providerValue.photoData?.photos![photoDataIndex].id;
     }
     showDialog(
       context: context,
