@@ -14,8 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController titlecontroller = TextEditingController();
-  final TextEditingController idcontroller = TextEditingController();
   bool isLoading = false;
   void loadData() async {
     try {
@@ -29,17 +27,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void showMessage(String message) {
-    // print('object');
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => AlertDialog(
-    //     content: Text(message),
-    //     actions: [
-    //       TextButton(
-    //           onPressed: () => Navigator.of(context).pop(), child: Text('Okay'))
-    //     ],
-    //   ),
-    // );
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -58,7 +45,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     isLoading = true;
     loadData();
-    // isLoading = false;
   }
 
   @override
@@ -126,29 +112,19 @@ class _HomePageState extends State<HomePage> {
     int photodataIndex = providervalue.photodata!.photos!
         .indexWhere((element) => element.id == ids);
     int? exisId;
-    String? existtitle;
+    String? existTitle;
     if (ids != 0) {
-      existtitle = providervalue.photodata?.photos![photodataIndex].title;
+      existTitle = providervalue.photodata?.photos![photodataIndex].title;
       exisId = providervalue.photodata?.photos![photodataIndex].id;
     }
     showDialog(
       context: context,
       builder: ((context) => EditPage(
-            existtitle: existtitle,
+            existTitle: existTitle,
             ids: ids,
             exisId: exisId,
             showMessage: (String message) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  duration: const Duration(seconds: 2),
-                  action: SnackBarAction(
-                    textColor: Colors.blue,
-                    label: 'OKAY',
-                    onPressed: () {},
-                  ),
-                ),
-              );
+              showMessage(message);
             },
           )),
     );

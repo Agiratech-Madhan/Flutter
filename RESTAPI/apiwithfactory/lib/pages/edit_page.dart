@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditPage extends StatefulWidget {
-  String? existtitle;
+  String? existTitle;
   int? ids;
   int? exisId;
   Function? showMessage;
   EditPage(
       {super.key,
-      this.existtitle,
+      this.existTitle,
       this.ids,
       this.exisId,
       required this.showMessage});
@@ -21,38 +21,11 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
-  // void showMessage(BuildContext context, String message) {
-  //   print('object');
-  //   // showDialog(
-  //   //   context: context,
-  //   //   builder: (context) => AlertDialog(
-  //   //     content: Text(message),
-  //   //     actions: [
-  //   //       TextButton(
-  //   //           onPressed: () => Navigator.of(context).pop(), child: Text('Okay'))
-  //   //     ],
-  //   //   ),
-  //   // );
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text(message),
-  //       duration: const Duration(seconds: 2),
-  //       action: SnackBarAction(
-  //         textColor: Colors.blue,
-  //         label: 'OKAY',
-  //         onPressed: () {},
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  final TextEditingController titlecontroller = TextEditingController();
-
-  final TextEditingController idcontroller = TextEditingController();
-
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController idController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final providervalue = Provider.of<PhotoProvider>(
+    final provideValue = Provider.of<PhotoProvider>(
       context,
     );
     return AlertDialog(
@@ -60,15 +33,15 @@ class _EditPageState extends State<EditPage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
-            controller: titlecontroller,
+            controller: titleController,
             decoration: InputDecoration(
-              labelText: widget.existtitle,
+              labelText: widget.existTitle,
               hintText: 'Enter Title',
             ),
           ),
           if (widget.ids != 0)
             TextField(
-              controller: idcontroller,
+              controller: idController,
               decoration: InputDecoration(
                 labelText: (widget.ids != 0) ? widget.exisId.toString() : null,
                 hintText: 'Enter id',
@@ -88,32 +61,29 @@ class _EditPageState extends State<EditPage> {
             TextButton(
                 onPressed: () async {
                   Photo photonew = Photo(
-                    title: titlecontroller.text,
+                    title: titleController.text,
                   );
                   if (widget.ids == 0) {
                     try {
-                      await providervalue.createAlbum(
-                          photonew, idcontroller.text);
-                      //          idcontroller.text = '';
-                      // titlecontroller.text = '';
+                      await provideValue.createAlbum(
+                          photonew, idController.text);
                     } on CustomException catch (e) {
-                      // showMessage(context, e.toString());
                       widget.showMessage!(e.toString());
+                    } finally {
+                      Navigator.of(context).pop();
                     }
-                    // Navigator.of(context).pop();
                   } else {
                     try {
                       Photo photosdd = Photo(
-                          title: titlecontroller.text,
-                          id: int.parse(idcontroller.text));
-                      await providervalue.updateAlbum(photosdd, widget.ids!);
+                          title: titleController.text,
+                          id: int.parse(idController.text));
+                      await provideValue.updateAlbum(photosdd, widget.ids!);
                     } on CustomException catch (e) {
-                      // showMessage(context, e.toString());
                       widget.showMessage!(e.toString());
+                    } finally {
+                      Navigator.of(context).pop();
                     }
                   }
-
-                  Navigator.of(context).pop();
                 },
                 child: Text(widget.ids == 0 ? 'Add' : 'Update'))
           ],
