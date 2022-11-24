@@ -4,7 +4,6 @@ class CustomException implements Exception {
   CustomException({required this.message});
   @override
   String toString() {
-    print('custom exception called');
     return message!;
   }
 }

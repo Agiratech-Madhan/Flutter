@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
     } finally {
       isLoading = false;
     }
-    // isLoading = false;
   }
 
   @override
