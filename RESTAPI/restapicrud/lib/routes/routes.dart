@@ -13,8 +13,14 @@ Route<dynamic> controller(RouteSettings settings) {
       );
     case editUser:
       var data = settings.arguments as Map<String, dynamic>;
+
       return MaterialPageRoute(builder: (context) {
-        return EditScreen(id: data['id'], isAdd: data['isAdd']);
+        return EditScreen(
+            id: data['id'],
+            isAdd: data['isAdd'],
+            showMessage:
+                // HomeScreen.showMessage();
+                data['showMessage']);
       });
     default:
       throw ('this is not a route name');

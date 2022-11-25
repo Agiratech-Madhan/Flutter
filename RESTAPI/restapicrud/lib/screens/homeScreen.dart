@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restapicrud/models/Info_model.dart';
+import 'package:restapicrud/models/info_model.dart';
+import 'package:restapicrud/models/custom_exception.dart';
 import '../providers/detailsprovider.dart';
 import '../routes/routes.dart' as route;
 
@@ -18,11 +19,25 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isedit = true;
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 10), () {
+    Future.delayed(const Duration(seconds: 5), () {
       futureUser =
           Provider.of<DetailsProvider>(context, listen: false).fetchusers();
     });
     super.initState();
+  }
+
+  void showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+        action: SnackBarAction(
+          textColor: Colors.blue,
+          label: 'OKAY',
+          onPressed: () {},
+        ),
+      ),
+    );
   }
 
   @override
@@ -37,8 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(route.editUser,
-                    arguments: {'id': '', 'isAdd': true});
+                Navigator.of(context).pushNamed(route.editUser, arguments: {
+                  'id': '',
+                  'isAdd': true,
+                  'showMessage': showMessage
+                });
               },
               icon: const Icon(Icons.add))
         ],
@@ -76,11 +94,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               icon: const Icon(Icons.edit)),
                           IconButton(
                               color: Colors.red,
-                              onPressed: () {
-                                Provider.of<DetailsProvider>(context,
-                                        listen: false)
-                                    .deleteUser(
-                                        userValues.users[index].id.toString());
+                              onPressed: () async {
+                                try {
+                                  await userValues.deleteUser(
+                                      userValues.users[index].id.toString());
+                                } on CustomException catch (e) {
+                                  showMessage(e.toString());
+                                }
                               },
                               icon: const Icon(Icons.delete)),
                         ],

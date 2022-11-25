@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restapicrud/models/Info_model.dart';
+import 'package:restapicrud/models/custom_exception.dart';
+import 'package:restapicrud/models/info_model.dart';
 
 import '../providers/detailsprovider.dart';
 
@@ -9,11 +10,13 @@ class EditScreen extends StatefulWidget {
   static const routeName = '/edit-screen';
   final String id;
   final bool isAdd;
-  const EditScreen({
-    Key? key,
-    required this.id,
-    required this.isAdd,
-  }) : super(key: key);
+  Function? showMessage;
+  EditScreen(
+      {Key? key,
+      required this.id,
+      required this.isAdd,
+      required this.showMessage})
+      : super(key: key);
   @override
   State<EditScreen> createState() => _EditScreenState();
 }
@@ -24,6 +27,7 @@ class _EditScreenState extends State<EditScreen> {
 
   Map initValue = {'name': '', 'email': '', 'password': '', 'phoneNo': ''};
   bool isLoading = false;
+
   Future<void> _save(bool isadd) async {
     final isValid = _form.currentState!.validate();
     if (!isValid) {
@@ -34,11 +38,23 @@ class _EditScreenState extends State<EditScreen> {
       isLoading = true;
     });
     if (isadd) {
-      await Provider.of<DetailsProvider>(context, listen: false)
-          .addUser(_editedUser);
+      try {
+        await Provider.of<DetailsProvider>(context, listen: false)
+            .addUser(_editedUser);
+      } on CustomException catch (e) {
+        widget.showMessage!(e.toString());
+      } finally {
+        Navigator.pop(context);
+      }
     } else {
-      await Provider.of<DetailsProvider>(context, listen: false)
-          .updateUser(_editedUser.id!, _editedUser);
+      try {
+        await Provider.of<DetailsProvider>(context, listen: false)
+            .updateUser(_editedUser.id!, _editedUser);
+      } on CustomException catch (e) {
+        widget.showMessage!(e.toString());
+      } finally {
+        Navigator.pop(context);
+      }
     }
     setState((() {
       isLoading = false;
@@ -189,9 +205,8 @@ class _EditScreenState extends State<EditScreen> {
                                       padding: const EdgeInsets.only(
                                           left: 8.0, right: 10),
                                       child: ElevatedButton(
-                                          onPressed: () {
-                                            _save(widget.isAdd);
-                                            Navigator.pop(context);
+                                          onPressed: () async {
+                                            await _save(widget.isAdd);
                                           },
                                           child: Text(widget.isAdd
                                               ? 'Save'

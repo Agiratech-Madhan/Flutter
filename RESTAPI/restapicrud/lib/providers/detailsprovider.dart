@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../models/Info_model.dart';
+import 'package:restapicrud/models/custom_exception.dart';
+import '../models/info_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -29,7 +30,7 @@ class DetailsProvider with ChangeNotifier {
         notifyListeners();
       });
     } catch (e) {
-      rethrow;
+      throw CustomException(message: 'Failed to create User');
     }
   }
 
@@ -55,7 +56,7 @@ class DetailsProvider with ChangeNotifier {
         return users;
       }
     } catch (e) {
-      rethrow;
+      throw CustomException(message: 'Failed to load User');
     }
   }
 
@@ -66,30 +67,39 @@ class DetailsProvider with ChangeNotifier {
   Future<void> updateUser(String id, User newUser) async {
     final userIndex = users.indexWhere((element) => element.id == id);
     if (userIndex >= 0) {
-      final url = Uri.parse(
-          'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
-      await http
-          .patch(url,
-              body: json.encode({
-                'name': newUser.name,
-                'email': newUser.email,
-                'password': newUser.password,
-                'phoneNo': newUser.phoneNo
-              }))
-          .then((value) {});
+      try {
+        final url = Uri.parse(
+            'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
+        await http
+            .patch(url,
+                body: json.encode({
+                  'name': newUser.name,
+                  'email': newUser.email,
+                  'password': newUser.password,
+                  'phoneNo': newUser.phoneNo
+                }))
+            .then((value) {});
 
-      users[userIndex] = newUser;
+        users[userIndex] = newUser;
 
-      notifyListeners();
+        notifyListeners();
+      } catch (e) {
+        throw CustomException(message: 'Failed to Update User');
+      }
     }
   }
 
   Future<void> deleteUser(String id) async {
-    final url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
-    final exisUser = users.indexWhere((element) => element.id == id);
-    users.removeAt(exisUser);
-    notifyListeners();
-    await http.delete(url);
+    try {
+      final url = Uri.parse(
+          'https://shop-app-4b081-default-rtdb.firebaso.com/apicrud/$id.json');
+      final exisUser = users.indexWhere((element) => element.id == id);
+      await http.delete(url);
+
+      users.removeAt(exisUser);
+      notifyListeners();
+    } catch (e) {
+      throw CustomException(message: 'Failed to delete User');
+    }
   }
 }
