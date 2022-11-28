@@ -87,9 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: () {
                                 final id =
                                     userValues.users[index].id.toString();
-
                                 Navigator.of(context).pushNamed(route.editUser,
-                                    arguments: {'id': id, 'isAdd': false});
+                                    arguments: {
+                                      'id': id,
+                                      'isAdd': false,
+                                      'showMessage': showMessage
+                                    });
                               },
                               icon: const Icon(Icons.edit)),
                           IconButton(
@@ -108,6 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )),
             );
+          } else if (snapshot.hasError) {
+            return const Center(child: Text('Error occured in server'));
           } else if (snapshot.data == null) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -118,18 +123,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text('No Data found'),
               );
             }
-          } else if (snapshot.hasError) {
-            return const Center(child: Text('Error occured in server'));
           }
-
           return const Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.of(context)
-              .pushNamed(route.editUser, arguments: {'id': '', 'isAdd': true});
+          Navigator.of(context).pushNamed(route.editUser,
+              arguments: {'id': '', 'isAdd': true, 'showMessage': showMessage});
         },
         label: Row(
           children: const [

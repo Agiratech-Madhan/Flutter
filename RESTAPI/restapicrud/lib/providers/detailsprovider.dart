@@ -69,17 +69,14 @@ class DetailsProvider with ChangeNotifier {
     if (userIndex >= 0) {
       try {
         final url = Uri.parse(
-            'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
-        await http
-            .patch(url,
-                body: json.encode({
-                  'name': newUser.name,
-                  'email': newUser.email,
-                  'password': newUser.password,
-                  'phoneNo': newUser.phoneNo
-                }))
-            .then((value) {});
-
+            'https://shop-app081-default-rtdb.firebaseio.com/apicrud/$id.json');
+        await http.patch(url,
+            body: json.encode({
+              'name': newUser.name,
+              'email': newUser.email,
+              'password': newUser.password,
+              'phoneNo': newUser.phoneNo
+            }));
         users[userIndex] = newUser;
 
         notifyListeners();

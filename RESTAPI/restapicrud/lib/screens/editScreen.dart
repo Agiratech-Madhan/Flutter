@@ -44,8 +44,9 @@ class _EditScreenState extends State<EditScreen> {
       } on CustomException catch (e) {
         widget.showMessage!(e.toString());
       } finally {
-        Navigator.pop(context);
+        // Navigator.pop(context);
       }
+      Navigator.pop(context);
     } else {
       try {
         await Provider.of<DetailsProvider>(context, listen: false)
@@ -53,8 +54,9 @@ class _EditScreenState extends State<EditScreen> {
       } on CustomException catch (e) {
         widget.showMessage!(e.toString());
       } finally {
-        Navigator.pop(context);
+        // Navigator.pop(context);
       }
+      Navigator.pop(context);
     }
     setState((() {
       isLoading = false;
