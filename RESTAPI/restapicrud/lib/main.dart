@@ -7,8 +7,10 @@ import '../routes/routes.dart' as route;
 void main() {
   runApp(ChangeNotifierProvider(
       create: (context) => DetailsProvider(),
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)),
         home: HomeScreen(),
         onGenerateRoute: route.controller,
       )));
