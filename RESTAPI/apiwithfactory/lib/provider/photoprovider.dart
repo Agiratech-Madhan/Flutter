@@ -28,6 +28,42 @@ class PhotoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<Photo> createAndUpdate(Photo photo, String id) async {
+    var x = json.encode(photo.toJson());
+    var newValue;
+    final photoDataIndex =
+        photoData!.photos!.indexWhere((element) => element.id == id);
+
+    try {
+      if (id == '') {
+        final response = await http.post(
+          Uri.parse('https://jsonplaceholder.typicode.com/photos'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: x,
+        );
+        newValue = Photo.fromJson(jsonDecode(response.body));
+        photoData!.photos!.add(newValue);
+      } else {
+        final responses = await http.put(
+          Uri.parse('https://jsonplaceholder.typicode.com/photos/$id'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: x,
+        );
+        newValue = Photo.fromJson(jsonDecode(responses.body));
+        photoData!.photos![photoDataIndex] = photo;
+      }
+      notifyListeners();
+      return newValue;
+    } catch (e) {
+      throw CustomException(
+          message: 'Faild to ${(id == '') ? 'Create' : 'Update'}  Photos');
+    }
+  }
+
   Future<Photo> createAlbum(Photo photo, String id) async {
     try {
       var x = json.encode(photo.toJson());
