@@ -18,12 +18,12 @@ class ShowDialog {
   }
 
   Future<void> showdialogue(
-      BuildContext context, PhotoProvider providerValue, int? ids) async {
+      BuildContext context, PhotoProvider providerValue, String? ids) async {
     int photoDataIndex = providerValue.photoData!.photos!
         .indexWhere((element) => element.id == ids);
-    int? exisId;
+    String? exisId;
     String? existTitle;
-    if (ids != 0) {
+    if (ids != '0') {
       existTitle = providerValue.photoData?.photos![photoDataIndex].title;
       exisId = providerValue.photoData?.photos![photoDataIndex].id;
     }
@@ -31,7 +31,7 @@ class ShowDialog {
       context: context,
       builder: ((context) => EditPage(
             existTitle: existTitle,
-            ids: ids,
+            ids: ids.toString(),
             exisId: exisId,
             showMessage: (String message) {
               showMessage(context, message);

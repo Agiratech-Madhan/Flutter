@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 class EditPage extends StatefulWidget {
   String? existTitle;
-  int? ids;
-  int? exisId;
+  String? ids;
+  String? exisId;
   Function? showMessage;
   EditPage(
       {super.key,
@@ -21,6 +21,8 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
+  // var uuid = Uuid();
+
   final TextEditingController titleController = TextEditingController();
   final TextEditingController idController = TextEditingController();
   @override
@@ -39,11 +41,11 @@ class _EditPageState extends State<EditPage> {
               hintText: 'Enter Title',
             ),
           ),
-          if (widget.ids != 0)
+          if (widget.ids != '0')
             TextField(
               controller: idController,
               decoration: InputDecoration(
-                labelText: (widget.ids != 0) ? widget.exisId.toString() : null,
+                labelText: (widget.ids != '0') ? widget.exisId.toString() : '0',
                 hintText: 'Enter id',
               ),
             ),
@@ -60,32 +62,23 @@ class _EditPageState extends State<EditPage> {
                 child: const Text('Cancel')),
             TextButton(
                 onPressed: () async {
+                  // print('sam ${uuid.v1()}');
                   Photo photonew = Photo(
                     title: titleController.text,
                   );
-                  if (widget.ids == 0) {
-                    try {
-                      await provideValue.createAlbum(
-                          photonew, idController.text);
-                    } on CustomException catch (e) {
-                      widget.showMessage!(e.toString());
-                    } finally {
-                      Navigator.of(context).pop();
-                    }
-                  } else {
-                    try {
-                      Photo photosdd = Photo(
-                          title: titleController.text,
-                          id: int.parse(idController.text));
-                      await provideValue.updateAlbum(photosdd, widget.ids!);
-                    } on CustomException catch (e) {
-                      widget.showMessage!(e.toString());
-                    } finally {
-                      Navigator.of(context).pop();
-                    }
+                  Photo photosdd =
+                      Photo(title: titleController.text, id: idController.text);
+                  Photo photoMethod = (widget.ids == '0') ? photonew : photosdd;
+                  try {
+                    await provideValue.createAndUpdate(
+                        photoMethod, widget.ids!.toString());
+                  } on CustomException catch (e) {
+                    widget.showMessage!(e.toString());
+                  } finally {
+                    Navigator.of(context).pop();
                   }
                 },
-                child: Text(widget.ids == 0 ? 'Add' : 'Update'))
+                child: Text(widget.ids == '0' ? 'Add' : 'Update'))
           ],
         )
       ],

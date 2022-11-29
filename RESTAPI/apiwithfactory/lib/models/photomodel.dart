@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class Photos {
   List<Photo>? photos;
   Photos({
@@ -12,7 +14,7 @@ class Photos {
 
 class Photo {
   int? albumId;
-  int? id;
+  String? id;
   String? title;
   String? url;
   String? thumbnailUrl;
@@ -23,16 +25,21 @@ class Photo {
     this.url,
     this.thumbnailUrl,
   });
+  static const uuid = Uuid();
+
   factory Photo.fromJson(Map<String, dynamic> json) {
+    String ids = json['id'].toString();
+
     return Photo(
-        albumId: json['albumId'],
-        id: json['id'],
+        id: ids,
+        // id: ((json['id'] == '0') ? uuid.v4() : json['id']).toString(),
         title: json['title'],
+        albumId: json['albumId'],
         url: json['url'],
         thumbnailUrl: json['thumbnailUrl']);
   }
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'id': (id == null) ? uuid.v4().toString() : id,
         'title': title,
         'albumId': albumId,
         'url': url,

@@ -4,6 +4,7 @@ import '../provider/photoprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'show_dialog.dart';
+import 'package:uuid/uuid.dart';
 
 class HomePage extends StatefulWidget {
   final ShowDialog sample;
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
                 onPressed: () async {
-                  await widget.sample.showdialogue(context, providerValue, 0);
+                  await widget.sample.showdialogue(context, providerValue, '0');
                 },
                 icon: const Icon(Icons.add))
           ],
@@ -58,41 +59,43 @@ class _HomePageState extends State<HomePage> {
                       )
                     : ListView.builder(
                         itemCount: providerValue.photoData?.photos!.length,
-                        itemBuilder: ((context, index) => ListTile(
-                              leading: Text(
-                                  '${providerValue.photoData?.photos![index].id}'),
-                              title: Text(
-                                '${providerValue.photoData?.photos![index].title}',
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                      onPressed: () async {
-                                        int? ids = providerValue
-                                            .photoData?.photos![index].id;
-                                        await widget.sample.showdialogue(
-                                            context, providerValue, ids);
-                                      },
-                                      icon: const Icon(Icons.edit)),
-                                  IconButton(
-                                      onPressed: () async {
-                                        int? ids = providerValue
-                                            .photoData?.photos![index].id;
-                                        try {
-                                          await providerValue.deleteUser(ids!);
-                                        } on CustomException catch (e) {
-                                          widget.sample.showMessage(
-                                              context, e.toString());
-                                        }
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ))
-                                ],
-                              ),
-                            )),
+                        itemBuilder: ((context, index) {
+                          return ListTile(
+                            leading: Text(
+                                '${providerValue.photoData?.photos![index].id}'),
+                            title: Text(
+                              '${providerValue.photoData?.photos![index].title}',
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                    onPressed: () async {
+                                      String? ids = providerValue
+                                          .photoData?.photos![index].id;
+                                      await widget.sample.showdialogue(
+                                          context, providerValue, ids);
+                                    },
+                                    icon: const Icon(Icons.edit)),
+                                IconButton(
+                                    onPressed: () async {
+                                      String? ids = providerValue
+                                          .photoData?.photos![index].id;
+                                      try {
+                                        await providerValue.deleteUser(ids!);
+                                      } on CustomException catch (e) {
+                                        widget.sample
+                                            .showMessage(context, e.toString());
+                                      }
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ))
+                              ],
+                            ),
+                          );
+                        }),
                       )));
   }
 }

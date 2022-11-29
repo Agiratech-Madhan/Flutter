@@ -8,10 +8,11 @@ import 'package:flutter/material.dart';
 class PhotoProvider with ChangeNotifier {
   Photos? photoData;
   bool isOkay = true;
+  final uri = 'https://jsonplaceholder.typicode.com/photos';
   Future<Photos> loadphoto() async {
     try {
       final response = await http.get(
-        Uri.parse('https://jsonplaceholder.typicode.com/photos'),
+        Uri.parse(uri),
       );
       Photos x = Photos.fromJson(jsonDecode(response.body));
       photoData = x;
@@ -30,86 +31,37 @@ class PhotoProvider with ChangeNotifier {
 
   Future<Photo> createAndUpdate(Photo photo, String id) async {
     var x = json.encode(photo.toJson());
-    var newValue;
+    // notifyListeners();
+    print(x);
+    Photo newValue;
+    String actionId = (id == '0') ? '' : '/$id';
     final photoDataIndex =
-        photoData!.photos!.indexWhere((element) => element.id == id);
-
+        photoData!.photos!.indexWhere((element) => '${element.id}' == id);
+    final methods = id == '0' ? http.post : http.put;
     try {
-      if (id == '') {
-        final response = await http.post(
-          Uri.parse('https://jsonplaceholder.typicode.com/photos'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: x,
-        );
-        newValue = Photo.fromJson(jsonDecode(response.body));
-        photoData!.photos!.add(newValue);
-      } else {
-        final responses = await http.put(
-          Uri.parse('https://jsonplaceholder.typicode.com/photos/$id'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: x,
-        );
-        newValue = Photo.fromJson(jsonDecode(responses.body));
-        photoData!.photos![photoDataIndex] = photo;
-      }
+      final response = await methods(
+        Uri.parse('$uri$actionId'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: x,
+      );
+      print(response.body);
+      newValue = Photo.fromJson(json.decode(response.body));
+      (id == '0')
+          ? photoData!.photos!.insert(0, newValue)
+          : photoData!.photos![photoDataIndex] = photo;
       notifyListeners();
       return newValue;
     } catch (e) {
       throw CustomException(
-          message: 'Faild to ${(id == '') ? 'Create' : 'Update'}  Photos');
+          message: 'Faild to ${(id == '0') ? 'Create' : 'Update'}  Photos');
     }
   }
 
-  Future<Photo> createAlbum(Photo photo, String id) async {
+  Future<void> deleteUser(String id) async {
     try {
-      var x = json.encode(photo.toJson());
-      final response = await http.post(
-        Uri.parse('https://jsonplaceholder.typicode.com/photos'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: x,
-      );
-      var newValue = Photo.fromJson(jsonDecode(response.body));
-      photoData!.photos!.add(newValue);
-      notifyListeners();
-      return newValue;
-    } catch (e) {
-      throw CustomException(message: 'Faild to Create  Photos');
-    }
-  }
-
-  Future<Photo> updateAlbum(Photo photo, int id) async {
-    try {
-      var x = json.encode(photo.toJson());
-      final photoDataIndex =
-          photoData!.photos!.indexWhere((element) => element.id == id);
-
-      final responses = await http.put(
-        Uri.parse('https://jsonplaceholder.typicode.com/photos/$id'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: x,
-      );
-      var updatevalue = Photo.fromJson(jsonDecode(responses.body));
-      photoData!.photos![photoDataIndex] = photo;
-
-      notifyListeners();
-
-      return updatevalue;
-    } catch (e) {
-      throw CustomException(message: ' Failed to update data');
-    }
-  }
-
-  Future<void> deleteUser(int id) async {
-    try {
-      final url = Uri.parse('https://jsonplaceholder.typicode.com/photos/$id');
+      final url = Uri.parse('$uri/$id');
       final photoDataIndex =
           photoData!.photos!.indexWhere((element) => element.id == id);
       await http.delete(url);
@@ -120,3 +72,45 @@ class PhotoProvider with ChangeNotifier {
     }
   }
 }
+ // Future<Photo> createAlbum(Photo photo, String id) async {
+  //   try {
+  //     var x = json.encode(photo.toJson());
+  //     final response = await http.post(
+  //       Uri.parse(uri),
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //       },
+  //       body: x,
+  //     );
+  //     var newValue = Photo.fromJson(jsonDecode(response.body));
+  //     photoData!.photos!.add(newValue);
+  //     notifyListeners();
+  //     return newValue;
+  //   } catch (e) {
+  //     throw CustomException(message: 'Faild to Create  Photos');
+  //   }
+  // }
+
+  // Future<Photo> updateAlbum(Photo photo, int id) async {
+  //   try {
+  //     var x = json.encode(photo.toJson());
+  //     final photoDataIndex =
+  //         photoData!.photos!.indexWhere((element) => element.id == id);
+
+  //     final responses = await http.put(
+  //       Uri.parse('$uri/$id'),
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //       },
+  //       body: x,
+  //     );
+  //     var updatevalue = Photo.fromJson(jsonDecode(responses.body));
+  //     photoData!.photos![photoDataIndex] = photo;
+
+  //     notifyListeners();
+
+  //     return updatevalue;
+  //   } catch (e) {
+  //     throw CustomException(message: ' Failed to update data');
+  //   }
+  // }
