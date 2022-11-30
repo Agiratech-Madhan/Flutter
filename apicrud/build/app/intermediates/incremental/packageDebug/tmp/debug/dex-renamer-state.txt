@@ -1,0 +1,4 @@
+#Wed Nov 09 09:58:20 IST 2022
+base.0=/home/agira/Flutter Task/apicrud/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
