@@ -17,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = false;
   bool isadd = true;
   bool isedit = true;
+  // Users? users;
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 5), () {
@@ -42,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // print(users?.users!.length);
     final userValues = Provider.of<DetailsProvider>(
       context,
     );

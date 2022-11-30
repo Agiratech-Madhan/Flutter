@@ -1,10 +1,16 @@
 class Users {
+  // String? id;
   List<User>? users;
   Users({
     this.users,
+    // this.id
   });
   factory Users.fromJson(List<dynamic> json) {
-    List<User> userslist = json.map((e) => User.fromJson(e)).toList();
+    List<User> userslist = json
+        .map(
+          (e) => User.fromJson(e.id, e),
+        )
+        .toList();
     return Users(users: userslist);
   }
 }
@@ -17,9 +23,9 @@ class User {
   String? phoneNo;
   User({this.id, this.name, this.email, this.password, this.phoneNo});
 
-  factory User.fromJson(Map<String, dynamic> json) {
+  factory User.fromJson(String key, Map<String, dynamic> json) {
     return User(
-        id: json['id'],
+        id: key,
         name: json['name'],
         email: json['email'],
         password: json['password'],
