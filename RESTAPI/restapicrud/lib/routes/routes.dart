@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restapicrud/screens/editScreen.dart';
+import 'package:restapicrud/screens/edit_screen.dart';
 import 'package:restapicrud/screens/homeScreen.dart';
 
 const editUser = '/edit-user';

@@ -7,33 +7,6 @@ import 'dart:convert';
 
 class DetailsProvider with ChangeNotifier {
   List<User> users = [];
-  Future<void> addUser(User user) async {
-    final url = Uri.parse(
-        'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
-    try {
-      await http
-          .post(url,
-              body: json.encode({
-                'name': user.name,
-                'email': user.email,
-                'password': user.password,
-                'phoneNo': user.phoneNo
-              }))
-          .then((value) {
-        final newUser = User(
-            id: json.decode(value.body)['name'],
-            name: user.name,
-            email: user.email,
-            password: user.password,
-            phoneNo: user.phoneNo);
-        users.add(newUser);
-        notifyListeners();
-      });
-    } catch (e) {
-      throw CustomException(message: 'Failed to create User');
-    }
-  }
-
   Future<List<User>> fetchusers() async {
     final url = Uri.parse(
         'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud.json');
@@ -64,32 +37,33 @@ class DetailsProvider with ChangeNotifier {
     return users.firstWhere((element) => element.id == id);
   }
 
-  Future<void> updateUser(String id, User newUser) async {
+  Future<void> createAndUpdate(String id, User user, bool isAdd) async {
+    String actionId = isAdd ? '' : '/$id';
+    const uri = 'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud';
+    final url = Uri.parse('$uri$actionId.json');
+    final methods = isAdd ? http.post : http.patch;
     final userIndex = users.indexWhere((element) => element.id == id);
-    if (userIndex >= 0) {
-      try {
-        final url = Uri.parse(
-            'https://shop-app081-default-rtdb.firebaseio.com/apicrud/$id.json');
-        await http.patch(url,
-            body: json.encode({
-              'name': newUser.name,
-              'email': newUser.email,
-              'password': newUser.password,
-              'phoneNo': newUser.phoneNo
-            }));
-        users[userIndex] = newUser;
-
-        notifyListeners();
-      } catch (e) {
-        throw CustomException(message: 'Failed to Update User');
-      }
+    var x = json.encode(user.toJson());
+    try {
+      final value = await methods(url, body: x);
+      final newUser = User(
+          id: json.decode(value.body)['name'],
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          phoneNo: user.phoneNo);
+      isAdd ? users.add(newUser) : users[userIndex] = user;
+      notifyListeners();
+    } catch (e) {
+      throw CustomException(
+          message: 'Faild to ${isAdd ? 'Create' : 'Update'}  User');
     }
   }
 
   Future<void> deleteUser(String id) async {
     try {
       final url = Uri.parse(
-          'https://shop-app-4b081-default-rtdb.firebaso.com/apicrud/$id.json');
+          'https://shop-app-4b081-default-rtdb.firebaseio.com/apicrud/$id.json');
       final exisUser = users.indexWhere((element) => element.id == id);
       await http.delete(url);
 

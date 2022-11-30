@@ -37,25 +37,12 @@ class _EditScreenState extends State<EditScreen> {
     setState(() {
       isLoading = true;
     });
-    if (isadd) {
-      try {
-        await Provider.of<DetailsProvider>(context, listen: false)
-            .addUser(_editedUser);
-      } on CustomException catch (e) {
-        widget.showMessage!(e.toString());
-      } finally {
-        // Navigator.pop(context);
-      }
-      Navigator.pop(context);
-    } else {
-      try {
-        await Provider.of<DetailsProvider>(context, listen: false)
-            .updateUser(_editedUser.id!, _editedUser);
-      } on CustomException catch (e) {
-        widget.showMessage!(e.toString());
-      } finally {
-        // Navigator.pop(context);
-      }
+    try {
+      await Provider.of<DetailsProvider>(context, listen: false)
+          .createAndUpdate(_editedUser.id!, _editedUser, isadd);
+    } catch (e) {
+      widget.showMessage!(e.toString());
+    } finally {
       Navigator.pop(context);
     }
     setState((() {
