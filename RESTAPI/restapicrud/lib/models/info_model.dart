@@ -1,9 +1,7 @@
 class Users {
-  // String? id;
   List<User>? users;
   Users({
     this.users,
-    // this.id
   });
   factory Users.fromJson(List<dynamic> json) {
     List<User> userslist = json

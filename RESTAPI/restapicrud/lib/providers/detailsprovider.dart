@@ -7,9 +7,11 @@ import 'dart:convert';
 import '../api/api.dart';
 
 class DetailsProvider with ChangeNotifier {
+  Users? users_;
   Api api;
   DetailsProvider({required this.api});
   List<User> users = [];
+
   Future<List<User>> fetchusers() async {
     final url = Uri.parse(api.fetch());
     try {
@@ -19,16 +21,7 @@ class DetailsProvider with ChangeNotifier {
             json.decode(response.body) as Map<String, dynamic>;
         final List<User> usersList = [];
         extractedUserData.forEach((key, value) {
-          usersList.add(User.fromJson(key, value)
-
-              // User(
-              //   id: key,
-              //   name: value['name'],
-              //   email: value['email'],
-              //   password: value['password'],
-              //   phoneNo: value['phoneNo'])
-
-              );
+          usersList.add(User.fromJson(key, value));
         });
         users = usersList;
         notifyListeners();

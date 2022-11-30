@@ -43,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // print(users?.users!.length);
     final userValues = Provider.of<DetailsProvider>(
       context,
     );
