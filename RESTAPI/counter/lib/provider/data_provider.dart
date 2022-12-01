@@ -6,16 +6,13 @@ class DataProvider with ChangeNotifier {
     return count;
   }
 
-  int increment() {
+  void increment() {
     count = count + 1;
     notifyListeners();
-
-    return count;
   }
 
-  int decrement() {
+  void decrement() {
     count = count - 1;
     notifyListeners();
-    return count;
   }
 }

@@ -46,7 +46,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             // snap: true,//
             stretchTriggerOffset: 40.0, //
-            shape: RoundedRectangleBorder(),
+            shape: const RoundedRectangleBorder(),
             stretch: true,
             // leadingWidth: 300, //
             actions: [
@@ -66,13 +66,13 @@ class _SecondPageState extends State<SecondPage> {
           ),
           SliverList(
               delegate: SliverChildListDelegate([
-            Text('data'),
+            const Text('data'),
           ])),
           // SliverLayoutBuilder(
           //     builder: ((p0, p1) => SliverToBoxAdapter(
           //           child: Text('data'),
           //         )))
-          SliverFillRemaining(
+          const SliverFillRemaining(
             child: Text('data'),
           ),
         ],
