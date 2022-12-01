@@ -13,7 +13,17 @@ class _FourthPageState extends State<FourthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('FourthPage'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(route.fifthPage);
+                },
+                icon: const Icon(Icons.arrow_forward))
+          ],
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
