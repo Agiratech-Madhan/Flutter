@@ -14,9 +14,8 @@ class SeventhPageState extends State<SeventhPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        backgroundColor: Colors.pink[300],
-        title: const Text('Flutter Indexed Stack Demo'),
+        title: const Text('Seventh Page'),
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[_stackedContainers(), _navigationButtons()],
@@ -29,16 +28,25 @@ class SeventhPageState extends State<SeventhPage> {
   }
 
   Widget _stackedContainers() {
-    return Expanded(
-      child: IndexedStack(
-        index: index,
-        children: <Widget>[
-          imageNetwork('https://pbs.twimg.com/media/Eu7m692XIAEvxxP.png'),
-          imageNetwork(
-              'https://docs.flutter.dev/assets/images/dash/Dashatars.png'),
-          imageNetwork('https://pbs.twimg.com/media/E44jYYkXoAEMlXS.jpg'),
-        ],
-      ),
+    return Column(
+      children: [
+        IndexedStack(
+          index: index,
+          children: <Widget>[
+            imageNetwork('https://pbs.twimg.com/media/Eu7m692XIAEvxxP.png'),
+            imageNetwork(
+                'https://docs.flutter.dev/assets/images/dash/Dashatars.png'),
+            imageNetwork('https://pbs.twimg.com/media/E44jYYkXoAEMlXS.jpg'),
+          ],
+        ),
+        // Expanded(
+        //   child: Flexible(
+        //       child: FractionallySizedBox(
+        //     heightFactor: 0.1,
+        //     child: Text('data'),
+        //   )),
+        // )
+      ],
     );
   }
 

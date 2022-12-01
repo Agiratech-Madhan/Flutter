@@ -15,7 +15,7 @@ class _SixthpageState extends State<Sixthpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SixthPage'),
+        title: const Text('SixthPage'),
         actions: [
           IconButton(
               onPressed: () {
@@ -24,27 +24,40 @@ class _SixthpageState extends State<Sixthpage> {
               icon: const Icon(Icons.arrow_forward))
         ],
       ),
-      body: SizedBox(
-        height: 200,
-        child: ReorderableListView(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          children: [
-            for (int index = 0; index < _items.length; index++)
-              ListTile(
-                key: Key(index.toString()),
-                title: Text('Item ${_items[index]}'),
-              ),
-          ],
-          onReorder: (int oldIndex, int newIndex) {
-            setState(() {
-              if (oldIndex < newIndex) {
-                newIndex -= 1;
-              }
-              final int item = _items.removeAt(oldIndex);
-              _items.insert(newIndex, item);
-            });
-          },
-        ),
+      body: Column(
+        children: [
+          const SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: Card(
+                child: SelectableText(
+              'Helllo Maddy  Selectable Text',
+              textAlign: TextAlign.center,
+            )),
+          ),
+          SizedBox(
+            height: 200,
+            child: ReorderableListView(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              children: [
+                for (int index = 0; index < _items.length; index++)
+                  ListTile(
+                    key: Key(index.toString()),
+                    title: Text('Item ${_items[index]}'),
+                  ),
+              ],
+              onReorder: (int oldIndex, int newIndex) {
+                setState(() {
+                  if (oldIndex < newIndex) {
+                    newIndex -= 1;
+                  }
+                  final int item = _items.removeAt(oldIndex);
+                  _items.insert(newIndex, item);
+                });
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
