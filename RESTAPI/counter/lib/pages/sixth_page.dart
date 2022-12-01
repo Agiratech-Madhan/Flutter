@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../routes/routes.dart' as route;
 
 class Sixthpage extends StatefulWidget {
   const Sixthpage({super.key});
@@ -13,7 +14,16 @@ class _SixthpageState extends State<Sixthpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('SixthPage'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(route.seventhPage);
+              },
+              icon: const Icon(Icons.arrow_forward))
+        ],
+      ),
       body: SizedBox(
         height: 200,
         child: ReorderableListView(
