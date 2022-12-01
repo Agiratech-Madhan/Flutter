@@ -9,6 +9,7 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  List<String> items = ['1', '2', '3', '4', '5'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,21 @@ class _SecondPageState extends State<SecondPage> {
       //   ],
       //   title: Text('SecondPage'),
       // ),
-      body: CustomScrollView(
+      body:
+          //     ListView.custom(
+
+          //         // itemExtent: 50,
+          //         childrenDelegate: SliverChildBuilderDelegate(((context, index) {
+          //   // print(index);
+          //   childCount:
+          //   items.length;
+          //   return Card(
+          //     color: Colors.pink,
+          //     child: Text('items[$index].toString()'),
+          //   );
+          // })))
+
+          CustomScrollView(
         slivers: [
           SliverAppBar(
             title: const Text('Siver Page'),
@@ -65,16 +80,52 @@ class _SecondPageState extends State<SecondPage> {
             ),
           ),
           SliverList(
-              delegate: SliverChildListDelegate([
-            const Text('data'),
-          ])),
+            delegate: SliverChildBuilderDelegate(
+              (_, int index) {
+                return ListTile(
+                  leading: const SizedBox(width: 100, child: CircleAvatar()),
+                  title: Text('Place ${index + 1}', textScaleFactor: 1),
+                );
+              },
+              childCount: 20,
+            ),
+          ),
           // SliverLayoutBuilder(
           //     builder: ((p0, p1) => SliverToBoxAdapter(
           //           child: Text('data'),
           //         )))
-          const SliverFillRemaining(
-            child: Text('data'),
-          ),
+          /*  SliverFillRemaining(
+                  // child: Text('data'),
+                  child: ListBody(
+                children: const [
+                  Text('Object'),
+                  Text('Object'),
+                  Text('Object'),
+                  Text('Object'),
+                  Text('Object'),
+                ],
+              )
+                  /* ListWheelScrollView(
+                itemExtent: 50,
+                squeeze: 1.0,
+                onSelectedItemChanged: (value) {
+                  print('object');
+                },
+                diameterRatio: 1.5,
+                offAxisFraction: -1.0,
+                useMagnifier: true,
+                children: const [
+                  Text('data'),
+                  Text('data'),
+                  Text('data'),
+                  Text('data'),
+                  Text('data'),
+                  Text('data'),
+                  Text('data'),
+                  Text('data'),
+                  Text('data'),
+                ],
+              )*/*/
         ],
       ),
     );

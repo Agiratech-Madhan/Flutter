@@ -12,7 +12,12 @@ class DataProvider with ChangeNotifier {
   }
 
   void decrement() {
-    count = count - 1;
+    if (0 <= count) {
+      count = 0;
+    } else {
+      count = count - 1;
+    }
+
     notifyListeners();
   }
 }
