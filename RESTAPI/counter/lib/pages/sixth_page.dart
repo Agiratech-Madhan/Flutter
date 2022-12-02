@@ -57,6 +57,17 @@ class _SixthpageState extends State<Sixthpage> {
               },
             ),
           ),
+          ShaderMask(
+            shaderCallback: ((bounds) {
+              return RadialGradient(
+                  radius: 5,
+                  colors: [Colors.blue, Colors.red]).createShader(bounds);
+            }),
+            child: Text(
+              'HELLOWORLD',
+              style: TextStyle(color: Colors.white, fontSize: 28),
+            ),
+          )
         ],
       ),
     );

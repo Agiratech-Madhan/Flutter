@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:counter/provider/data_provider.dart';
 import 'package:flutter/material.dart';
 import '../routes/routes.dart' as route;

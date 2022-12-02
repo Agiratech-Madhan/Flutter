@@ -82,13 +82,18 @@ class _FourthPageState extends State<FourthPage> {
                   ),
                 ],
               ),
-              const Expanded(
+              Expanded(
                 flex: 0,
                 child: SizedBox(
                   width: double.infinity,
-                  height: 200,
-                  child: Card(
-                    child: Center(child: Text('Expanded')),
+                  // height: 200,
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < 5; i++)
+                        Card(
+                          child: Center(child: Text('Expanded')),
+                        ),
+                    ],
                   ),
                 ),
               )
