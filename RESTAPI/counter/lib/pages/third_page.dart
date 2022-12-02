@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:counter/provider/data_provider.dart';
 import 'package:flutter/material.dart';
 import '../routes/routes.dart' as route;
@@ -14,6 +16,18 @@ class ThirdPage extends StatefulWidget {
 class _ThirdPageState extends State<ThirdPage> {
   double rating = 10;
   RangeValues selectRange = const RangeValues(10, 20);
+  List<Widget> fruits = const [Text('Apple'), Text('Banana'), Text('Orange')];
+
+  List vegetables = const [Text('Tomatoes'), Text('Potatoes'), Text('Carrots')];
+
+  List icons = const [
+    Icon(Icons.sunny),
+    Icon(Icons.cloud),
+    Icon(Icons.ac_unit),
+  ];
+  final List<bool> _selectedFruits = [true, false, false];
+  bool vertical = false;
+
   @override
   Widget build(BuildContext context) {
     final value = Provider.of<DataProvider>(context);
@@ -76,6 +90,27 @@ class _ThirdPageState extends State<ThirdPage> {
                 selectRange = values;
               });
             },
+          ),
+          ToggleButtons(
+            direction: vertical ? Axis.vertical : Axis.horizontal,
+            onPressed: (int index) {
+              setState(() {
+                for (int i = 0; i < _selectedFruits.length; i++) {
+                  _selectedFruits[i] = i == index;
+                }
+              });
+            },
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            selectedBorderColor: Colors.red[700],
+            selectedColor: Colors.white,
+            fillColor: Colors.red[200],
+            color: Colors.red[400],
+            constraints: const BoxConstraints(
+              minHeight: 40.0,
+              minWidth: 100.0,
+            ),
+            isSelected: _selectedFruits,
+            children: fruits,
           ),
           Expanded(
               child: DraggableScrollableSheet(
