@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:weather/model/country_model.dart';
-import 'package:weather/model/weather_model.dart';
+
 import 'package:weather/provider/data_provider.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,9 +15,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Counties? countries;
-  // Future<void> loadData() async {
-  //   await Provider.of<DataProvider>(context, listen: false).load('London');
-  // }
+  Future<void> loadData() async {
+    await Provider.of<DataProvider>(context, listen: false).load('India');
+  }
 
   Future<void> loadCountry() async {
     countries =
@@ -28,20 +27,22 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // loadData();
     loadCountry();
+    loadData();
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<DataProvider>(context);
-    print(provider.counties?.data?[0].country);
+    String x = '2022-12-05 4:49';
+    String dateValue = (provider.data?.num) ?? x;
+    DateTime getDate = DateFormat("yyyy-MM-dd hh:mm").parse(dateValue);
+    String formatedDate = DateFormat("E,d MMM").format(getDate);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Autocomplete<Country>(
-            // fieldViewBuilder:(context, textEditingController, focusNode, onFieldSubmitted) => ,
             optionsBuilder: (TextEditingValue textEditingValue) {
               if (textEditingValue.text == '') {
                 return List.empty();
@@ -58,26 +59,27 @@ class _HomePageState extends State<HomePage> {
                     FocusNode node,
                     Function onSubmit) =>
                 TextField(
-              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white),
               controller: controller,
               focusNode: node,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
+                border: InputBorder.none,
                 counterStyle: TextStyle(color: Colors.white),
-                hintText: 'Type here...',
+                hintText: 'India',
                 hintStyle: TextStyle(color: Colors.white),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)),
-                suffixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
               ),
             ),
-            onSelected: (selection) {
-              provider.load('${selection.country}');
-              print('You just selected ${selection.country}');
+            onSelected: (selection) async {
+              try {
+                await provider.load('${selection.country}');
+              } catch (e) {
+                Exception('error to load data');
+              } finally {
+                FocusScope.of(context).unfocus();
+              }
             },
-            displayStringForOption: (Country d) => '${d.country!}',
+            displayStringForOption: (Country d) => d.country!,
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -97,12 +99,10 @@ class _HomePageState extends State<HomePage> {
             Positioned(
                 top: 90,
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 30,
-                        // left: MediaQuery.of(context).size.width * 0.3,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text('${provider.Data?.num ?? 456789}',
+                          Text(formatedDate,
                               style: const TextStyle(
                                 color: Colors.grey,
                               )),
@@ -125,13 +125,29 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: 100,
                             child: Text(
-                              '${provider.Data?.temperature ?? 7}°',
+                              '${provider.data?.temperature ?? 7}°',
                               style: const TextStyle(
                                 fontSize: 100,
                                 color: Colors.white,
                               ),
                             ),
-                          )
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          SizedBox(
+                            height: 40,
+                            width: 250,
+                            child: FittedBox(
+                              child: Text(
+                                '${provider.data?.condition ?? 'Sunny'}',
+                                style: const TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     )
