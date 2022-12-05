@@ -104,38 +104,147 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          centerTitle: true,
-          title: search ? autocomplete : Text('${countryName ?? 'India'}'),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          actions: [
-            Row(
-              children: [
-                !search
-                    ? IconButton(
-                        onPressed: () {
-                          setState(() {
-                            search = true;
-                          });
-                        },
-                        icon: const Icon(Icons.search))
-                    : (search)
+
+        // AppBar(
+        // centerTitle: true,
+        // title: search ? autocomplete : Text('${countryName ?? 'India'}'),
+        // backgroundColor: Colors.transparent,
+        // elevation: 0,
+        // actions: [
+        //   Row(
+        //     children: [
+        //       !search
+        //           ? IconButton(
+        //               onPressed: () {
+        //                 setState(() {
+        //                   search = true;
+        //                 });
+        //               },
+        //               icon: const Icon(Icons.search))
+        //           : (search)
+        //               ? IconButton(
+        //                   onPressed: () {
+        //                     setState(() {
+        //                       search = false;
+        //                     });
+        //                   },
+        //                   icon: const Icon(Icons.close))
+        //               : Container(),
+        //     ],
+        //   )
+        // ],
+        // ),
+
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              centerTitle: true,
+              // title: Text('data'),
+              flexibleSpace: FlexibleSpaceBar(
+                  background: Image.network(
+                    provider.getImage('${provider.data?.condition}'),
+                    height: MediaQuery.of(context).size.height * 1,
+                    fit: BoxFit.fitHeight,
+                  ),
+                  title: Text('${countryName ?? 'India'}')),
+              pinned: true,
+              expandedHeight: MediaQuery.of(context).size.height * 0.3,
+
+              actions: [
+                Row(
+                  children: [
+                    !search
                         ? IconButton(
                             onPressed: () {
                               setState(() {
-                                search = false;
+                                search = true;
                               });
                             },
-                            icon: const Icon(Icons.close))
-                        : Container(),
+                            icon: const Icon(Icons.search))
+                        : (search)
+                            ? IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    search = false;
+                                  });
+                                },
+                                icon: const Icon(Icons.close))
+                            : Container(),
+                  ],
+                )
               ],
-            )
+            ),
+            SliverList(
+                delegate: SliverChildListDelegate.fixed([
+              Column(
+                children: [
+                  // Container(
+                  //   color: Colors.pink,
+                  //   height: 700,
+                  // )
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                    ),
+                    child: autoComplete!
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text(
+                                'Today',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(formatedDate,
+                                  style: const TextStyle(
+                                    color: Colors.black54,
+                                  )),
+                              const SizedBox(
+                                height: 50,
+                              ),
+                              SizedBox(
+                                height: 100,
+                                child: Text(
+                                  '${provider.data?.temperature ?? 7}°',
+                                  style: const TextStyle(
+                                    fontSize: 100,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              SizedBox(
+                                height: 40,
+                                width: 250,
+                                child: FittedBox(
+                                  child: Text(
+                                    '${provider.data?.condition ?? 'Sunny'}',
+                                    style: const TextStyle(
+                                      fontSize: 40,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                  )
+                ],
+              )
+            ]))
           ],
-        ),
-        body: ImageData(
-            provider: provider,
-            autoComplete: autoComplete,
-            formatedDate: formatedDate));
+        ));
   }
 }
+/**ImageData(
+            provider: provider,
+            autoComplete: autoComplete,
+            formatedDate: formatedDate)) */
