@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool search = false;
   String? countryName;
+  bool? autoComplete = false;
   Counties? countries;
   Future<void> loadData() async {
     await Provider.of<DataProvider>(context, listen: false).load('India');
@@ -29,111 +30,162 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    loadCountry();
     loadData();
+    loadCountry();
   }
+  /* final List<DropdownMenuItem<String>> _dropDownitems = menuItem
+      .map((String e) => DropdownMenuItem<String>(
+            child: Text(e),
+            value: e,
+          ))
+      .toList();
+DropdownButton(
+                  style: TextStyle(color: Colors.white),
+                  items: _dropDownitems,
+                  value: _value,
+                  onChanged: (String? value) {
+                    if (value != null) {
+                      setState(() {
+                        _value = value;
+                      });
+                    }
+                  })*/
 
+  // final List<DropdownMenuItem<String>> __dropDownitems = countries?.data
+
+  // void autoSearchMethod(
+  //   bool search,
+  //   var auto,
+  // ) {
+  //   search ? auto : Text('${countryName ?? 'India'}');
+  // }
+
+  String _value = 'mad';
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<DataProvider>(context);
+    // String selectedItem=
     String x = '2022-12-05 4:49';
     String dateValue = (provider.data?.num) ?? x;
     DateTime getDate = DateFormat("yyyy-MM-dd hh:mm").parse(dateValue);
     String formatedDate = DateFormat("E,d MMM").format(getDate);
+    // String selectedItem = '${countries?.data!.first.country}';
+    // print('selec$selectedItem');
+
+    var autocomplete = Autocomplete<Country>(
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text == '') {
+          // search = false;
+          return List.empty();
+        } else {
+          return countries!.data!
+              .where((element) => element.country!
+                  .toLowerCase()
+                  .contains(textEditingValue.text.toLowerCase()))
+              .toList();
+        }
+      },
+      fieldViewBuilder: (BuildContext context, TextEditingController controller,
+              FocusNode node, Function onSubmit) =>
+          TextField(
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.black),
+        controller: controller,
+        focusNode: node,
+        decoration: InputDecoration(
+          disabledBorder: InputBorder.none,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            // borderRadius: BorderRadius.circular(20.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 3, color: Colors.white),
+          ),
+          fillColor: Colors.white,
+          filled: true,
+
+          // border: InputBorder.none,
+          hintStyle: TextStyle(color: Colors.black),
+        ),
+      ),
+      onSelected: (selection) async {
+        try {
+          setState(() {
+            search = false;
+          });
+          countryName = selection.country;
+          await provider.load('${selection.country}');
+        } catch (e) {
+          Exception('error to load data');
+        } finally {
+          FocusScope.of(context).unfocus();
+        }
+      },
+      displayStringForOption: (Country d) => d.country!,
+    );
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           centerTitle: true,
-          title: search
-              ? Autocomplete<Country>(
-                  optionsBuilder: (TextEditingValue textEditingValue) {
-                    if (textEditingValue.text == '') {
-                      // search = false;
-                      return List.empty();
-                    } else {
-                      return countries!.data!
-                          .where((element) => element.country!
-                              .toLowerCase()
-                              .contains(textEditingValue.text.toLowerCase()))
-                          .toList();
-                    }
-                  },
-                  fieldViewBuilder: (BuildContext context,
-                          TextEditingController controller,
-                          FocusNode node,
-                          Function onSubmit) =>
-                      TextField(
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.black),
-                    controller: controller..text = countryName!,
-                    focusNode: node,
-                    decoration: InputDecoration(
-                      disabledBorder: InputBorder.none,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                        // borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(width: 3, color: Colors.white),
-                      ),
-                      fillColor: Colors.white,
-                      filled: true,
-
-                      // border: InputBorder.none,
-                      hintStyle: TextStyle(color: Colors.black),
-                    ),
+          title: Row(
+            children: [
+              DropdownButton(
+                  underline: SizedBox(),
+                  iconEnabledColor: Colors.white,
+                  alignment: Alignment.center,
+                  hint: Text(
+                    _value,
+                    style: const TextStyle(color: Colors.white, fontSize: 27),
                   ),
-                  onSelected: (selection) async {
-                    try {
-                      setState(() {
-                        search = false;
-                      });
-                      countryName = selection.country;
-                      await provider.load('${selection.country}');
-                    } catch (e) {
-                      Exception('error to load data');
-                    } finally {
-                      FocusScope.of(context).unfocus();
-                    }
-                  },
-                  displayStringForOption: (Country d) => d.country!,
-                )
-              : Text(countryName!),
+                  items: countries?.data!.map((e) {
+                    return DropdownMenuItem<String>(
+                        value: e.country, child: Text(e.country!));
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      provider.load(value!);
+                      _value = provider.getValue(value);
+                    });
+                  }),
+            ],
+          ),
+
           backgroundColor: Colors.transparent,
           elevation: 0,
-          actions: [
-            Row(
-              children: [
-                !search
-                    ? IconButton(
-                        onPressed: () {
-                          setState(() {
-                            search = true;
-                          });
-                        },
-                        icon: const Icon(Icons.search))
-                    : (search)
-                        ? IconButton(
-                            onPressed: () {
-                              setState(() {
-                                search = false;
-                              });
-                            },
-                            icon: const Icon(Icons.close))
-                        : Container(),
-                // IconButton(
-                //     onPressed: () {}, icon: const Icon(Icons.filter_list)),
-              ],
-            )
-          ],
+          // actions: [
+          //   if (autoComplete!)
+          //     Row(
+          //       children: [
+          //         !search
+          //             ? IconButton(
+          //                 onPressed: () {
+          //                   setState(() {
+          //                     search = true;
+          //                   });
+          //                 },
+          //                 icon: const Icon(Icons.search))
+          //             : (search)
+          //                 ? IconButton(
+          //                     onPressed: () {
+          //                       setState(() {
+          //                         search = false;
+          //                       });
+          //                     },
+          //                     icon: const Icon(Icons.close))
+          //                 : Container(),
+          //         // IconButton(
+          //         //     onPressed: () {}, icon: const Icon(Icons.filter_list)),
+          //       ],
+          //     )
+          // ],
         ),
         body: Stack(
           alignment: AlignmentDirectional.center,
           children: [
             Image.network(
-              'https://cdn.wallpapersafari.com/43/98/7hfVLN.jpg',
+              provider.getImage('${provider.data?.condition}'),
               height: MediaQuery.of(context).size.height * 1,
               fit: BoxFit.fitHeight,
               filterQuality: FilterQuality.high,
@@ -159,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(formatedDate,
                               style: const TextStyle(
-                                color: Colors.grey,
+                                color: Colors.black54,
                               )),
                           const SizedBox(
                             height: 50,
