@@ -14,6 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool search = false;
+  String? countryName;
   Counties? countries;
   Future<void> loadData() async {
     await Provider.of<DataProvider>(context, listen: false).load('India');
@@ -42,49 +44,89 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Autocomplete<Country>(
-            optionsBuilder: (TextEditingValue textEditingValue) {
-              if (textEditingValue.text == '') {
-                return List.empty();
-              } else {
-                return countries!.data!
-                    .where((element) => element.country!
-                        .toLowerCase()
-                        .contains(textEditingValue.text.toLowerCase()))
-                    .toList();
-              }
-            },
-            fieldViewBuilder: (BuildContext context,
-                    TextEditingController controller,
-                    FocusNode node,
-                    Function onSubmit) =>
-                TextField(
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white),
-              controller: controller,
-              focusNode: node,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                counterStyle: TextStyle(color: Colors.white),
-                hintText: 'India',
-                hintStyle: TextStyle(color: Colors.white),
-              ),
-            ),
-            onSelected: (selection) async {
-              try {
-                await provider.load('${selection.country}');
-              } catch (e) {
-                Exception('error to load data');
-              } finally {
-                FocusScope.of(context).unfocus();
-              }
-            },
-            displayStringForOption: (Country d) => d.country!,
-          ),
+          centerTitle: true,
+          title: search
+              ? Autocomplete<Country>(
+                  optionsBuilder: (TextEditingValue textEditingValue) {
+                    if (textEditingValue.text == '') {
+                      // search = false;
+                      return List.empty();
+                    } else {
+                      return countries!.data!
+                          .where((element) => element.country!
+                              .toLowerCase()
+                              .contains(textEditingValue.text.toLowerCase()))
+                          .toList();
+                    }
+                  },
+                  fieldViewBuilder: (BuildContext context,
+                          TextEditingController controller,
+                          FocusNode node,
+                          Function onSubmit) =>
+                      TextField(
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.black),
+                    controller: controller..text = countryName!,
+                    focusNode: node,
+                    decoration: InputDecoration(
+                      disabledBorder: InputBorder.none,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        // borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(width: 3, color: Colors.white),
+                      ),
+                      fillColor: Colors.white,
+                      filled: true,
+
+                      // border: InputBorder.none,
+                      hintStyle: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  onSelected: (selection) async {
+                    try {
+                      setState(() {
+                        search = false;
+                      });
+                      countryName = selection.country;
+                      await provider.load('${selection.country}');
+                    } catch (e) {
+                      Exception('error to load data');
+                    } finally {
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
+                  displayStringForOption: (Country d) => d.country!,
+                )
+              : Text(countryName!),
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.filter_list))
+            Row(
+              children: [
+                !search
+                    ? IconButton(
+                        onPressed: () {
+                          setState(() {
+                            search = true;
+                          });
+                        },
+                        icon: const Icon(Icons.search))
+                    : (search)
+                        ? IconButton(
+                            onPressed: () {
+                              setState(() {
+                                search = false;
+                              });
+                            },
+                            icon: const Icon(Icons.close))
+                        : Container(),
+                // IconButton(
+                //     onPressed: () {}, icon: const Icon(Icons.filter_list)),
+              ],
+            )
           ],
         ),
         body: Stack(
