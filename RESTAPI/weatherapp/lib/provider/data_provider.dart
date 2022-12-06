@@ -34,6 +34,24 @@ class DataProvider with ChangeNotifier {
     return counties!;
   }
 
+  bool visible = false;
+  void getVisible(bool value) {
+    visible = value;
+    notifyListeners();
+  }
+
+  bool get visibleValue {
+    return visible;
+  }
+
+  bool x = false;
+  void setBool(bool val) {
+    x = val;
+    notifyListeners();
+  }
+
+  var top;
+
   String? selectedvalue;
   String getValue(String value) {
     print(value);
