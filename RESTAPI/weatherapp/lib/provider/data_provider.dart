@@ -47,6 +47,7 @@ class DataProvider with ChangeNotifier {
   bool x = false;
   void setBool(bool val) {
     x = val;
+    print('x==$x');
     notifyListeners();
   }
 
@@ -65,7 +66,8 @@ class DataProvider with ChangeNotifier {
     'https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9nfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
     'https://images.all-free-download.com/images/graphiclarge/air_atmosphere_background_clear_climate_cloud_598652.jpg',
     'https://images.unsplash.com/photo-1624324378932-68e20f332982?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2xpbWF0ZSUyMGNoYW5nZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    'https://cdn.wallpapersafari.com/43/98/7hfVLN.jpg'
+    'https://cdn.wallpapersafari.com/43/98/7hfVLN.jpg',
+    'https://www.colorpsychology.org/wp-content/uploads/2015/02/green-1.png'
   ];
   String getImage(String image) {
     if (image.toLowerCase().contains('sunny')) {
@@ -78,8 +80,9 @@ class DataProvider with ChangeNotifier {
       return images[3];
     } else if (image.toLowerCase().contains('clear')) {
       return images[4];
-    } else {
+    } else if (image.toLowerCase().contains('color')) {
+      return images[6];
+    } else
       return images[5];
-    }
   }
 }

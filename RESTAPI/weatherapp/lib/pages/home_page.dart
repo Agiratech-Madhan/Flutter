@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:weatherapp/pages/app_bar_function.dart';
-import 'package:weatherapp/pages/image_data.dart';
+import '../pages/app_bar_function.dart';
+import '../pages/data_widget.dart';
 import '../model/country_model.dart';
 
 import '../provider/data_provider.dart';
@@ -16,15 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ScrollPosition? _position;
   bool visibleValues = false;
-  double? heightValue;
   bool search = false;
-  String? countryName;
+  String? countryName = 'India';
   bool autoComplete = false;
+  bool loading = false;
   Counties? countries;
   Future<void> loadData() async {
-    await Provider.of<DataProvider>(context, listen: false).load('India');
+    await Provider.of<DataProvider>(context, listen: false).load(countryName!);
   }
 
   Future<void> loadCountry() async {
@@ -41,9 +40,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    heightValue = MediaQuery.of(context).size.height * 0.3;
-    print(heightValue);
-
     var autocomplete = Consumer<DataProvider>(
         builder: (context, provider, child) => Autocomplete<Country>(
               optionsBuilder: (TextEditingValue textEditingValue) {
@@ -64,25 +60,22 @@ class _HomePageState extends State<HomePage> {
                       Function onSubmit) =>
                   TextField(
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.white),
                 controller: controller,
                 focusNode: node,
                 decoration: InputDecoration(
+                  suffixIcon: (provider.visibleValue)
+                      ? IconButton(
+                          onPressed: () {
+                            controller.text = '';
+                            search = false;
+                            provider.getVisible(false);
+                          },
+                          icon: const Icon(Icons.close, color: Colors.white))
+                      : null,
                   border: InputBorder.none,
                   disabledBorder: InputBorder.none,
-                  // border: const OutlineInputBorder(
-                  //   borderSide: BorderSide(color: Colors.white),
-                  //   // borderRadius: BorderRadius.circular(20.0),
-                  // ),
-                  // focusedBorder: OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(10),
-                  //   borderSide: const BorderSide(width: 3, color: Colors.white),
-                  // ),
-                  // fillColor: Colors.white,
-                  filled: true,
-
-                  // border: InputBorder.none,
-                  hintStyle: const TextStyle(color: Colors.black),
+                  hintStyle: const TextStyle(color: Colors.white),
                 ),
               ),
               onSelected: (selection) async {
@@ -91,10 +84,13 @@ class _HomePageState extends State<HomePage> {
                     provider.getVisible(false);
                     autoComplete = true;
                   });
-                  countryName = selection.country;
-
+                  // countryName = selection.country;
+                  loading = true;
                   await provider.load('${selection.country}');
-                  autoComplete = false;
+                  autoComplete = true;
+                  setState(() {
+                    loading = false;
+                  });
                 } catch (e) {
                   Exception('error to load data');
                 } finally {
@@ -103,122 +99,79 @@ class _HomePageState extends State<HomePage> {
               },
               displayStringForOption: (Country d) => d.country!,
             ));
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
-        body: CustomScrollView(
-          slivers: [
-            Consumer<DataProvider>(
-              builder: (context, provider, child) => SliverAppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                centerTitle: true,
-                title: provider.visibleValue
-                    ? autocomplete
-                    : TextButton(
-                        onPressed: (() {
-                          provider.getVisible(true);
-                        }),
-                        child: Text(
-                          countryName ?? 'India',
-                          style: TextStyle(fontSize: 27),
-                        )),
-
-                // provider.visibleValue
-                //     ?
-                //     AppBarFunction(
-                //   autoComplete: true,
-                // ),
-                // : Text('${countryName ?? 'India'}'),
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    fit: BoxFit.cover,
-                    provider.getImage('${provider.data?.condition}'),
-                  ),
-                  centerTitle: true,
-                  // title: AppBarFunction(
-                  //   fullscreen: Text('data'),
-                  // )
-                  // AppBarFunction(
-                  //   action: '${countryName ?? 'India1'}',
-                  // )
-                ),
-                pinned: true,
-                expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                // actions: [AppBarFunction(action: 'search', search: search,a)],
-              ),
-            ),
-            SliverFillRemaining(
-              child: Stack(
-                children: [
-                  Consumer<DataProvider>(builder: (context, provider, child) {
-                    String x = '2022-12-05 4:49';
-                    String dateValue = (provider.data?.num) ?? x;
-                    DateTime getDate =
-                        DateFormat("yyyy-MM-dd hh:mm").parse(dateValue);
-                    String formatedDate = DateFormat("E,d MMM").format(getDate);
-
-                    return Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(provider.getImage(
-                                  true ? '${provider.data?.condition}' : '')))),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 100),
-                            const Text(
-                              'Today',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 30),
-                            Text(formatedDate,
-                                style: const TextStyle(
-                                  color: Colors.black54,
-                                )),
-                            const SizedBox(
-                              height: 50,
-                            ),
-                            SizedBox(
-                              height: 100,
+        body: loading
+            ? const Center(child: CircularProgressIndicator())
+            : CustomScrollView(
+                slivers: [
+                  Consumer<DataProvider>(
+                    builder: (context, provider, child) => SliverAppBar(
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                      centerTitle: true,
+                      title: provider.visibleValue
+                          ? autocomplete
+                          : TextButton(
+                              onPressed: (() {
+                                provider.getVisible(true);
+                              }),
                               child: Text(
-                                '${provider.data?.temperature ?? 7}°',
+                                countryName ?? 'India',
                                 style: const TextStyle(
-                                  fontSize: 100,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            SizedBox(
-                              height: 40,
-                              width: 250,
-                              child: FittedBox(
-                                child: Text(
-                                  '${provider.data?.condition ?? 'Sunny'}',
-                                  style: const TextStyle(
-                                    fontSize: 40,
+                                    fontSize: 27,
                                     color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  })
+                                    fontWeight: FontWeight.normal),
+                              )),
+                      flexibleSpace: FlexibleSpaceBar(
+                          background: Image.network(
+                            fit: BoxFit.cover,
+                            provider.getImage('${provider.data?.condition}'),
+                          ),
+                          centerTitle: true,
+                          title: AppBarFunction(
+                            fullscreen: const Text(''),
+                          )),
+                      pinned: true,
+                      expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                  ),
+                  SliverFillRemaining(
+                    child: Consumer<DataProvider>(
+                        builder: (context, provider, child) {
+                      String x = '2022-12-05 4:49';
+                      String dateValue = (provider.data?.num) ?? x;
+                      DateTime getDate =
+                          DateFormat("yyyy-MM-dd hh:mm").parse(dateValue);
+                      String formatedDate =
+                          DateFormat("E,d MMM").format(getDate);
+                      return Stack(
+                        children: [
+                          AppBarFunction(
+                            context: context,
+                            fullscreen: imageMethod(
+                                context,
+                                provider,
+                                provider.x
+                                    ? '${provider.data?.condition}'
+                                    : 'color'),
+                          ),
+                          DataWidget(formatedDate: formatedDate),
+                        ],
+                      );
+                    }),
+                  )
                 ],
-              ),
-            )
-          ],
-        ));
+              ));
+  }
+
+  Image imageMethod(BuildContext context, DataProvider provider, String v) {
+    return Image.network(
+      height: MediaQuery.of(context).size.height * 1,
+      fit: BoxFit.cover,
+      provider.getImage(v),
+    );
   }
 }
