@@ -16,6 +16,7 @@ class MovieListProvider with ChangeNotifier {
       // final responseData=json.decode(source)
       Movies moviesData = Movies.fromJson(jsonDecode(response.body));
       movies = moviesData;
+      // print(movies?.item[0]);
       notifyListeners();
       return movies!;
     } catch (e) {

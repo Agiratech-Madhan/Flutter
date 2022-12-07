@@ -14,7 +14,6 @@ class Movies {
 
 class MovieData {
   String? backdropPath;
-
   final int? id;
   final String? mediaType;
   final String? originalLanguage;
@@ -25,8 +24,8 @@ class MovieData {
   final String? releaseDate;
   final String? title;
   final bool? video;
-  final double? voteAverage;
-  final int? voteCount;
+  final num? voteAverage;
+  final num? voteCount;
   MovieData({
     required this.backdropPath,
     required this.id,
@@ -44,18 +43,18 @@ class MovieData {
   });
   factory MovieData.fromJson(Map<String, dynamic> json) {
     return MovieData(
-        backdropPath: json['backdropPath'],
+        backdropPath: json['backdrop_path'],
         id: json['id'],
-        mediaType: json['mediaType'],
-        originalLanguage: json['originalLanguage'],
-        originalTitle: json['originalTitle'],
+        mediaType: json['media_type'],
+        originalLanguage: json['original_language'],
+        originalTitle: json['original_title'],
         overview: json['overview'],
         popularity: json['popularity'],
-        posterPath: json['posterPath'],
-        releaseDate: json['releaseDate'],
+        posterPath: json['poster_path'],
+        releaseDate: json['release_date'],
         title: json['title'],
         video: json['video'],
-        voteAverage: json['voteAverage'],
-        voteCount: json['voteCount']);
+        voteAverage: json['vote_average'],
+        voteCount: json['vote_count']);
   }
 }
