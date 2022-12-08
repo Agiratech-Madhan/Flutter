@@ -5,7 +5,7 @@ class Movies {
     required this.item,
   });
   factory Movies.fromJson(Map<String, dynamic> json) {
-    List movies = json['items'];
+    List movies = json['results'];
     List<MovieData> moviesData =
         movies.map((e) => MovieData.fromJson(e)).toList();
     return Movies(item: moviesData);

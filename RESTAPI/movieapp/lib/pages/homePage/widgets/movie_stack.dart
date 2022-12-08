@@ -70,19 +70,6 @@ class _StackWidgetState extends State<StackWidget> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 135),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       left: 25, right: 25),
-                  //   child: SizedBox(
-                  //     height: 135,
-                  //     child: Text(
-                  //       '${provider.movies?.item[index].title}',
-                  //       style: const TextStyle(
-                  //           fontSize: 40, color: Colors.white),
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
             ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/pages/home_page.dart';
+import 'package:movieapp/pages/homePage/home_page.dart';
 import 'package:movieapp/provider/movie_list_provider.dart';
 import 'package:provider/provider.dart';
 import './routes/routes.dart' as route;

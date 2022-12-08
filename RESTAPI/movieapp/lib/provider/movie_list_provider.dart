@@ -5,18 +5,21 @@ import 'package:movieapp/models/movie_model.dart';
 import 'package:http/http.dart' as http;
 
 class MovieListProvider with ChangeNotifier {
+  Movies? moviesSearch;
   Movies? movies;
 
-  Future<Movies> load() async {
+  Future<Movies> loadData(String value) async {
+    String searchValue = (value == '') ? '' : value;
+    String params = (value == '') ? '/3/trending/movie/day' : '/3/search/movie';
     try {
-      final url = Uri.http('api.themoviedb.org', '/3/list/234',
-          {'api_key': 'b6ee00729c9ca9a458e3625f96877b1a'});
+      final url = Uri.http('api.themoviedb.org', params, {
+        'api_key': 'b6ee00729c9ca9a458e3625f96877b1a',
+        'query': searchValue
+      });
       final response = await http.get(url);
-      print(response.statusCode);
-      // final responseData=json.decode(source)
       Movies moviesData = Movies.fromJson(jsonDecode(response.body));
+      if (value == '') moviesSearch = moviesData;
       movies = moviesData;
-      // print(movies?.item[0]);
       notifyListeners();
       return movies!;
     } catch (e) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/pages/detailPage/detail_page.dart';
-import 'package:movieapp/pages/home_page.dart';
+import 'package:movieapp/pages/homePage/home_page.dart';
 
 const homePage = '/home-page';
 const detailPage = '/detail-page';
