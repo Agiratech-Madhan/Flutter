@@ -28,8 +28,15 @@ class MovieListProvider with ChangeNotifier {
     }
   }
 
+  // void flexValue(double value) {
+  //   top = value;
+  //   notifyListeners();
+  // }
+
+  // double? top;
 //https://api.themoviedb.org/3/movie/19995/videos?api_key=b6ee00729c9ca9a458e3625f96877b1a
   Videos? videos;
+  // String? keys;
   Future<Videos> loadVideo(int value) async {
     try {
       final url = Uri.http('api.themoviedb.org', '/3/movie/$value/videos', {
@@ -38,6 +45,9 @@ class MovieListProvider with ChangeNotifier {
       final response = await http.get(url);
       Videos videosData = Videos.fromJson(jsonDecode(response.body));
       videos = videosData;
+      // keys = videos!.item[0].keyValue;
+      print('mad');
+      // print(keys);
       notifyListeners();
       return videos!;
     } catch (e) {

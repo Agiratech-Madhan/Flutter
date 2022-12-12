@@ -167,6 +167,8 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: ((context, index) {
                         return GestureDetector(
                           onTap: () {
+                            provider.loadVideo(
+                                provider.movies?.item[index].id as int);
                             Navigator.of(context).pushNamed(route.detailPage,
                                 arguments: {
                                   'index': index,
