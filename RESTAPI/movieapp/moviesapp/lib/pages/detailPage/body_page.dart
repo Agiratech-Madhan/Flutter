@@ -44,17 +44,17 @@ class _WidgetBodyState extends State<WidgetBody> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
+                          padding: const EdgeInsets.only(right: 6.0),
                           child: Chip(
                             backgroundColor: coloValue,
                             labelStyle: const TextStyle(
-                                fontSize: 16, color: Colors.black),
+                                fontSize: 14, color: Colors.black),
                             label: Text(
                                 'IMDB ${provider.movies?.item[widget.index!].voteAverage}'),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
                           child: Icon(
                             Icons.star,
                             size: 30,
@@ -65,11 +65,11 @@ class _WidgetBodyState extends State<WidgetBody> {
                           '${provider.movies?.item[widget.index!].voteAverage}',
                           style: TextStyle(
                               color: coloValue,
-                              fontSize: 18,
+                              fontSize: 17,
                               fontWeight: FontWeight.bold),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
+                          padding: const EdgeInsets.only(right: 0),
                           child: Text(
                             ' (${(provider.movies?.item[widget.index!].popularity)!.round()}K reviews)',
                             style: const TextStyle(
